@@ -18,7 +18,7 @@ const Image = (props) => {
     
         
     const img_style = {
-        width: '400px',
+        width: '365px',
         position: 'relative',
         height: loaded? 'auto' : '400px',
         overflow: 'hidden',
@@ -74,14 +74,14 @@ const Image = (props) => {
                 <React.Fragment>
                     <button
                         type="button"
-                        className="btn btn-md m-2 border"
+                        className="btn btn-md m-2 border btn-outline-light"
                         style={buttonStyle}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
-                            fill="white"
+                            fill="currentColor"
                             className="bi bi-bookmark-fill"
                             viewBox="0 0 16 16"
                         >
@@ -91,14 +91,14 @@ const Image = (props) => {
 
                     <button
                         type="button"
-                        className="btn btn-md border m-2 bg-grey"
+                        className="btn btn-md border m-2 btn-outline-light"
                         style={{ ...buttonStyle, left: '57px' }}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
-                            fill="white"
+                            fill="currentColor"
                             className="bi bi-heart-fill"
                             viewBox="0 0 16 16"
                         >

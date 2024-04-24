@@ -18,10 +18,10 @@ function App() {
         justify-content-center
         justify-items-center 
         
-        bg-warning
+        
         ">
           <div  /**画廊看板 */
-          style={{width:'1220px',minWidth:'1000px'}}
+          style={{width:'1500px',minWidth:'1000px'}}
           className="
           d-flex
           justify-content-center
@@ -30,14 +30,7 @@ function App() {
             <Gallery/>
           </div>
           
-          <div style={{width:'250px',height:'600px'}} /**排行榜 */
-          className='
-          d-none d-lg-block
-          border
-          bg-danger
-          rounded '>
-
-          </div>
+          
         </div>
         
         </div>

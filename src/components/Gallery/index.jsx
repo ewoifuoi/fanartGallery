@@ -31,7 +31,7 @@ const Gallery = ()=>{
         }
     };
 
-    const columnsRef = useRef([[],[],[]]); // 画廊的三列
+    const columnsRef = useRef([[],[],[],[]]); // 画廊的三列
 
     const handleScroll = () => {
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -59,10 +59,10 @@ const Gallery = ()=>{
             ">
                 <div className="row">
                     {columnsRef.current.map((column, columnIndex) =>(
-                        <div key={columnIndex} className="col-lg-4 col-md-6">
+                        <div key={columnIndex} className="col-lg-3 col-md-6">
                             {column.map((image, index) => (
-                                <div key={index} className="m-2">
-                                    <Image className="w-100 shadow-1-strong rounded" src={image} />
+                                <div key={index} className="mb-2">
+                                    <Image className="w-100 shadow-2-strong rounded" src={image} />
                                 </div>
                             ))}
                     </div>
