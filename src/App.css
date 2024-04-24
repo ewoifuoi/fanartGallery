@@ -1,0 +1,10 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1000; /* 确保Header在其他内容上方显示 */
+    background-color: white; /* 可以根据需求设置Header的背景色 */
+  }
+  

@@ -1,5 +1,5 @@
 import {Button, Nav, Navbar, Container, Offcanvas, NavDropdown, Form } from "react-bootstrap";
-
+import './Header.css'
 
 function Header() {
 
@@ -10,7 +10,7 @@ function Header() {
  };
     
     return (
-        <>
+        <div className="header">
           <Navbar key="navbar" expand="sm" className="bg-body-tertiary" style={{boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)'}}>
             <Container fluid>
 
@@ -31,6 +31,9 @@ function Header() {
                 <Offcanvas.Body
                 >
                   <Nav className="justify-content-start flex-grow-1 pe-3 ">
+                  <div style={{width: '10px'}}></div>
+                  <Nav.Link href="#action1"
+                    className="ml-3">首页</Nav.Link>
                   </Nav>
 
                   
@@ -67,7 +70,7 @@ function Header() {
 
             </Container>
           </Navbar>
-      </>
+      </div>
     );
 }
 

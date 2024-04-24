@@ -47,6 +47,7 @@ const Gallery = ()=>{
 
     images.forEach((image, index) => {
         const shortestColumn = columnsRef.current.reduce((acc, curr) => (curr.length < acc.length ? curr : acc), columnsRef.current[0]);
+        
         shortestColumn.push(image);
     });
     
@@ -62,7 +63,7 @@ const Gallery = ()=>{
                         <div key={columnIndex} className="col-lg-3 col-md-6">
                             {column.map((image, index) => (
                                 <div key={index} className="mb-2">
-                                    <Image className="w-100 shadow-2-strong rounded" src={image} />
+                                    <Image className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
                                 </div>
                             ))}
                     </div>

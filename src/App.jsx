@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header'
 import Board from './components/Board'
 import Gallery from './components/Gallery'
+import './App.css'
 
 function App() {
   return (
     
     <div style={{minWidth:'1000px'}}>
-        <Header/>
+        <Header className="header"/>
         <div className="container-fluid">
         <Board/> 
 

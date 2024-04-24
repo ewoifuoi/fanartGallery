@@ -46,29 +46,49 @@ const Image = (props) => {
         transition: 'opacity 0.3s ease',
     };
 
+    const tagStyle = {
+        position: 'absolute',
+        bottom: '20px',
+        left: '20px',
+        opacity: '0.8',
+        transition: 'opacity 0.3s ease', // 添加过渡效果
+        backdropFilter: 'blur(10px) opacity(0.7)'
+    }
+
     
     return (
         <div className=''style={img_style}
         onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
         onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         >
-
-            {!loaded && ( // 当图片未加载完成时显示闪烁的图标
+            {/* 图片加载动画 */}
+            {!loaded && (
                 <div className="image-container">
                     <div className="loading-animation">
                     </div>
                 </div>
             )}
             
+            {/* 图片 */}
             <img src={props.src} className=" 
             img-thumbnail
-            "></img> {/* 图片 */}
+            "></img> 
 
+            {/* 蒙版 */}
             <div 
             className='
             rounded
             '
-            style={overlayStyle}></div>  {/* 蒙版 */}
+            style={overlayStyle}></div>  
+
+            {/* 三个标签 */}
+            {hovered && props.tags && (
+                <div style={{...tagStyle}} className='d-flex'>
+                    {props.tags.length>0 &&(<a className="p-1 fs-6 text-white text-decoration-none" >{props.tags[0]}</a>)}
+                    {props.tags.length>1 &&(<a className="p-1 fs-6 text-white text-decoration-none" >{props.tags[1]}</a>)}
+                    {props.tags.length>2 &&(<a className="p-1 fs-6 text-white text-decoration-none" >{props.tags[2]}</a>)}
+                </div>
+            )}
 
             {hovered && ( // 根据鼠标悬停状态显示按钮
                 <React.Fragment>
