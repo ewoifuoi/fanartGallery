@@ -7,14 +7,14 @@ import './App.css'
 
 function App() {
   return (
-    
-    <div style={{minWidth:'1000px'}}>
-        <Header className="header"/>
-        <div className="container-fluid">
-        <Board/> 
 
-        <div style={{minHeight:'1200px', height:'auto'}}  /**内容 */
-        className="d-flex flex-row 
+    <div style={{ minWidth: '1000px' }}>
+      <Header className="header" />
+      <div className="container-fluid">
+        <Board />
+
+        <div style={{ minHeight: '1200px', height: 'auto' }}  /**内容 */
+          className="d-flex flex-row 
         gap-3
         justify-content-center
         justify-items-center 
@@ -22,22 +22,21 @@ function App() {
         
         ">
           <div  /**画廊看板 */
-          style={{width:'1500px',minWidth:'1000px'}}
-          className="
+            style={{ width: '1500px', minWidth: '1000px' }}
+            className="
           d-flex
           justify-content-center
           justify-items-center
           ">
-            <Gallery/>
+            <Gallery />
           </div>
-          
-          
+
         </div>
-        
-        </div>
+
+      </div>
     </div>
-    
+
   )
 }
- 
+
 export default App

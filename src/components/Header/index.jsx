@@ -1,10 +1,14 @@
 import {Button, Nav, Navbar, Container, Offcanvas, NavDropdown, Form } from "react-bootstrap";
 import './Header.css'
+import LoginModal from "../LoginModal";
+import React from "react";
+import { useState } from "react";
 
 function Header() {
 
+  const [modalShow, setModalShow] = useState(false);
+
   const buttonStyle = {
-    
     opacity: '1',
     
  };
@@ -16,6 +20,8 @@ function Header() {
       behavior: "smooth" // 可以选择平滑滚动或者立即滚动
     });
   };
+
+
     
     return (
         <div className="header">
@@ -46,9 +52,14 @@ function Header() {
 
                   
                   <Nav className="justify-content-end d-flex">
-                    <Nav.Link href="#action1"
-                    className="mr-3">登录</Nav.Link>
+
+                    {/*用户登录按钮*/}
+                    <button type="button"  
+                    onClick={() => setModalShow(true)}                     
+                    className="btn">登录</button>
+
                     <div style={{width: '10px'}}></div>
+
                     <button type="button" className="
                     btn
                     btn-outline-secondary
@@ -78,6 +89,12 @@ function Header() {
 
             </Container>
           </Navbar>
+
+          {/* 用户登录模态框 */}
+          
+          <LoginModal show={modalShow} onHide={()=>setModalShow(false)}/>
+
+
       </div>
     );
 }
