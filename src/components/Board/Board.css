@@ -1,0 +1,22 @@
+
+:root {
+    --primary-color: #4460f1;
+    --white-color: #ffffffff;
+    --light-text-color: #9398b3;
+    --dark-color: #333333;
+    --background-color: #fcfcff;
+}
+
+
+
+.title::before {
+    content:' ';
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    width: 280px;
+    height: 100px;
+    background: linear-gradient(to right, var(--primary-color),#c471ed, #f64f54);
+    /* z-index: -1; */
+    filter: blur(90px);
+}
