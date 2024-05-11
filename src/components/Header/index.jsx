@@ -8,6 +8,14 @@ function Header() {
     opacity: '1',
     
  };
+
+  // 点击首页滚动回顶部
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // 可以选择平滑滚动或者立即滚动
+    });
+  };
     
     return (
         <div className="header">
@@ -32,7 +40,7 @@ function Header() {
                 >
                   <Nav className="justify-content-start flex-grow-1 pe-3 ">
                   <div style={{width: '10px'}}></div>
-                  <Nav.Link href="#action1"
+                  <Nav.Link href="" onClick={scrollToTop}
                     className="ml-3">首页</Nav.Link>
                   </Nav>
 
