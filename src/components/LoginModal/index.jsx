@@ -12,7 +12,7 @@ const LoginModal = (props) => {
     // 处理点击模态框内容以外的区域关闭模态框
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
-        if (!e.target.closest('.login__registre')) {
+        if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!e.target.closest('.login__registre') && e.target.closest('.login__forms'))) {
             props.onHide();
         }
     };
