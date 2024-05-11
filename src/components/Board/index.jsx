@@ -10,9 +10,11 @@ function Board() {
                 <Row className="ms-2 me-2 justify-content-center align-items-center" >
                         <Card className="mt-5 mb-3" style={{ backgroundImage: 'url(your-image-url)',height:'350px', backgroundSize: 'cover' }}>
                             <Card.Body>
-                                <Card.Title className="pt-3 mt-5 text-center fs-1 fw-bold title" >分享和发现二次元绘画艺术作品</Card.Title>
-                                <Card.Text  className=" text-center">-- 图库，高质量插画壁纸的聚集地 --</Card.Text>
-                                <div className="d-flex p-5 align-items-center justify-content-center">
+                                <Card.Title  className=" paint z-0"></Card.Title>
+                                <Card.Text className="pt-3 mt-5 text-center fs-1 fw-bold title z-3" >分享和发现二次元绘画艺术作品</Card.Text>
+                                <Card.Text  className=" text-center z-3">-- 图库，高质量插画壁纸的聚集地 --</Card.Text>
+                                
+                                <div className="d-flex p-5 align-items-center justify-content-center z-3">
                                     <SearchBox/>
                                 </div>
                             </Card.Body>
