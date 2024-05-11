@@ -9,11 +9,12 @@
 .modal-dialog {
     margin: 0;
     max-width: none;
+    max-height: none;
 }
 
 .modal-header,
 .modal-footer {
-    display: none; /* 可选，如果不希望显示头部和尾部 */
+    display: none; /*可选，如果不希望显示头部和尾部*/
 }
 
 .modal-body {

@@ -9,6 +9,22 @@ import './assets/js/main.js'
 
 const LoginModal = (props) => {
 
+    // 定义状态
+    const [showLogin, setShowLogin] = useState(true);
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    // 显示登录表单
+    const showLoginHandler = () => {
+        setShowLogin(true);
+        setShowSignUp(false);
+    };
+
+    // 显示注册表单
+    const showSignUpHandler = () => {
+        setShowLogin(false);
+        setShowSignUp(true);
+    };
+
     // 处理点击模态框内容以外的区域关闭模态框
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
@@ -48,7 +64,8 @@ const LoginModal = (props) => {
                                 <img src="/images/img-login.svg" alt="" />
                             </div>
                             <div className="login__forms">
-                                <form action="" className="login__registre" id="login-in">
+                                {/* 根据状态动态显示登录或注册表单 */}
+                                <form action="" className={showLogin ? 'login__registre block' : 'login__registre none'} id="login-in">
                                     <h1 className="login__title">登录</h1>
 
                                     <div className="login__box">
@@ -63,15 +80,17 @@ const LoginModal = (props) => {
 
                                     <a href="#" className="login__forgot">Forgot password?</a>
 
-                                    <a href="#" className="login__button">登录</a>
+                                    <a href="#" className="login__button submit">登录</a>
 
                                     <div>
                                         <span className="login__account">Don't have an Account ?</span>
-                                        <span className="login__signin" id="sign-up">注册</span>
+                                        <span className="login__signin submit" id="sign-up" onClick={showSignUpHandler}>注册</span>
                                     </div>
                                 </form>
+                                
 
-                                <form action="" className="login__create none" id="login-up">
+                                
+                                <form action="" className={showSignUp ? 'login__registre block' : 'login__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
                                     <div className="login__box">
@@ -89,19 +108,20 @@ const LoginModal = (props) => {
                                         <input type="password" placeholder="Password" className="login__input" />
                                     </div>
 
-                                    <a href="#" className="login__button">注册</a>
+                                    <a href="#" className="login__button submit">注册</a>
 
                                     <div>
                                         <span className="login__account">Already have an Account ?</span>
-                                        <span className="login__signup" id="sign-in">登录</span>
+                                        <span className="login__signup submit" id="sign-in" onClick={showLoginHandler}>登录</span>
                                     </div>
 
-                                    <div className="login__social">
+                                    {/* <div className="login__social">
                                         <a href="#" className="login__social-icon"><i className='bx bxl-facebook' ></i></a>
                                         <a href="#" className="login__social-icon"><i className='bx bxl-twitter' ></i></a>
                                         <a href="#" className="login__social-icon"><i className='bx bxl-google' ></i></a>
-                                    </div>
+                                    </div> */}
                                 </form>
+                                
                             </div>
                         </div>
                     </div>

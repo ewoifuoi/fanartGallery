@@ -156,6 +156,8 @@ img{
   text-align: center;
   border-radius: .5rem;
   transition: .3s;
+
+  box-shadow: var(--first-color) 25px 20px 30px -15px;
 }
 
 .login__button:hover{
@@ -243,3 +245,4 @@ img{
     bottom: -5.5rem;
   }
 }
+
