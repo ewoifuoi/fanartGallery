@@ -4,15 +4,17 @@ import Header from './components/Header'
 import Board from './components/Board'
 import Gallery from './components/Gallery'
 import './App.css'
+import Alerts from './components/Alerts'
 
 function App() {
   return (
 
     <div style={{ minWidth: '1000px' }}>
+      
       <Header className="header" />
       <div className="container-fluid">
         <Board />
-
+        
         <div style={{ minHeight: '1200px', height: 'auto' }}  /**内容 */
           className="d-flex flex-row 
         gap-3

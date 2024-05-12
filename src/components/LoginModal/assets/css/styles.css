@@ -15,6 +15,7 @@
   --body-font: 'Open Sans', sans-serif;
   --h1-font-size: 1.5rem;
   --normal-font-size: .978rem;
+  --large-font-size: 1.3rem;
   --small-font-size: .813rem;
 }
 
@@ -137,9 +138,10 @@ img{
 .login__input{
   border: none;
   outline: none;
-  font-size: var(--normal-font-size);
+  width: 100%;
+  font-size: var(--large-font-size);
   font-weight: 700;
-  color: var(--first-color-dark);
+  
 }
 
 .login__input::placeholder{

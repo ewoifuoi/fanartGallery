@@ -2,10 +2,12 @@
 import { Button, Container, Stack, Row, Col, Card } from "react-bootstrap";
 import SearchBox from "../SearchBox";
 import './Board.css'
+import Alerts from '../Alerts'
 
 function Board() {
     return (
         <div >
+            
             <Container fluid >
                 <Row className="ms-2 me-2 justify-content-center align-items-center" >
                         <Card className="mt-5 mb-3" style={{ backgroundImage: 'url(your-image-url)',height:'350px', backgroundSize: 'cover' }}>
