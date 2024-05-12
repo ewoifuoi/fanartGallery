@@ -59,13 +59,13 @@ const LoginModal = (props) => {
                                     <h1 className="login__title">登录</h1>
 
                                     <div className="login__box">
-                                        <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="Username" className="login__input" />
+                                        <i className='bx bx-lock-alt login__icon'></i>
+                                        <input type="text" placeholder="手机号" className="login__input " />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="password" placeholder="Password" className="login__input" />
+                                        <input type="password" placeholder="密码" className="login__input" />
                                     </div>
 
                                     <a href="#" className="login__forgot">忘记密码?</a>
@@ -79,24 +79,63 @@ const LoginModal = (props) => {
                                 </form>
                                 
 
-                                {/* 注册界面 */}
+                                {/* 注册界面 1 */}
                                 <form action="" className={loginState == 1 ? 'login__registre block' : 'login__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
-                                    {/* <div className="login__box">
-                                        <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="用户名" className="login__input" />
-                                    </div> */}
+                                    
 
                                     <div className="login__box">
                                         <i className='bx bx-at login__icon'></i>
-                                        <input type="text" placeholder="邮箱" className="login__input" />
+                                        <input type="text" placeholder="手机号" className="login__input" />
                                     </div>
 
-                                    {/* <div className="login__box">
-                                        <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="password" placeholder="密码" className="login__input" />
-                                    </div> */}
+                                    <div className="login__box">
+                                        <i className='bx bx-user login__icon'></i>
+                                        <input type="text" placeholder="验证码" className="login__input" />
+                                    </div>
+
+                                    <div className="p-3">
+                                        
+                                    </div>
+
+                                    <a href="#" className="login__button submit" onClick={()=>{
+
+                                        // 输入邮箱后的校验
+                                        
+                                        setLoginState(2);
+                                    }}>下一步</a>
+
+                                    <div>
+                                        <span className="login__account">已有账号 ?</span>
+                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setLoginState(0)}}>登录</span>
+                                    </div>
+                                </form>
+
+                                {/* 注册界面 2 */}
+                                <form action="" className={loginState == 2 ? 'login__registre block' : 'login__registre none'} id="login-up">
+                                    <h1 className="login__title">创建账号</h1>
+
+                                    
+
+                                    <div className="login__box">
+                                        <i className='bx bx-user login__icon'></i>
+                                        <input type="text" placeholder="用户名" className="login__input" />
+                                    </div>
+
+                                    <div className="login__box">
+                                        <i className='bx bx-user login__icon'></i>
+                                        <input type="text" placeholder="密码" className="login__input" />
+                                    </div>
+
+                                    <div className="login__box">
+                                        <i className='bx bx-user login__icon'></i>
+                                        <input type="text" placeholder="确认密码" className="login__input" />
+                                    </div>
+
+                                    <div className="p-3">
+                                        
+                                    </div>
 
                                     <a href="#" className="login__button submit">发送验证邮件</a>
 
@@ -104,12 +143,6 @@ const LoginModal = (props) => {
                                         <span className="login__account">已有账号 ?</span>
                                         <span className="login__signup submit" id="sign-in" onClick={()=>{setLoginState(0)}}>登录</span>
                                     </div>
-
-                                    {/* <div className="login__social">
-                                        <a href="#" className="login__social-icon"><i className='bx bxl-facebook' ></i></a>
-                                        <a href="#" className="login__social-icon"><i className='bx bxl-twitter' ></i></a>
-                                        <a href="#" className="login__social-icon"><i className='bx bxl-google' ></i></a>
-                                    </div> */}
                                 </form>
                                 
                             </div>
