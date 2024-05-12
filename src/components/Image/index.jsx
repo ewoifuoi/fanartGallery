@@ -61,18 +61,23 @@ const Image = (props) => {
         onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
         onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         >
-            {/* 图片加载动画 */}
-            {!loaded && (
-                <div className="image-container">
-                    <div className="loading-animation">
+
+           
+                {/* 图片加载动画 */}
+                {!loaded && (
+                     <div style={{position: 'absolute',top:0,height:'100%',width:'100%'}}>
+                        <p className="placeholder-glow rounded">
+                            <span style={{padding:0,margin:0,height:'400px',position:'absolute',left:0, top:0}} className="rounded placeholder col-12 bg-secondary z-3"></span>
+                        </p>
                     </div>
-                </div>
-            )}
+                )}
+                
+                {/* 图片 */}
+                <img src={props.src} className=" 
+                img-thumbnail
+                "></img> 
             
-            {/* 图片 */}
-            <img src={props.src} className=" 
-            img-thumbnail
-            "></img> 
+            
 
             {/* 蒙版 */}
             <div 
@@ -90,7 +95,7 @@ const Image = (props) => {
                 </div>
             )}
 
-            {hovered && ( // 根据鼠标悬停状态显示按钮
+            {hovered && loaded && ( // 根据鼠标悬停状态显示按钮
                 <React.Fragment>
                     <button
                         type="button"
