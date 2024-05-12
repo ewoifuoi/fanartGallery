@@ -83,22 +83,22 @@ const LoginModal = (props) => {
                                 <form action="" className={loginState == 1 ? 'login__registre block' : 'login__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
-                                    <div className="login__box">
+                                    {/* <div className="login__box">
                                         <i className='bx bx-user login__icon'></i>
                                         <input type="text" placeholder="用户名" className="login__input" />
-                                    </div>
+                                    </div> */}
 
                                     <div className="login__box">
                                         <i className='bx bx-at login__icon'></i>
                                         <input type="text" placeholder="邮箱" className="login__input" />
                                     </div>
 
-                                    <div className="login__box">
+                                    {/* <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
                                         <input type="password" placeholder="密码" className="login__input" />
-                                    </div>
+                                    </div> */}
 
-                                    <a href="#" className="login__button submit">注册</a>
+                                    <a href="#" className="login__button submit">发送验证邮件</a>
 
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
