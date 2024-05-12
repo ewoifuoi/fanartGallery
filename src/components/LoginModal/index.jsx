@@ -5,25 +5,27 @@ import './LoginModal.css'
 
 import './assets/css/styles.css'
 
-import './assets/js/main.js'
+
 
 const LoginModal = (props) => {
 
-    // 定义状态
-    const [showLogin, setShowLogin] = useState(true);
-    const [showSignUp, setShowSignUp] = useState(false);
 
-    // 显示登录表单
-    const showLoginHandler = () => {
-        setShowLogin(true);
-        setShowSignUp(false);
-    };
+    // 登录模态框状态 
+    // 0 : 登录界面
+    // 1 : 注册界面 : 使用 邮箱 注册还是 QQ 注册
+    const [loginState, setLoginState] = useState(0);
 
-    // 显示注册表单
-    const showSignUpHandler = () => {
-        setShowLogin(false);
-        setShowSignUp(true);
-    };
+    // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
+    useEffect(() => {
+        // 在状态变化时触发父组件传递的事件处理函数
+        if(props.modalState == 1) {
+            setLoginState(0);
+        }
+        else if(props.modalState == 2) {
+            setLoginState(1);
+        }
+    }, [props.modalState]);
+
 
     // 处理点击模态框内容以外的区域关闭模态框
     const handleModalBodyClick = (e) => {
@@ -40,23 +42,10 @@ const LoginModal = (props) => {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-
                 onHide={props.onHide}
             >
                 
                 <Modal.Body onClick={handleModalBodyClick}>
-                    {/* <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>用户名</Form.Label>
-                            <Form.Control type="text" placeholder="输入用户名" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>密码</Form.Label>
-                            <Form.Control type="password" placeholder="输入密码" />
-                        </Form.Group>
-                    </Form>
-                    <Button variant="primary">登录</Button> */}
                     
                     <div className="login">
                         <div className="login__content">
@@ -64,8 +53,9 @@ const LoginModal = (props) => {
                                 <img src="/images/img-login.svg" alt="" />
                             </div>
                             <div className="login__forms">
-                                {/* 根据状态动态显示登录或注册表单 */}
-                                <form action="" className={showLogin ? 'login__registre block' : 'login__registre none'} id="login-in">
+
+                                {/* 登录界面 */}
+                                <form action="" className={loginState == 0 ? 'login__registre block' : 'login__registre none'} id="login-in">
                                     <h1 className="login__title">登录</h1>
 
                                     <div className="login__box">
@@ -78,41 +68,41 @@ const LoginModal = (props) => {
                                         <input type="password" placeholder="Password" className="login__input" />
                                     </div>
 
-                                    <a href="#" className="login__forgot">Forgot password?</a>
+                                    <a href="#" className="login__forgot">忘记密码?</a>
 
                                     <a href="#" className="login__button submit">登录</a>
 
                                     <div>
-                                        <span className="login__account">Don't have an Account ?</span>
-                                        <span className="login__signin submit" id="sign-up" onClick={showSignUpHandler}>注册</span>
+                                        <span className="login__account ">还没有账号 ?</span>
+                                        <span className="login__signin submit" id="sign-up" onClick={()=>{setLoginState(1)}}>注册</span>
                                     </div>
                                 </form>
                                 
 
-                                
-                                <form action="" className={showSignUp ? 'login__registre block' : 'login__registre none'} id="login-up">
+                                {/* 注册界面 */}
+                                <form action="" className={loginState == 1 ? 'login__registre block' : 'login__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
                                     <div className="login__box">
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="Username" className="login__input" />
+                                        <input type="text" placeholder="用户名" className="login__input" />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-at login__icon'></i>
-                                        <input type="text" placeholder="Email" className="login__input" />
+                                        <input type="text" placeholder="邮箱" className="login__input" />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="password" placeholder="Password" className="login__input" />
+                                        <input type="password" placeholder="密码" className="login__input" />
                                     </div>
 
                                     <a href="#" className="login__button submit">注册</a>
 
                                     <div>
-                                        <span className="login__account">Already have an Account ?</span>
-                                        <span className="login__signup submit" id="sign-in" onClick={showLoginHandler}>登录</span>
+                                        <span className="login__account">已有账号 ?</span>
+                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setLoginState(0)}}>登录</span>
                                     </div>
 
                                     {/* <div className="login__social">
@@ -127,7 +117,7 @@ const LoginModal = (props) => {
                     </div>
 
 
-                    <script src="assets/js/main.js"></script>
+
                 </Modal.Body>
 
             </Modal>

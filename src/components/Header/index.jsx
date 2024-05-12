@@ -6,7 +6,11 @@ import { useState } from "react";
 
 function Header() {
 
-  const [modalShow, setModalShow] = useState(false);
+  // 登录模态框状态
+  // 0 : 不显示
+  // 1 : 显示登录界面
+  // 2 : 显示注册界面
+  const [modalState, setModalState] = useState(0);
 
   const buttonStyle = {
     opacity: '1',
@@ -55,7 +59,7 @@ function Header() {
 
                     {/*用户登录按钮*/}
                     <button type="button"  
-                    onClick={() => setModalShow(true)}                     
+                    onClick={() => setModalState(1)}                     
                     className="btn">登录</button>
 
                     <div style={{width: '10px'}}></div>
@@ -65,7 +69,8 @@ function Header() {
                     btn-outline-secondary
                     border
                     rounded-4
-                    " style={{...buttonStyle}}>注册</button>
+                    " style={{...buttonStyle}}
+                    onClick={()=>{setModalState(2)}}>注册</button>
                     <div style={{width: '17px'}}></div>
                     <button type="button" className="
                     btn btn-success
@@ -92,7 +97,7 @@ function Header() {
 
           {/* 用户登录模态框 */}
           
-          <LoginModal show={modalShow} onHide={()=>setModalShow(false)}/>
+          <LoginModal show={modalState!=0?true:false} onHide={()=>setModalState(0)} modalState={modalState}/>
 
 
       </div>
