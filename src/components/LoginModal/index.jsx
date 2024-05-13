@@ -22,17 +22,26 @@ const LoginModal = (props) => {
     const [loginPassword, setLoginPassword] = useState('');
 
     // 用户注册表单
-    const [signinEmail, setsigninEmail] = useState('');
-    const [signinName, setsigninName] = useState('');
-    const [signinPassword, setsigninPassword] = useState('');
-    const [signinConfirmPassword, setsigninConfirmPassword] = useState('');
+    const [signinEmail, setSigninEmail] = useState('');
+    const [signinName, setSigninName] = useState('');
+    const [signinPassword, setSigninPassword] = useState('');
+    const [signinConfirmPassword, setSigninConfirmPassword] = useState('');
     
     // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
 
-    // 异常代码 : 用于控制界面异常显示的状态转移
+    // 异常代码 : 用于控制界面异常显示的状态转移 
+    //    其中相反数代表获得焦点
+
     // 0 : 正常界面
     // 1 : 请输入正确的邮箱地址
+    // 2 : 请输入密码
+
+    // 3 : 请输入正确的注册邮箱地址
+    // 4 : 请输入昵称
+    // 5 : 请输入密码
+    // 6 : 请再次输入密码
+
     const [errorCode, setErrorCode] = useState(0);
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
@@ -66,7 +75,7 @@ const LoginModal = (props) => {
     };
 
     // 登录时校验信息合法性
-    const LoginValidation = (e) => {
+    const LoginValidation = () => {
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -83,7 +92,41 @@ const LoginModal = (props) => {
         else return true;
     }
 
+    // 注册时校验信息合法性
+    const RegisterValidation = () => {
 
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if(!emailPattern.test(signinEmail)) {
+            alertRef.current.showAlert({type:'danger', msg:'请输入正确的邮箱地址'})
+            setErrorCode(3);
+            return false;
+        }
+        else if(signinName.trim()==='') {
+            alertRef.current.showAlert({type:'danger', msg:'请输入昵称'})
+            setErrorCode(4);
+            return false;
+        }
+        else if(signinPassword.trim()==='') {
+            alertRef.current.showAlert({type:'danger', msg:'请输入密码'})
+            setErrorCode(5);
+            return false;
+        }
+        else if(signinConfirmPassword.trim()==='') {
+            alertRef.current.showAlert({type:'danger', msg:'请再次输入密码'})
+            setErrorCode(6);
+            return false;
+        }
+        else if(signinConfirmPassword !== signinPassword) {
+            alertRef.current.showAlert({type:'danger', msg:'两次输入密码不一致'})
+            setErrorCode(6);
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
 
     return (
         <div>
@@ -136,10 +179,10 @@ const LoginModal = (props) => {
                                         // 校验输入合法性
                                         if(LoginValidation()) {
                                             setErrorCode(0); // 重置异常代码
+
+                                            // 登录成功
                                             alertRef.current.showAlert({type:'success', msg:'登录成功'})
                                         }
-
-
 
                                     }}>登录</a>
 
@@ -149,36 +192,58 @@ const LoginModal = (props) => {
                                     </div>
                                 </form>
                                 
-
                                 {/* 注册界面 1 */}
                                 <form action="" className={loginState == 1 ? 'signin__registre block' : 'signin__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
-                                    <div className="login__box">
+                                    <div className={`login__box border border-4
+                                        ${errorCode==-3 ? 'border-primary-subtle' : errorCode==3 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-3)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="邮箱" className="login__input" />
+                                        <input type="text" placeholder="邮箱" className="login__input" onChange={(e)=>{setSigninEmail(e.target.value)}}/>
                                     </div>
 
-                                    <div className="login__box">
+                                    <div className={`login__box border border-4
+                                        ${errorCode==-4 ? 'border-primary-subtle' : errorCode==4 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-4)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="昵称" className="login__input" />
+                                        <input type="text" placeholder="昵称" className="login__input" onChange={(e)=>{setSigninName(e.target.value)}}/>
                                     </div>
 
-                                    <div className="login__box">
+                                    <div className={`login__box border border-4
+                                        ${errorCode==-5 ? 'border-primary-subtle' : errorCode==5 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-5)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="password" placeholder="密码" className="login__input" />
+                                        <input type="password" placeholder="密码" className="login__input" onChange={(e)=>{setSigninPassword(e.target.value)}}/>
                                     </div>
 
-                                    <div className="login__box">
+                                    <div className={`login__box border border-4
+                                        ${errorCode==-6 ? 'border-primary-subtle' : errorCode==6 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-6)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="password" placeholder="确认密码" className="login__input" />
+                                        <input type="password" placeholder="确认密码" className="login__input" onChange={(e)=>{setSigninConfirmPassword(e.target.value)}}/>
                                     </div>
 
                                     <div className="p-3">
                                         
                                     </div>
 
-                                    <a href="#" className="login__button submit">发送验证邮件</a>
+                                    <a href="#" className="login__button submit" onClick={()=>{
+
+                                        // 注册逻辑
+
+                                        if(RegisterValidation()) {
+
+                                            setErrorCode(0); // 重置异常代码
+                                            // 注册成功
+                                        }
+
+
+                                    }}>发送验证邮件</a>
 
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
