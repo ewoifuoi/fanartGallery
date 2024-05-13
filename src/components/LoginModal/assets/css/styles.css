@@ -80,7 +80,8 @@ img{
   height: 368px;
 }
 
-.login__registre, .login__create{
+
+.login__registre{
   position: absolute;
   bottom: 1rem;
   width: 100%;
@@ -92,6 +93,21 @@ img{
   animation-duration: .4s;
   animation-name: animate-login;
 }
+
+.signin__registre{
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  background-color: var(--first-color-lighten);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(35,0,77,.2);
+  animation-duration: .4s;
+  animation-name: animate-login;
+}
+
+
 
 @keyframes animate-login{
   0%{
@@ -274,6 +290,23 @@ img{
   .login__registre{
     bottom: -2rem;
   }
+
+  .signin__registre{
+    
+    bottom: -8rem;
+    left: -11rem;
+    width: 100%;
+    height: 170%;
+    background-color: var(--first-color-lighten);
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(35,0,77,.2);
+    animation-duration: .4s;
+    animation-name: animate-login;
+  }
+
+  
 
   .login__create{
     bottom: -5.5rem;

@@ -32,7 +32,7 @@ const LoginModal = (props) => {
     // 处理点击模态框内容以外的区域关闭模态框
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
-        if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!e.target.closest('.login__registre') && e.target.closest('.login__forms'))) {
+        if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms'))) {
             props.onHide();
         }
     };
@@ -62,7 +62,7 @@ const LoginModal = (props) => {
 
                                     <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="text" placeholder="手机号" className="login__input " />
+                                        <input type="text" placeholder="邮箱" className="login__input " />
                                     </div>
 
                                     <div className="login__box">
@@ -81,58 +81,21 @@ const LoginModal = (props) => {
                                 </form>
                                 
 
+                                
+                                
+
                                 {/* 注册界面 1 */}
-                                <form action="" className={loginState == 1 ? 'login__registre block' : 'login__registre none'} id="login-up">
+                                <form action="" className={loginState == 1 ? 'signin__registre block' : 'signin__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
-                                    
-
-                                    <div className="send__message__box">
-                                        <i className='bx bx-at login__icon'></i>
-                                        <input type="text" placeholder="手机号" className="login__input" />
-                                        <a className='send__button' onClick={()=>{
-
-                                            // 点击发送短信逻辑
-                                            
-                                            this.alertRef.current.handleAlertClick();
-                                            setLoginState(2);
-
-
-
-                                        }}>
-                                        <svg t="1715503476077" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5593" width="30" height="20"><path d="M504.46 516.953333L76.533333 89.026667A53.073333 53.073333 0 0 1 96 85.333333h832a53.073333 53.073333 0 0 1 19.466667 3.693334L519.54 516.953333a10.666667 10.666667 0 0 1-15.08 0z m473.18-397.753333L549.713333 547.126667a53.333333 53.333333 0 0 1-75.426666 0L46.36 119.2A53.073333 53.073333 0 0 0 42.666667 138.666667v661.333333a53.393333 53.393333 0 0 0 53.333333 53.333333h501.333333v-85.333333a64 64 0 0 1-45.253333-109.253333l149.333333-149.333334a64 64 0 0 1 90.506667 0l149.333333 149.333334A64 64 0 0 1 896 768v85.333333h32a53.393333 53.393333 0 0 0 53.333333-53.333333V138.666667a53.073333 53.073333 0 0 0-3.693333-19.466667z m-66.553333 569.713333l-149.333334-149.333333a21.333333 21.333333 0 0 0-30.173333 0l-149.333333 149.333333A21.333333 21.333333 0 0 0 597.333333 725.333333h42.666667v234.666667a21.333333 21.333333 0 0 0 21.333333 21.333333h170.666667a21.333333 21.333333 0 0 0 21.333333-21.333333v-234.666667h42.666667a21.333333 21.333333 0 0 0 15.086667-36.42z" fill="#ffffff" p-id="5594"></path></svg>
-                                        </a>
+                                    <div className="login__box">
+                                        <i className='bx bx-user login__icon'></i>
+                                        <input type="text" placeholder="邮箱" className="login__input" />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="验证码" className="login__input" />
-                                    </div>
-
-                                    <div className="p-3">
-                                        
-                                    </div>
-
-                                    <a href="#" className="login__button submit" onClick={()=>{
-
-                                        setLoginState(2)
-                                    }}>下一步</a>
-
-                                    <div>
-                                        <span className="login__account">已有账号 ?</span>
-                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setLoginState(0)}}>登录</span>
-                                    </div>
-                                </form>
-
-                                {/* 注册界面 2 */}
-                                <form action="" className={loginState == 2 ? 'login__registre block' : 'login__registre none'} id="login-up">
-                                    <h1 className="login__title">创建账号</h1>
-
-                                    
-
-                                    <div className="login__box">
-                                        <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="用户名" className="login__input" />
+                                        <input type="text" placeholder="昵称" className="login__input" />
                                     </div>
 
                                     <div className="login__box">
