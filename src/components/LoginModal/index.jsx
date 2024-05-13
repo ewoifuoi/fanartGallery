@@ -62,6 +62,10 @@ const LoginModal = (props) => {
         setErrorCode(0);
         setLoginEmail('');
         setLoginPassword('');
+        setSigninConfirmPassword('');
+        setSigninEmail('');
+        setSigninName('');
+        setSigninPassword('');
 
     }
 
@@ -78,7 +82,7 @@ const LoginModal = (props) => {
     // 登录时校验信息合法性
     const LoginValidation = () => {
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.com+$/;
 
         if(!emailPattern.test(loginEmail)) {
             alertRef.current.showAlert({type:'danger', msg:'请输入正确的邮箱地址'})
@@ -96,7 +100,8 @@ const LoginModal = (props) => {
     // 注册时校验信息合法性
     const RegisterValidation = () => {
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.com+$/;
+        const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]+$/;
         
         if(!emailPattern.test(signinEmail)) {
             alertRef.current.showAlert({type:'danger', msg:'请输入正确的邮箱地址'})
@@ -113,7 +118,17 @@ const LoginModal = (props) => {
             setErrorCode(5);
             return false;
         }
-        else if(signinConfirmPassword.trim()==='') {
+        else if(signinPassword.length < 8) {
+            alertRef.current.showAlert({type:'danger', msg:'密码长度至少为8位'})
+            setErrorCode(5);
+            return false;
+        }
+        else if(!passwordPattern.test(signinPassword)){
+            alertRef.current.showAlert({type:'danger', msg:'密码必须包含字母和数字'})
+            setErrorCode(5);
+            return false;
+        }
+        else if(signinConfirmPassword.trim() =='') {
             alertRef.current.showAlert({type:'danger', msg:'请再次输入密码'})
             setErrorCode(6);
             return false;
@@ -155,20 +170,22 @@ const LoginModal = (props) => {
                                 <form action="" className={loginState == 0 ? 'login__registre block' : 'login__registre none'} id="login-in">
                                     <h1 className="login__title">登录</h1>
 
+                                    {/* 登录邮箱 */}
                                     <div id='loginEmail' className={`login__box border border-4  
                                         ${errorCode==-1 ? 'border-primary-subtle' : errorCode==1 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-1)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="text" placeholder="邮箱" className="login__input " onChange={(e)=>setLoginEmail(e.target.value)} />
+                                        <input maxLength={25} type="text" placeholder="邮箱" className="login__input " onChange={(e)=>setLoginEmail(e.target.value)} />
                                     </div>
 
+                                    {/* 登录密码 */}
                                     <div className={`login__box border border-4
                                         ${errorCode==-2 ? 'border-primary-subtle' : errorCode==2 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-2)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="password" placeholder="密码" className="login__input" onChange={(e)=>{setLoginPassword(e.target.value)}} />
+                                        <input  maxLength={20} type="password" placeholder="密码" className="login__input" onChange={(e)=>{setLoginPassword(e.target.value)}} />
                                     </div>
 
                                     <a href="#" className="login__forgot">忘记密码?</a>
@@ -197,36 +214,40 @@ const LoginModal = (props) => {
                                 <form action="" className={loginState == 1 ? 'signin__registre block' : 'signin__registre none'} id="login-up">
                                     <h1 className="login__title">创建账号</h1>
 
+                                    {/* 注册邮箱 */}
                                     <div className={`login__box border border-4
                                         ${errorCode==-3 ? 'border-primary-subtle' : errorCode==3 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-3)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="邮箱" className="login__input" onChange={(e)=>{setSigninEmail(e.target.value)}}/>
+                                        <input maxLength={25} type="text" placeholder="邮箱" className="login__input" onChange={(e)=>{setSigninEmail(e.target.value)}}/>
                                     </div>
 
+                                    {/* 注册昵称 */}
                                     <div className={`login__box border border-4
                                         ${errorCode==-4 ? 'border-primary-subtle' : errorCode==4 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-4)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="昵称" className="login__input" onChange={(e)=>{setSigninName(e.target.value)}}/>
+                                        <input  maxLength={20} type="text" placeholder="昵称" className="login__input" onChange={(e)=>{setSigninName(e.target.value)}}/>
                                     </div>
 
+                                    {/* 注册密码 */}
                                     <div className={`login__box border border-4
                                         ${errorCode==-5 ? 'border-primary-subtle' : errorCode==5 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-5)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="password" placeholder="密码" className="login__input" onChange={(e)=>{setSigninPassword(e.target.value)}}/>
+                                        <input  maxLength={20} type="password" placeholder="密码" className="login__input" onChange={(e)=>{setSigninPassword(e.target.value)}}/>
                                     </div>
 
+                                    {/* 确认密码 */}
                                     <div className={`login__box border border-4
                                         ${errorCode==-6 ? 'border-primary-subtle' : errorCode==6 ? 'border-danger-subtle':'border-white'} `}
                                         onFocus={()=>{setErrorCode(-6)}}
                                         onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="password" placeholder="确认密码" className="login__input" onChange={(e)=>{setSigninConfirmPassword(e.target.value)}}/>
+                                        <input  maxLength={20} type="password" placeholder="确认密码" className="login__input" onChange={(e)=>{setSigninConfirmPassword(e.target.value)}}/>
                                     </div>
 
                                     <div className="p-3">
