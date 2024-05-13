@@ -11,10 +11,23 @@
   
   .alert-exit {
     opacity: 1;
+    transform: translateY(-20px);
+    transition: opacity 300ms, transform 300ms;
   }
   
   .alert-exit-active {
     opacity: 0;
+    transform: translateY(0px);
     transition: opacity 300ms;
   }
   
+  .floating-alert {
+    
+    position: fixed;
+    opacity: 0.85;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* 确保提示信息在其他内容之上 */
+    
+}

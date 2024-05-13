@@ -47,7 +47,7 @@ const LoginModal = (props) => {
     const LoginValidation = (e) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!emailPattern.test(loginEmail)) {
-            alertRef.current.showAlert()
+            alertRef.current.showAlert({type:'danger', msg:'请输入正确邮箱地址'})
             return false;
         }
         return true;

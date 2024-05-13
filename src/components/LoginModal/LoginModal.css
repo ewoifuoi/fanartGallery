@@ -21,12 +21,3 @@
     padding: 0; /* 可选，如果希望内容与模态框之间没有间距 */
 }
 
-.floating-alert {
-    position: fixed;
-    opacity: 0.8;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999; /* 确保提示信息在其他内容之上 */
-    width: 50%; /* 设置提示信息的宽度 */
-}
