@@ -30,9 +30,6 @@ const Alerts = () => {
           </CSSTransition>
         ))}
       </TransitionGroup>
-      <button type="button" className="btn btn-primary" onClick={handleAlertClick}>
-        Show live alert
-      </button>
     </div>
   );
 };

@@ -97,7 +97,7 @@ function Header() {
 
           {/* 用户登录模态框 */}
           
-          <LoginModal show={modalState!=0?true:false} onHide={()=>setModalState(0)} modalState={modalState}/>
+          <LoginModal show={modalState!=0?true:false} onHide={()=>setModalState(0)} modalstate={modalState}/>
 
 
       </div>
