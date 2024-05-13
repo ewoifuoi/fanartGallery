@@ -44,6 +44,7 @@ const LoginModal = (props) => {
 
     const [errorCode, setErrorCode] = useState(0);
 
+
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
     useEffect(() => {
         // 在状态变化时触发父组件传递的事件处理函数
@@ -67,7 +68,7 @@ const LoginModal = (props) => {
     // 关闭登录模态框 逻辑
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
-        if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms'))) {
+        if (errorCode >= 0 && ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms')))) {
             
             resetAllState();
             props.onHide();
@@ -142,7 +143,7 @@ const LoginModal = (props) => {
                 {/* 提示消息列表 */}
                 <Alerts ref={alertRef}/>
 
-                <Modal.Body onClick={handleModalBodyClick}>
+                <Modal.Body onClick={handleModalBodyClick} draggable="false" >
                     <div className="login">
                         <div className="login__content">
                             <div className="login__img">
