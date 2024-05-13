@@ -21,7 +21,13 @@ const LoginModal = (props) => {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
+    // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
+
+    // 异常代码 : 用于控制界面异常显示的状态转移
+    // 0 : 正常界面
+    // 1 : 请输入正确的邮箱地址
+    const [errorCode, setErrorCode] = useState(0);
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
     useEffect(() => {
@@ -35,19 +41,24 @@ const LoginModal = (props) => {
     }, [props.modalstate]);
 
 
-    // 处理点击模态框内容以外的区域关闭模态框
+    // 关闭登录模态框 逻辑
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
         if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms'))) {
+            
+            setErrorCode(0); // 重置异常状态码
             props.onHide();
         }
     };
 
     // 登录时校验信息合法性
     const LoginValidation = (e) => {
+
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if(!emailPattern.test(loginEmail)) {
-            alertRef.current.showAlert({type:'danger', msg:'请输入正确邮箱地址'})
+            alertRef.current.showAlert({type:'danger', msg:'请输入正确的邮箱地址'})
+            setErrorCode(1);
             return false;
         }
         return true;
@@ -57,13 +68,6 @@ const LoginModal = (props) => {
 
     return (
         <div>
-        
-            
-            
-            
-        
-        
-            
             <Modal
                 {...props}
                 dialogClassName="modal-90w"
@@ -73,7 +77,9 @@ const LoginModal = (props) => {
                 onHide={props.onHide}
                 
             >
+                {/* 提示消息列表 */}
                 <Alerts ref={alertRef}/>
+
                 <Modal.Body onClick={handleModalBodyClick}>
                     <div className="login">
                         <div className="login__content">
@@ -86,7 +92,7 @@ const LoginModal = (props) => {
                                 <form action="" className={loginState == 0 ? 'login__registre block' : 'login__registre none'} id="login-in">
                                     <h1 className="login__title">登录</h1>
 
-                                    <div className="login__box">
+                                    <div className={`login__box ${errorCode==1? 'border border-danger-subtle border-3':''}`}>
                                         <i className='bx bx-lock-alt login__icon'></i>
                                         <input type="text" placeholder="邮箱" className="login__input " onChange={(e)=>setLoginEmail(e.target.value)} />
                                     </div>

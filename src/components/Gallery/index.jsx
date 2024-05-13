@@ -1,12 +1,16 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Image from '../Image';
+import Alerts from '../Alerts';
 
 
 const Gallery = ()=>{
 
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    // 提示消息列表的引用 <Alerts/> 组件
+    const alertRef = useRef(null);
 
     useEffect(() => {
     // 异步请求获取图片链接
@@ -24,7 +28,7 @@ const Gallery = ()=>{
             const data = await response.json();
             setImages(data.image);
         } catch (error) {
-            console.error('发生错误:', error);
+            alertRef.current.showAlert({type:'danger', msg:'当前网络状态不佳'})
         }
         finally {
             setLoading(false);
@@ -55,6 +59,8 @@ const Gallery = ()=>{
     
     return (
         <>
+            {/* 提示消息列表 */}
+            <Alerts ref={alertRef}/>
             <div className="
             container-fluid text-center
             ">
