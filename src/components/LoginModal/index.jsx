@@ -21,6 +21,12 @@ const LoginModal = (props) => {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
+    // 用户注册表单
+    const [signinEmail, setsigninEmail] = useState('');
+    const [signinName, setsigninName] = useState('');
+    const [signinPassword, setsigninPassword] = useState('');
+    const [signinConfirmPassword, setsigninConfirmPassword] = useState('');
+    
     // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
 
@@ -41,12 +47,20 @@ const LoginModal = (props) => {
     }, [props.modalstate]);
 
 
+    // 关闭模态框时重置所有状态
+    const resetAllState = () => {
+        setErrorCode(0);
+        setLoginEmail('');
+        setLoginPassword('');
+
+    }
+
     // 关闭登录模态框 逻辑
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
         if ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms'))) {
             
-            setErrorCode(0); // 重置异常状态码
+            resetAllState();
             props.onHide();
         }
     };
@@ -61,7 +75,12 @@ const LoginModal = (props) => {
             setErrorCode(1);
             return false;
         }
-        return true;
+        else if(loginPassword.trim()==='') {
+            alertRef.current.showAlert({type:'danger', msg:'请输入密码'})
+            setErrorCode(2);
+            return false;
+        }
+        else return true;
     }
 
 
@@ -92,12 +111,18 @@ const LoginModal = (props) => {
                                 <form action="" className={loginState == 0 ? 'login__registre block' : 'login__registre none'} id="login-in">
                                     <h1 className="login__title">登录</h1>
 
-                                    <div className={`login__box ${errorCode==1? 'border border-danger-subtle border-3':''}`}>
+                                    <div id='loginEmail' className={`login__box border border-4  
+                                        ${errorCode==-1 ? 'border-primary-subtle' : errorCode==1 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-1)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-lock-alt login__icon'></i>
                                         <input type="text" placeholder="邮箱" className="login__input " onChange={(e)=>setLoginEmail(e.target.value)} />
                                     </div>
 
-                                    <div className="login__box">
+                                    <div className={`login__box border border-4
+                                        ${errorCode==-2 ? 'border-primary-subtle' : errorCode==2 ? 'border-danger-subtle':'border-white'} `}
+                                        onFocus={()=>{setErrorCode(-2)}}
+                                        onBlur={()=>{setErrorCode(0)}}>
                                         <i className='bx bx-lock-alt login__icon'></i>
                                         <input type="password" placeholder="密码" className="login__input" onChange={(e)=>{setLoginPassword(e.target.value)}} />
                                     </div>
@@ -110,7 +135,8 @@ const LoginModal = (props) => {
 
                                         // 校验输入合法性
                                         if(LoginValidation()) {
-                                            
+                                            setErrorCode(0); // 重置异常代码
+                                            alertRef.current.showAlert({type:'success', msg:'登录成功'})
                                         }
 
 
@@ -119,12 +145,9 @@ const LoginModal = (props) => {
 
                                     <div>
                                         <span className="login__account ">还没有账号 ?</span>
-                                        <span className="login__signin submit" id="sign-up" onClick={()=>{setLoginState(1)}}>注册</span>
+                                        <span className="login__signin submit" id="sign-up" onClick={()=>{setErrorCode(0);setLoginState(1)}}>注册</span>
                                     </div>
                                 </form>
-                                
-
-                                
                                 
 
                                 {/* 注册界面 1 */}
@@ -159,7 +182,7 @@ const LoginModal = (props) => {
 
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
-                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setLoginState(0)}}>登录</span>
+                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setErrorCode(0);setLoginState(0)}}>登录</span>
                                     </div>
                                 </form>
                                 

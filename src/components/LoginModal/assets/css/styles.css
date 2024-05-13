@@ -129,11 +129,13 @@ img{
 .login__box{
   display: grid;
   grid-template-columns: max-content 1fr max-content;
-  column-gap: .5rem;
-  padding: 1rem 1rem;
+  column-gap: .4rem;
+  padding: 0.8rem 0.8rem;
   background-color: #FFF;
   margin-top: 1rem;
-  border-radius: .5rem;
+  
+  border-radius: 0.9rem;
+  
 }
 
 .send__message__box{
