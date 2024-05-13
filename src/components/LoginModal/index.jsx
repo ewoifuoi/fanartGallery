@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useState, useEffect, createRef, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
@@ -10,12 +10,18 @@ import Alerts from '../Alerts';
 
 const LoginModal = (props) => {
 
-    const alertRef = createRef();
+
 
     // 登录模态框状态 
     // 0 : 登录界面
     // 1 : 注册界面 : 使用 邮箱 注册还是 QQ 注册
     const [loginState, setLoginState] = useState(0);
+
+    // 用户登录表单
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+
+    const alertRef = useRef(null);
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
     useEffect(() => {
@@ -36,8 +42,28 @@ const LoginModal = (props) => {
             props.onHide();
         }
     };
+
+    // 登录时校验信息合法性
+    const LoginValidation = (e) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailPattern.test(loginEmail)) {
+            alertRef.current.showAlert()
+            return false;
+        }
+        return true;
+    }
+
+
+
     return (
-        <>
+        <div>
+        
+            
+            
+            
+        
+        
+            
             <Modal
                 {...props}
                 dialogClassName="modal-90w"
@@ -45,10 +71,10 @@ const LoginModal = (props) => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 onHide={props.onHide}
-            >
                 
+            >
+                <Alerts ref={alertRef}/>
                 <Modal.Body onClick={handleModalBodyClick}>
-                    
                     <div className="login">
                         <div className="login__content">
                             <div className="login__img">
@@ -62,17 +88,28 @@ const LoginModal = (props) => {
 
                                     <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="text" placeholder="邮箱" className="login__input " />
+                                        <input type="text" placeholder="邮箱" className="login__input " onChange={(e)=>setLoginEmail(e.target.value)} />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-lock-alt login__icon'></i>
-                                        <input type="password" placeholder="密码" className="login__input" />
+                                        <input type="password" placeholder="密码" className="login__input" onChange={(e)=>{setLoginPassword(e.target.value)}} />
                                     </div>
 
                                     <a href="#" className="login__forgot">忘记密码?</a>
 
-                                    <a href="#" className="login__button submit">登录</a>
+                                    <a href="#" className="login__button submit" onClick={()=>{
+
+                                     // 登录逻辑
+
+                                        // 校验输入合法性
+                                        if(LoginValidation()) {
+                                            
+                                        }
+
+
+
+                                    }}>登录</a>
 
                                     <div>
                                         <span className="login__account ">还没有账号 ?</span>
@@ -100,12 +137,12 @@ const LoginModal = (props) => {
 
                                     <div className="login__box">
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="密码" className="login__input" />
+                                        <input type="password" placeholder="密码" className="login__input" />
                                     </div>
 
                                     <div className="login__box">
                                         <i className='bx bx-user login__icon'></i>
-                                        <input type="text" placeholder="确认密码" className="login__input" />
+                                        <input type="password" placeholder="确认密码" className="login__input" />
                                     </div>
 
                                     <div className="p-3">
@@ -129,9 +166,9 @@ const LoginModal = (props) => {
                 </Modal.Body>
 
             </Modal>
-            <Alerts ref={alertRef}/>
+           
             
-        </>
+        </div>
     )
 }
 
