@@ -3,6 +3,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
 
+import SliderCaptcha, {
+    
+  } from 'rc-slider-captcha';
+
+
 import './assets/css/styles.css'
 import Alerts from '../Alerts';
 
@@ -43,6 +48,9 @@ const LoginModal = (props) => {
     // 6 : 请再次输入密码
 
     const [errorCode, setErrorCode] = useState(0);
+
+    // 滑动验证组件状态
+    const [rotateCaptcha, setrotateCaptcha] = useState(false)
 
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
@@ -250,9 +258,23 @@ const LoginModal = (props) => {
                                         <input  maxLength={20} type="password" placeholder="确认密码" className="login__input" onChange={(e)=>{setSigninConfirmPassword(e.target.value)}}/>
                                     </div>
 
-                                    <div className="p-3">
-                                        
-                                    </div>
+                                    <SliderCaptcha
+                                        className='captcha_box pt-4'
+                                        mode='float'
+                                        request={async () => {
+                                            return {
+                                            bgUrl: 'background image url',
+                                            puzzleUrl: 'puzzle image url'
+                                            };
+                                        }}
+                                        onVerify={async (data) => {
+                                            console.log(data);
+                                            // verify data
+                                            return Promise.resolve();
+                                        }}
+                                        />
+
+                                    
 
                                     <a href="#" className="login__button submit" onClick={()=>{
 
@@ -262,10 +284,12 @@ const LoginModal = (props) => {
 
                                             setErrorCode(0); // 重置异常代码
                                             // 注册成功
+                                            setrotateCaptcha(true)
                                         }
 
 
                                     }}>发送验证邮件</a>
+                                    
 
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
@@ -276,8 +300,6 @@ const LoginModal = (props) => {
                             </div>
                         </div>
                     </div>
-
-
 
                 </Modal.Body>
 
