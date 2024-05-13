@@ -6,7 +6,7 @@ import './LoginModal.css'
 import './assets/css/styles.css'
 import Alerts from '../Alerts';
 
-
+ 
 
 const LoginModal = (props) => {
 
