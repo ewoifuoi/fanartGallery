@@ -38,6 +38,8 @@ const LoginModal = (props) => {
     // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
 
+    const [signinLoading, setSigninLoading] = useState(false);
+
     // 异常代码 : 用于控制界面异常显示的状态转移 
     //    其中相反数代表获得焦点
 
@@ -168,6 +170,9 @@ const LoginModal = (props) => {
 
         let pwd = sha(signinPassword)
         
+        // 注册按钮进入加载中状态
+
+        setSigninLoading(true);
         try {
             const response = await axios.post(URL.REGISTER_URL, {
                 email: signinEmail,
@@ -188,6 +193,10 @@ const LoginModal = (props) => {
             }
         } catch (error) {
             alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${error.message}` });
+        }
+        finally {
+            // 注册按钮结束加载中状态
+            setSigninLoading(false);
         }
     }
 
@@ -345,8 +354,15 @@ const LoginModal = (props) => {
                                             actionRef.current?.refresh() // 重置滑动验证模块
                                         }
 
-
-                                    }}>发送验证邮件</a>
+                                        
+                                    }}>
+                                        <div className='d-flex'>
+                                            <div className='ps-3'></div>
+                                            {signinLoading? <span className="ms-5 mt-1 spinner-border spinner-border-sm" aria-hidden="flase"></span>:<div className="ms-5 mt-1"></div>}
+                                            <div className="pe-2"></div>
+                                            <div className='ps-3' >发送验证邮件</div>
+                                        </div>
+                                    </a>
                                     
 
                                     <div>
