@@ -4,7 +4,7 @@ import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
 
 import SliderCaptcha, {
-    
+
   } from 'rc-slider-captcha';
 
 
@@ -50,7 +50,7 @@ const LoginModal = (props) => {
     const [errorCode, setErrorCode] = useState(0);
 
     // 滑动验证组件状态
-    const [rotateCaptcha, setrotateCaptcha] = useState(false)
+    const actionRef = useRef(null);
 
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
@@ -258,19 +258,29 @@ const LoginModal = (props) => {
                                         <input  maxLength={20} type="password" placeholder="确认密码" className="login__input" onChange={(e)=>{setSigninConfirmPassword(e.target.value)}}/>
                                     </div>
 
+                                    {/* 人机识别验证码 */}
                                     <SliderCaptcha
                                         className='captcha_box pt-4'
-                                        mode='float'
-                                        request={async () => {
-                                            return {
-                                            bgUrl: 'background image url',
-                                            puzzleUrl: 'puzzle image url'
-                                            };
+                                        mode='slider'
+                                        tipText={{
+                                            default: '请按住滑块，拖动到最右边',
+                                            moving: '请按住滑块，拖动到最右边',
+                                            error: '验证失败，请重新操作',
+                                            success: '验证成功'
                                         }}
-                                        onVerify={async (data) => {
+                                        errorHoldDuration={1000}
+                                        onVerify={(data) => {
                                             console.log(data);
-                                            // verify data
-                                            return Promise.resolve();
+                                            // 默认背景图宽度 320 减去默认拼图宽度 60 所以滑轨宽度是 260
+                                            if (data.x === 260) {
+                                              return Promise.resolve();
+                                            }
+                                            return Promise.reject();
+                                        }}
+                                        actionRef={actionRef}
+                                        style={{
+                                            '--rcsc-panel-border-radius': '10px',
+                                            '--rcsc-control-border-radius': '20px'
                                         }}
                                         />
 
