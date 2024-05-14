@@ -2,6 +2,7 @@ import React, { useState, useEffect, createRef, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
+import URL from '../../config.js'
 
 import SliderCaptcha, {
     Status
@@ -10,6 +11,8 @@ import SliderCaptcha, {
 
 import './assets/css/styles.css'
 import Alerts from '../Alerts';
+import axios from 'axios';
+import sha from 'sha256';
 
  
 
@@ -161,30 +164,28 @@ const LoginModal = (props) => {
 
     }
 
-    async function Signin() {
+    const Signin = async () => {
+
+        let pwd = sha(signinPassword)
+        
         try {
-            const response = await fetch('http://localhost:8000/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: signinName,
-                        email: signinEmail,
-                        password: signinPassword,
-                    }),
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    alertRef.current.showAlert({ type: 'success', msg: '注册成功' });
-                    resetAllState();
-                    props.onHide();
-                } else {
-                    const errorData = await response.json();
-                    alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${errorData.detail}` });
+            const response = await axios.post(URL.REGISTER_URL, {
+                email: signinEmail,
+                name: signinName,
+                pwd: pwd,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
                 }
+            });
 
+            if (response.status === 200) {
+                alertRef.current.showAlert({ type: 'success', msg: '注册成功' });
+                // resetAllState();
+                // props.onHide();
+            } else {
+                alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response.data.detail}` });
+            }
         } catch (error) {
             alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${error.message}` });
         }
@@ -335,7 +336,7 @@ const LoginModal = (props) => {
 
                                             setErrorCode(0); // 重置异常代码
                                             // 注册成功
-                                            setrotateCaptcha(true)
+                                            
 
                                             Signin();
                                         }
