@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Image from '../Image';
 import Alerts from '../Alerts';
+import URL from '../../config.js'
 
 
 const Gallery = ()=>{
@@ -21,7 +22,7 @@ const Gallery = ()=>{
 
     const fetchImages = async () => {
         try {
-            const response = await fetch('http://124.221.8.18:8080/image/');
+            const response = await fetch(URL.IMAGE_URL);
             if (!response.ok) {
                 throw new Error('请求失败');
             }

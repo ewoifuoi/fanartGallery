@@ -161,6 +161,35 @@ const LoginModal = (props) => {
 
     }
 
+    async function Signin() {
+        try {
+            const response = await fetch('http://localhost:8000/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: signinName,
+                        email: signinEmail,
+                        password: signinPassword,
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alertRef.current.showAlert({ type: 'success', msg: '注册成功' });
+                    resetAllState();
+                    props.onHide();
+                } else {
+                    const errorData = await response.json();
+                    alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${errorData.detail}` });
+                }
+
+        } catch (error) {
+            alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${error.message}` });
+        }
+    }
+
     return (
         <div>
             <Modal
@@ -307,6 +336,8 @@ const LoginModal = (props) => {
                                             setErrorCode(0); // 重置异常代码
                                             // 注册成功
                                             setrotateCaptcha(true)
+
+                                            Signin();
                                         }
                                         else { // 表单校验失败 
 
