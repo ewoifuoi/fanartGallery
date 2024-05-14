@@ -4,7 +4,7 @@ import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
 
 import SliderCaptcha, {
-
+    Status
   } from 'rc-slider-captcha';
 
 
@@ -46,6 +46,7 @@ const LoginModal = (props) => {
     // 4 : 请输入昵称
     // 5 : 请输入密码
     // 6 : 请再次输入密码
+    // 7 : 请拖动滑块完成人机验证 
 
     const [errorCode, setErrorCode] = useState(0);
 
@@ -74,6 +75,9 @@ const LoginModal = (props) => {
         setSigninEmail('');
         setSigninName('');
         setSigninPassword('');
+
+        // 重置滑动验证模块
+        actionRef.current?.refresh()
 
     }
 
@@ -111,7 +115,12 @@ const LoginModal = (props) => {
         const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.com+$/;
         const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]+$/;
         
-        if(!emailPattern.test(signinEmail)) {
+        if(actionRef.current.status != Status.Success) {
+            alertRef.current.showAlert({type:'danger', msg:'请拖动滑块完成人机验证'})
+            setErrorCode(7);
+            return false;
+        }
+        else if(!emailPattern.test(signinEmail)) {
             alertRef.current.showAlert({type:'danger', msg:'请输入正确的邮箱地址'})
             setErrorCode(3);
             return false;
@@ -260,6 +269,7 @@ const LoginModal = (props) => {
 
                                     {/* 人机识别验证码 */}
                                     <SliderCaptcha
+                                    
                                         className='captcha_box pt-4'
                                         mode='slider'
                                         tipText={{
@@ -277,12 +287,14 @@ const LoginModal = (props) => {
                                             }
                                             return Promise.reject();
                                         }}
+                                        
                                         actionRef={actionRef}
                                         style={{
+                                            
                                             '--rcsc-panel-border-radius': '10px',
-                                            '--rcsc-control-border-radius': '20px'
+                                            '--rcsc-control-border-radius': '10px'
                                         }}
-                                        />
+                                    />
 
                                     
 
@@ -296,6 +308,10 @@ const LoginModal = (props) => {
                                             // 注册成功
                                             setrotateCaptcha(true)
                                         }
+                                        else { // 表单校验失败 
+
+                                            actionRef.current?.refresh() // 重置滑动验证模块
+                                        }
 
 
                                     }}>发送验证邮件</a>
@@ -303,7 +319,7 @@ const LoginModal = (props) => {
 
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
-                                        <span className="login__signup submit" id="sign-in" onClick={()=>{setErrorCode(0);setLoginState(0)}}>登录</span>
+                                        <span className="login__signup submit" id="sign-in" onClick={()=>{actionRef.current?.refresh();setErrorCode(0);setLoginState(0)}}>登录</span>
                                     </div>
                                 </form>
                                 

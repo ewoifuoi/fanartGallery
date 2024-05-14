@@ -130,9 +130,9 @@ img{
   display: grid;
   grid-template-columns: max-content 1fr max-content;
   column-gap: .4rem;
-  padding: 0.8rem 0.8rem;
+  padding: 0.6rem 0.8rem;
   background-color: #FFF;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   
   border-radius: 0.9rem;
   
@@ -290,12 +290,12 @@ img{
   }
 
   .login__registre{
-    bottom: -2rem;
+    bottom: -0.7rem;
   }
 
   .signin__registre{
     
-    bottom: -8rem;
+    bottom: -7.8rem;
     left: -11rem;
     width: 100%;
     height: 170%;
