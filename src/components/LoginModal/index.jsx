@@ -340,7 +340,7 @@ const LoginModal = (props) => {
                                     
 
                                     <a href="#" className="login__button submit" onClick={()=>{
-
+ 
                                         // 注册逻辑
 
                                         if(RegisterValidation()) {
