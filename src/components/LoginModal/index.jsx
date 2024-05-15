@@ -191,10 +191,10 @@ const LoginModal = (props) => {
                 // resetAllState();
                 // props.onHide();
             } else {
-                alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response.data.detail}` });
+                alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response}` });
             }
         } catch (error) {
-            alertRef.current.showAlert({ type: 'danger', msg: error.message });
+            alertRef.current.showAlert({ type: 'danger', msg: `${error.response.data}` });
         }
         finally {
             // 注册按钮结束加载中状态
