@@ -166,6 +166,8 @@ const LoginModal = (props) => {
 
     }
 
+    // 向后端发送注册请求逻辑
+
     const Signin = async () => {
 
         let pwd = sha(signinPassword)
@@ -192,7 +194,7 @@ const LoginModal = (props) => {
                 alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response.data.detail}` });
             }
         } catch (error) {
-            alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${error.message}` });
+            alertRef.current.showAlert({ type: 'danger', msg: error.message });
         }
         finally {
             // 注册按钮结束加载中状态
