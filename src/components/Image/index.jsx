@@ -4,7 +4,6 @@ import './ImageLoadingAnimation.css'
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
-
 const Image = (props) => {
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
@@ -64,11 +63,12 @@ const Image = (props) => {
         onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
         onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         onClick={()=>{
-            let idRegex = /\/image\/([\w-]+)\.jpg/;
+            let idRegex = /image\/([^\/]+)$/;
             let match = props.src.match(idRegex);
             let id = match[1];
             // 点击插画作品跳转作品详情页
-            navigate(`/illustration/${id}`);
+            
+            window.open(`http://localhost:5173/illustration/${id}`, '_blank');
 
         }}
         >

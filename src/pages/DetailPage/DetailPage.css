@@ -1,0 +1,15 @@
+/* DetailPage.css */
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .img-animation {
+    animation-name: fadeIn;
+    animation-duration: 1.2s;
+  }
+  
