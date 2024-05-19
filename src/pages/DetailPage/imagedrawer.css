@@ -12,7 +12,7 @@
 /**
  * Display the picture if it's hidden
  */
-
+ 
 .visibleImage {
   display: block;
   visibility: visible;
