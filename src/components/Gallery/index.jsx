@@ -3,12 +3,15 @@ import React, { useEffect, useState, useRef } from 'react';
 import Image from '../Image';
 import Alerts from '../Alerts';
 import URL from '../../config.js'
+import Loading from '../Loading/index.jsx';
 
 
 const Gallery = ()=>{
 
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const [loadingPage, setLoadingPage] = useState(true);
 
     // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
@@ -28,6 +31,7 @@ const Gallery = ()=>{
             }
             const data = await response.json();
             setImages(data.image);
+            setLoadingPage(false)
         } catch (error) {
             alertRef.current.showAlert({type:'danger', msg:'当前网络状态不佳'})
         }
@@ -62,24 +66,28 @@ const Gallery = ()=>{
         <>
             {/* 提示消息列表 */}
             <Alerts ref={alertRef}/>
-            <div className="
-            container-fluid text-center
-            ">
-                <div className="row">
-                    {columnsRef.current.map((column, columnIndex) =>(
-                        <div key={columnIndex} className="col-lg-3 col-md-6">
-                            {column.map((image, index) => (
-                                <div key={index} className="mb-2">
-                                    <Image className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
-                                </div>
-                            ))}
-                    </div>
-                    ))}
-
-                   
+            
+            {loadingPage ? (
+                <div>
+                    <Loading/>
                 </div>
-                
-            </div>
+            ):(
+                <div className="
+                container-fluid text-center
+                ">
+                    <div className="row">
+                        {columnsRef.current.map((column, columnIndex) =>(
+                            <div key={columnIndex} className="col-lg-3 col-md-6">
+                                {column.map((image, index) => (
+                                    <div key={index} className="mb-2">
+                                        <Image className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </>
     )
 }
