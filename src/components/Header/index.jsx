@@ -1,10 +1,13 @@
 import {Button, Nav, Navbar, Container, Offcanvas, NavDropdown, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import './Header.css'
 import LoginModal from "../LoginModal";
 import React from "react";
 import { useState } from "react";
 
 function Header() {
+
+  const navigate = useNavigate();
 
   // 登录模态框状态
   // 0 : 不显示
@@ -50,7 +53,7 @@ function Header() {
                 >
                   <Nav className="justify-content-start flex-grow-1 pe-3 ">
                   <div style={{width: '10px'}}></div>
-                  <Nav.Link href="" onClick={scrollToTop}
+                  <Nav.Link href="" onClick={()=>{navigate('/')}}
                     className="ml-3">首页</Nav.Link>
                   </Nav>
 

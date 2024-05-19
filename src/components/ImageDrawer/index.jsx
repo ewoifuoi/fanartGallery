@@ -18,8 +18,8 @@ const ImageDrawer = ({ imageUrl }) => {
 
     const timing = {
       borderPencil: '0.2s',
-      pencilShades: '1s',
-      colorShades: '0.4s',
+      pencilShades: '0.7s',
+      colorShades: '0.7s',
       fullColors: '0.4s'
     };
 
@@ -57,7 +57,7 @@ const ImageDrawer = ({ imageUrl }) => {
 
   return (
     <div className='p-2 border border-3 d-flex justify-content-center rounded' style={{width:'900px',height:'auto'}}>
-      <div style={{backgroundColor:'black'}}>
+      <div>
         <img style={{width:'900px'}} ref={imageRef} src="" />
         <div ref={imgBackgroundRef} className="imgBackground"></div>
       </div>
