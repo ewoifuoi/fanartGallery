@@ -46,7 +46,25 @@ const DetailPage = () => {
                 {loading ? (
                     <Loading/>
                 ) : (
-                    <ImageDrawer imageUrl={imageSrc}/>
+
+                    <div className='d-flex justify-content-center'>
+                        <div>
+                            <ImageDrawer imageUrl={imageSrc}/>
+                            <div className='p-2'></div>
+                            <div className='p-3 border border-3 rounded' style={{width:'900px',height:'400px'}}></div>
+                        </div>
+                        
+                        <div className='p-3'></div>
+                        <div>
+                            <div className='p-3 border border-3 rounded' style={{width:'400px',height:'400px'}}></div>
+                            <div className='p-2'></div>
+                            <div className='p-3 border border-3 rounded' style={{width:'400px',height:'400px'}}></div>
+                        </div>
+                    </div>
+                    
+
+
+
                 )}
             </div>
         </>

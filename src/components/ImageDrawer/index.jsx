@@ -17,9 +17,9 @@ const ImageDrawer = ({ imageUrl }) => {
     
 
     const timing = {
-      borderPencil: '0.4s',
-      pencilShades: '0.8s',
-      colorShades: '0.8s',
+      borderPencil: '0.2s',
+      pencilShades: '1s',
+      colorShades: '0.4s',
       fullColors: '0.4s'
     };
 
@@ -27,6 +27,7 @@ const ImageDrawer = ({ imageUrl }) => {
       
 
     const drawImage = () => {
+      image.src = imageUrl;
       image.classList.add('borderPencil');
 
       const onAnimationEnd = () => {
@@ -52,13 +53,16 @@ const ImageDrawer = ({ imageUrl }) => {
     return () => {
       
     };
-  }, [imageUrl]);
+  }, []);
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      <img style={{width:'600px'}} ref={imageRef} src={imageUrl} alt="Drawing Image" />
-      <div ref={imgBackgroundRef} className="imgBackground"></div>
+    <div className='p-2 border border-3 d-flex justify-content-center rounded' style={{width:'900px',height:'auto'}}>
+      <div style={{backgroundColor:'black'}}>
+        <img style={{width:'900px'}} ref={imageRef} src="" />
+        <div ref={imgBackgroundRef} className="imgBackground"></div>
+      </div>
     </div>
+    
   );
 };
 
