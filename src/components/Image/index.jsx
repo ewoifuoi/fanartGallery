@@ -83,10 +83,14 @@ const Image = (props) => {
                     </div>
                 )}
                 
+                
                 {/* 图片 */}
-                <img src={props.src} className=" 
-                img-thumbnail
-                "></img> 
+                {loaded && (
+                    <img src={props.src} className=" 
+                    img-thumbnail
+                    "></img> 
+                )}
+                
             
             
 

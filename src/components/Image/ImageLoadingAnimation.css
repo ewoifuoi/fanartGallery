@@ -31,3 +31,19 @@
     opacity: 1; /* 悬停时按钮完全可见 */
     /* 其他样式，如背景颜色、阴影等 */
 }
+
+/* DetailPage.css */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+img {
+  animation-name: fadeIn;
+  animation-duration: 1.2s;
+}
+
