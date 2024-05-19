@@ -8,8 +8,8 @@ const Loading = () =>{
             <div className='p-3'></div>
             <div className='d-flex justify-content-center'>
                 <div className="loader">
-                    <svg class="spinner" width="70px" height="70px" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="path" fill="none" stroke-width="10" stroke-linecap="round" cx="44" cy="44" r="30"></circle>
+                    <svg className="spinner" width="70px" height="70px" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+                        <circle className="path" fill="none" strokeWidth="10" strokeLinecap="round" cx="44" cy="44" r="30"></circle>
                     </svg>
                 </div>
             </div>

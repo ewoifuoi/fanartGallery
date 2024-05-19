@@ -4,10 +4,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './DetailPage.css'
-import './imagedrawer.css'
+import axios from 'axios'
 
 import Alerts from '../../components/Alerts'
 import Loading from '../../components/Loading'
+import ImageDrawer from '../../components/ImageDrawer'
 
 const DetailPage = () => {
     const params = useParams()
@@ -29,8 +30,7 @@ const DetailPage = () => {
               setImageSrc(imageUrl);
               setLoading(false);
             } catch (error) {
-                alertRef.current.showAlert({type:'danger', msg:'当前网络状态不佳'})
-            //   setLoading(false);
+                alertRef.current.showAlert({type:'danger', msg:`${error}`})
             }
         };
 
@@ -46,10 +46,9 @@ const DetailPage = () => {
                 {loading ? (
                     <Loading/>
                 ) : (
-                    <img src={imageSrc} alt="Loaded" style={{ maxWidth: '100%' }} />
+                    <ImageDrawer imageUrl={imageSrc}/>
                 )}
             </div>
-            
         </>
     )
 }
