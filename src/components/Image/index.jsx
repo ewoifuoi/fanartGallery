@@ -87,6 +87,7 @@ const Image = (props) => {
                 {/* 图片 */}
                 {loaded && (
                     <img src={props.src} className=" 
+                    img-animation
                     img-thumbnail
                     "></img> 
                 )}

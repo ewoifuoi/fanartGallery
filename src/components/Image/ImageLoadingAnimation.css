@@ -42,7 +42,7 @@
   }
 }
 
-img {
+.img-animation {
   animation-name: fadeIn;
   animation-duration: 1.2s;
 }

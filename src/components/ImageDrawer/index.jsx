@@ -18,8 +18,8 @@ const ImageDrawer = ({ imageUrl }) => {
 
     const timing = {
       borderPencil: '0.2s',
-      pencilShades: '0.7s',
-      colorShades: '0.7s',
+      pencilShades: '0.8s',
+      colorShades: '0.8s',
       fullColors: '0.4s'
     };
 
