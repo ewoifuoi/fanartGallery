@@ -5,5 +5,6 @@ const IMAGE_URL = `${SERVER_URL}/image`
 const ORIGIN_URL = `${SERVER_URL}/image/origin`
 
 const REGISTER_URL = `${SERVER_URL}/user/register`
+const LOGIN_URL = `${SERVER_URL}/user/login`
 
-export default {SERVER_URL, IMAGE_URL, REGISTER_URL}
+export default {SERVER_URL, IMAGE_URL, REGISTER_URL, LOGIN_URL}

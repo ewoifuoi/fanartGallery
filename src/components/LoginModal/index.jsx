@@ -198,7 +198,7 @@ const LoginModal = (props) => {
 
         setSigninLoading(true);
         try {
-            const response = await axios.post(URL.REGISTER_URL, {
+            let response = await axios.post(URL.REGISTER_URL, {
                 email: signinEmail,
                 name: signinName,
                 pwd: pwd,
@@ -271,16 +271,42 @@ const LoginModal = (props) => {
 
                                     <a href="#" className="login__forgot">忘记密码?</a>
 
-                                    <a href="#" className="login__button submit" onClick={()=>{
+                                    <a href="#" className="login__button submit" onClick={async()=>{
 
                                      // 登录逻辑
 
                                         // 校验输入合法性
                                         if(LoginValidation()) {
                                             setErrorCode(0); // 重置异常代码
+                                            let pwd = sha(loginPassword)
+                                            try {
+                                                let response = await axios.post(URL.LOGIN_URL,{
+                                                    email: loginEmail,
+                                                    pwd: pwd,
+                                                },{
+                                                    headers:{
+                                                        'Content-Type':"application/json",
+                                                    }
+                                                });
+                                                if(response.status == 200) {
 
-                                            // 登录成功
-                                            alertRef.current.showAlert({type:'success', msg:'登录成功'})
+                                                    // 登录成功
+                                                    alertRef.current.showAlert({type:'success', msg:'登录成功'})
+                                                    resetAllState();
+                                                    let timer = setTimeout(() => {
+                                                        props.onHide();
+                                                    }, 1200);
+                                                    
+                                                    
+                                                }
+                                            } catch (error) {
+                                                alertRef.current.showAlert({type:'danger', msg:`登录失败:${error.response}`})
+                                            }
+                                            finally {
+
+                                            }
+
+                                           
                                         }
 
                                     }}>登录</a>
@@ -367,8 +393,6 @@ const LoginModal = (props) => {
 
                                             setErrorCode(0); // 重置异常代码
                                             // 注册成功
-                                            
-
                                             Signin();
                                         }
                                         else { // 表单校验失败 

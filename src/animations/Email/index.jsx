@@ -5,10 +5,10 @@ const EmailAnimation = () => {
 
     return (
         <>
-            <div class="pdf-generating-icon-wrap">
-                <div class="envelope-wrap">
-                    <div class="envelope">
-                        <div class="paper"></div>
+            <div className="pdf-generating-icon-wrap">
+                <div className="envelope-wrap">
+                    <div className="envelope">
+                        <div className="paper"></div>
                     </div>
                 </div>
             </div>
