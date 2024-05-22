@@ -13,6 +13,7 @@ import './assets/css/styles.css'
 import Alerts from '../Alerts';
 import axios from 'axios';
 import sha from 'sha256';
+import EmailAnimation from '../../animations/Email/index.jsx';
 
  
 
@@ -23,6 +24,7 @@ const LoginModal = (props) => {
     // 登录模态框状态 
     // 0 : 登录界面
     // 1 : 注册界面 : 使用 邮箱 注册还是 QQ 注册
+    // 2 : 注册成功界面
     const [loginState, setLoginState] = useState(0);
 
     // 用户登录表单
@@ -58,6 +60,25 @@ const LoginModal = (props) => {
     // 滑动验证组件状态
     const actionRef = useRef(null);
 
+    // 用户点击没有收到邮件的重新发送等待时间
+    const [resendWaiting, setResendWaiting] = useState(0);
+
+
+    // 点击重新发送邮件的倒计时
+    useEffect(()=>{
+        let timer;
+        if(resendWaiting > 0) {
+            
+            timer = setInterval(()=>{
+                setResendWaiting((prevSecond) => prevSecond - 1);
+            }, 1000)            
+            return ()=> clearInterval(timer);
+        }
+        else {
+            clearInterval(timer); // 清除计时器
+        }
+    }, [resendWaiting])
+
 
     // 使用 useEffect 来监听状态的变化 : 用于判断当前是登录还是注册
     useEffect(() => {
@@ -80,6 +101,7 @@ const LoginModal = (props) => {
         setSigninEmail('');
         setSigninName('');
         setSigninPassword('');
+        setResendWaiting(0);
 
         // 重置滑动验证模块
         actionRef.current?.refresh()
@@ -89,7 +111,7 @@ const LoginModal = (props) => {
     // 关闭登录模态框 逻辑
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
-        if (errorCode >= 0 && ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre')) && e.target.closest('.login__forms')))) {
+        if (errorCode >= 0 && ((!e.target.closest('.login__forms') && !e.target.closest('.login__img')) || (!(e.target.closest('.login__registre') || e.target.closest('.signin__registre') || e.target.closest('.signin__success')) && e.target.closest('.login__forms')))) {
             
             resetAllState();
             props.onHide();
@@ -187,9 +209,10 @@ const LoginModal = (props) => {
             });
 
             if (response.status === 200) {
-                alertRef.current.showAlert({ type: 'success', msg: '注册成功' });
+                // alertRef.current.showAlert({ type: 'success', msg: '注册成功' });
                 // resetAllState();
                 // props.onHide();
+                setLoginState(2);
             } else {
                 alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response}` });
             }
@@ -337,12 +360,9 @@ const LoginModal = (props) => {
                                         }}
                                     />
 
-                                    
-
                                     <a href="#" className="login__button submit" onClick={()=>{
  
                                         // 注册逻辑
-
                                         if(RegisterValidation()) {
 
                                             setErrorCode(0); // 重置异常代码
@@ -370,6 +390,42 @@ const LoginModal = (props) => {
                                     <div>
                                         <span className="login__account">已有账号 ?</span>
                                         <span className="login__signup submit" id="sign-in" onClick={()=>{actionRef.current?.refresh();setErrorCode(0);setLoginState(0)}}>登录</span>
+                                    </div>
+                                </form>
+
+
+                                {/* 注册成功界面(等待邮箱验证) */}
+                                <form action="" className={loginState == 2 ? 'signin__success block' : 'signin__success none'} id="login-up">
+                                    <div className='p-3'></div>
+                                    
+                                        <EmailAnimation/>
+                                    
+                                    <div className='p-3'></div>
+                                    <h3 className='fw-bolder p-0 m-0 text-start'>验证你的电子邮件</h3>
+                                    <div className="p-2"></div>
+                                    <p className='text-start text-secondary fw-bold fs-6'>
+                                        我们已经发送验证邮件到您的邮箱
+                                        <a href="https://126.com">{signinEmail}</a>
+                                        ,为了确定这是您的电子邮箱地址,请前往邮箱点击验证链接,完成注册
+                                    </p>
+                                    <div className="p-1"></div>
+                                    <div className="d-flex">
+                                    {resendWaiting==0&&<a className="resend__button submit" onClick={()=>{
+
+                                        // 用户点击没有收到邮件 : 需要重新发送邮件
+
+                                        setResendWaiting(60);
+
+                                        Signin();
+                                        
+
+                                    }}>没有收到邮件
+                                    </a>}
+                                    {resendWaiting!=0 && <div className="d-flex resend__button_disabled submit">
+                                        <div>已经重新发送</div>
+                                        <div className='p-1'></div>
+                                        <div>{resendWaiting}</div>
+                                        </div>}
                                     </div>
                                 </form>
                                 

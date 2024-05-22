@@ -107,6 +107,18 @@ img{
   animation-name: animate-login;
 }
 
+.signin__success{
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  background-color: var(--first-color-lighten);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  /* text-align: center; */
+  box-shadow: 0 8px 20px rgba(35,0,77,.2);
+  animation-duration: .4s;
+  animation-name: animate-login;
+}
 
 
 @keyframes animate-login{
@@ -192,7 +204,41 @@ img{
   box-shadow: var(--first-color) 25px 20px 30px -15px;
 }
 
+.resend__button{
+  display: block;
+  padding: 0.9rem  1.8rem;
+  margin: 0rem 0;
+  background-color: var(--first-color);
+  color: #FFF;
+  font-weight: 600;
+  text-align: start;
+  border-radius: .3rem;
+  transition: .3s;
+
+  box-shadow: var(--first-color) 25px 20px 30px -18px;
+}
+
+.resend__button_disabled{
+  pointer-events: none;
+
+  display: block;
+  padding: 0.9rem  1.8rem;
+  margin: 0rem 0;
+  background-color: #4b2e6fa2;
+  color: #FFF;
+  font-weight: 600;
+  text-align: start;
+  border-radius: .3rem;
+  transition: .3s;
+
+
+}
+
 .login__button:hover{
+  background-color: var(--first-color-dark);
+}
+
+.resend__button:hover{
   background-color: var(--first-color-dark);
 }
 
@@ -303,6 +349,21 @@ img{
     padding: 2rem 1rem;
     border-radius: 1rem;
     text-align: center;
+    box-shadow: 0 8px 20px rgba(35,0,77,.2);
+    animation-duration: .4s;
+    animation-name: animate-login;
+  }
+
+  .signin__success{
+    
+    bottom: -2.8rem;
+    left: -10rem;
+    width: 102%;
+    height: 130%;
+    background-color: var(--first-color-lighten);
+    padding: 2rem 2rem;
+    border-radius: 1rem;
+    /* text-align: center; */
     box-shadow: 0 8px 20px rgba(35,0,77,.2);
     animation-duration: .4s;
     animation-name: animate-login;
