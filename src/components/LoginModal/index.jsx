@@ -416,7 +416,7 @@ const LoginModal = (props) => {
 
                                         setResendWaiting(60);
 
-                                        Signin();
+                                        Signin(); 
                                         
 
                                     }}>没有收到邮件

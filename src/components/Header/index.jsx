@@ -60,22 +60,7 @@ function Header() {
                   
                   <Nav className="justify-content-end d-flex">
 
-                    {/*用户登录按钮*/}
-                    <button type="button"  
-                    onClick={() => setModalState(1)}                     
-                    className="btn">登录</button>
-
-                    <div style={{width: '10px'}}></div>
-
-                    <button type="button" className="
-                    btn
-                    btn-outline-secondary
-                    border
-                    rounded-4
-                    " style={{...buttonStyle}}
-                    onClick={()=>{setModalState(2)}}>注册</button>
-                    <div style={{width: '17px'}}></div>
-                    <button type="button" className="
+                  <button type="button" className="
                     btn btn-success
                     d-flex
                     justify-content-center
@@ -86,10 +71,27 @@ function Header() {
                       </svg>
                       <div style={{width:'7px'}}></div>
                       <div className="">上传图片</div>
-                      
-                      
                     </button>
-                    <div style={{width: '15px'}}></div>
+
+                    <div className="p-2"></div>
+
+                    {/*用户登录按钮*/}
+                    <button type="button"  
+                    onClick={() => setModalState(1)}                     
+                    className="btn">登录</button>
+
+                    <div className="p-1"></div>
+
+                    <button type="button" className="
+                    btn
+                    btn-outline-secondary
+                    border
+                    rounded-4
+                    " style={{...buttonStyle}}
+                    onClick={()=>{setModalState(2)}}>注册</button>
+                    <div style={{width: '17px'}}></div>
+                    
+                   
                   </Nav>
                 </Offcanvas.Body>
 
