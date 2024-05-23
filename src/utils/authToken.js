@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import store from "../store";
-import {update, logout} from '../store/modules/auth'
+import {login, logout} from '../store/modules/auth'
 
 // 使用原本的token申请新的token
 const refreshToken = async (dispatch) => {
@@ -13,8 +13,8 @@ const refreshToken = async (dispatch) => {
             }
         });
         if(response.status == 200) {
-            let token = response.data.token;
-            dispatch(update(token))
+            let {token,username,email} = response.data;
+            dispatch(login({token, username,email}))
         }
     }
     catch (error) {

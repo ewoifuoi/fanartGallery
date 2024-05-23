@@ -69,7 +69,7 @@ function Header() {
   useEffect(()=>{
     const handleOutsideClick = (event) => {
       // 如果点击的元素不在弹出框内部，则调用 onClose 函数
-      if (dropdownRef.current && dropdownRef.current.checkClick(event) && !event.target.closest('.circular-img')) {
+      if (dropdownRef.current && dropdownRef.current.checkClick(event) && !event.target.closest('.avatar')) {
         setShowDropdown(false);
       }
     };
@@ -180,7 +180,7 @@ function Header() {
 
                         <div className="p-2"></div>
 
-                        <div className="circular-link2 position-relative" onClick={()=>{
+                        <div className="circular-link position-relative avatar" onClick={()=>{
                           if (showDropdown == false){ setShowDropdown(true);}
                           else {setShowDropdown(false);}
                         }}>
