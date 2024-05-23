@@ -291,8 +291,8 @@ const LoginModal = (props) => {
                                                     }
                                                 });
                                                 if(response.status == 200) {
-                                                    let token = response.data.token;
-                                                    dispatch(login(token))
+                                                    let {token,username,email} = response.data;
+                                                    dispatch(login({token,username,email}))
                                                     
                                                     // 登录成功
                                                     alertRef.current.showAlert({type:'success', msg:'登录成功'})

@@ -4,18 +4,21 @@ import './Header.css'
 import LoginModal from "../LoginModal";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alerts from "../Alerts";
 import axios from "axios";
+import AvatarDropdown from "../AvatarDropdown";
+import { set_avatar } from "../../store/modules/auth";
 
 function Header() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const alertRef = useRef(null);
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const [imageSrc, setImageSrc] = useState('');
+  const imageSrc = useSelector((state) => state.auth.avatar_url);
 
   // 登录模态框状态
   // 0 : 不显示
@@ -48,7 +51,7 @@ function Header() {
         });
         
         let imageUrl = URL.createObjectURL(response.data);
-        setImageSrc(imageUrl);
+        dispatch(set_avatar(imageUrl))
       } catch(error) {
         alertRef.current.showAlert({type:'danger',msg:`${error}`});
       }
@@ -154,18 +157,22 @@ function Header() {
                         
                         </div>
 
-                        <div className="p-1"></div>
+                        <div className="p-2"></div>
 
                         <div className="circular-link2 position-relative">
-                          <img className="circular-img" src={imageSrc} alt="" />
+                          <img className="circular-img" src={imageSrc} alt="/images/default.png" />
                           <span style={{top:'80%',left:'85%'}} className="position-absolute translate-middle p-1 bg-success border border-light rounded-circle">
                           </span>
                         </div>
 
+                        <AvatarDropdown/>
+
                       </div>
                     )}
 
-                    <div className="p-1"></div>
+                    <div className="p-2"></div>
+                    
+                    
 
                   </Nav>
                 </Offcanvas.Body>
