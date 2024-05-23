@@ -62,9 +62,6 @@ const DetailPage = () => {
                         </div>
                     </div>
                     
-
-
-
                 )}
             </div>
         </>

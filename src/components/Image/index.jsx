@@ -73,7 +73,6 @@ const Image = (props) => {
         }}
         >
 
-           
                 {/* 图片加载动画 */}
                 {!loaded && (
                      <div style={{position: 'absolute',top:0,height:'100%',width:'100%'}}>
@@ -83,7 +82,6 @@ const Image = (props) => {
                     </div>
                 )}
                 
-                
                 {/* 图片 */}
                 {loaded && (
                     <img src={props.src} className=" 
@@ -91,9 +89,6 @@ const Image = (props) => {
                     img-thumbnail
                     "></img> 
                 )}
-                
-            
-            
 
             {/* 蒙版 */}
             <div 

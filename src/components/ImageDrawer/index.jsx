@@ -15,16 +15,12 @@ const ImageDrawer = ({ imageUrl }) => {
 
     let currPhase = 0;
     
-
     const timing = {
       borderPencil: '0.2s',
       pencilShades: '0.8s',
       colorShades: '0.8s',
       fullColors: '0.4s'
     };
-
-    
-      
 
     const drawImage = () => {
       image.src = imageUrl;
