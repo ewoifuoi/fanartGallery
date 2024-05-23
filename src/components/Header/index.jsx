@@ -15,6 +15,8 @@ function Header() {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  const [imageSrc, setImageSrc] = useState('');
+
   // 登录模态框状态
   // 0 : 不显示
   // 1 : 显示登录界面
@@ -143,13 +145,12 @@ function Header() {
 
                         <div className="circular-link">
                           <svg t="1716466844842" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="25" height="25"><path d="M640 682.666667a170.666667 170.666667 0 0 0 170.666667-170.666667V256a170.666667 170.666667 0 0 0-170.666667-170.666667H213.333333a170.666667 170.666667 0 0 0-170.666666 170.666667v533.333333a21.333333 21.333333 0 0 0 21.333333 21.333334 20.906667 20.906667 0 0 0 14.933333-6.4l85.333334-85.333334A128 128 0 0 1 256 682.666667z m256-426.666667v341.333333a170.666667 170.666667 0 0 1-170.666667 170.666667H213.333333a85.333333 85.333333 0 0 0 85.333334 85.333333h469.333333a128 128 0 0 1 90.88 37.546667l85.333333 85.333333a20.906667 20.906667 0 0 0 14.933334 6.4 21.333333 21.333333 0 0 0 21.333333-21.333333V341.333333A85.333333 85.333333 0 0 0 896 256z" p-id="4164"></path></svg>
-                          
                         </div>
 
                         <div className="p-1"></div>
 
-                        <div className="circular-link">
-
+                        <div className="circular-link2">
+                          <img className="circular-img" src={imageSrc} alt="" />
                         </div>
 
                       </div>

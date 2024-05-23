@@ -20,8 +20,34 @@
   transition: .3s;
 }
 
+.circular-link2 {
+  display: inline-block; /* 让链接显示为块级元素，这样就可以设置宽度和高度 */
+  width: 42px; /* 设置链接的宽度 */
+  height: 42px; /* 设置链接的高度 */
+  border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
+  
+  text-align: center; /* 文本居中 */
+  line-height: 38px; 
+  text-decoration: none; /* 去除链接的下划线 */
+  transition: .3s;
+}
+
+
+.circular-img {
+  display: inline-block; /* 让链接显示为块级元素，这样就可以设置宽度和高度 */
+  width: 35px; /* 设置链接的宽度 */
+  height: 35px; /* 设置链接的高度 */
+  border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
+   
+  transition: .3s;
+}
+
 .circular-link:hover {
-  background-color: #d8d8d8a4;
+  background-color: #d8d8d8c9;
+}
+
+.circular-link2:hover {
+  background-color: #aeb2b581;
 }
 
 .icon {
