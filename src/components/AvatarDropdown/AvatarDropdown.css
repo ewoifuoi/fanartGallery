@@ -13,7 +13,7 @@
     border-color: rgb(255, 255, 255);
     border-radius: 20px;
     box-shadow: -10px 15px 30px -10px rgba(0, 0, 0, 0.2);
-    overflow: hidden; /* 让内容超出部分隐藏 */
+    overflow: hidden; 
     transition: .3s;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .drop_item:hover{
-    background-color: rgb(210, 220, 241);
+    background-color: rgba(225, 231, 245, 0.586);
 }
 
 .drop_item_img {
@@ -44,3 +44,4 @@
     border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
     transition: .3s;
 }
+
