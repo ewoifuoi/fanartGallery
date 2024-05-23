@@ -14,11 +14,15 @@ function Header() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const alertRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const imageSrc = useSelector((state) => state.auth.avatar_url);
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   // 登录模态框状态
   // 0 : 不显示
@@ -39,7 +43,7 @@ function Header() {
     });
   };
 
-
+  // 请求头像图片
   useEffect(() => {
     const fetchAvatar = async () => {
       try {
@@ -59,6 +63,23 @@ function Header() {
     if(isLoggedIn) fetchAvatar();
     
   },[isLoggedIn])
+
+
+  // 关闭头像下拉菜单
+  useEffect(()=>{
+    const handleOutsideClick = (event) => {
+      // 如果点击的元素不在弹出框内部，则调用 onClose 函数
+      if (dropdownRef.current && dropdownRef.current.checkClick(event) && !event.target.closest('.circular-img')) {
+        setShowDropdown(false);
+      }
+    };
+    // 添加事件监听器
+    document.addEventListener('mousedown', handleOutsideClick);
+    // 在组件卸载时移除事件监听器
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [showDropdown])
     
     return (
         <div className="header">
@@ -159,20 +180,21 @@ function Header() {
 
                         <div className="p-2"></div>
 
-                        <div className="circular-link2 position-relative">
+                        <div className="circular-link2 position-relative" onClick={()=>{
+                          if (showDropdown == false){ setShowDropdown(true);}
+                          else {setShowDropdown(false);}
+                        }}>
                           <img className="circular-img" src={imageSrc} alt="/images/default.png" />
                           <span style={{top:'80%',left:'85%'}} className="position-absolute translate-middle p-1 bg-success border border-light rounded-circle">
                           </span>
                         </div>
 
-                        <AvatarDropdown/>
+                        <AvatarDropdown show={showDropdown} ref={dropdownRef} className="dropdown"/>
 
                       </div>
                     )}
 
                     <div className="p-2"></div>
-                    
-                    
 
                   </Nav>
                 </Offcanvas.Body>
