@@ -51,7 +51,7 @@ const DetailPage = () => {
                         <div>
                             <ImageDrawer imageUrl={imageSrc}/>
                             <div className='p-2'></div>
-                            <div className='p-3 border border-3 rounded' style={{width:'900px',height:'400px'}}></div>
+                            <div className='p-3 border border-3 rounded' style={{width:'700px',height:'400px'}}></div>
                         </div>
                         
                         <div className='p-3'></div>

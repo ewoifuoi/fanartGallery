@@ -137,20 +137,29 @@ function Header() {
                     {isLoggedIn && (
                       <div className="d-flex">
                         
-                        <div className="circular-link">
+                        <div className="circular-link position-relative">
                           <svg t="1716469676499" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11058" width="25" height="25"><path d="M849.6 713.4c8.4-0.4 16.7 1.8 23.8 6.4-28.9-18.5-46.4-50.4-46.3-84.8V436c0-145.9-105.7-267.6-246.9-297.5v-7.2c0-37.1-30.1-67.1-67.2-67.1h-0.1c-37.1 0-67.3 30.1-67.3 67.2v7C304.3 168.4 198.7 290 198.7 436v199.1c0 35.7-18.6 66.9-46.4 84.8 7-4.6 15.4-6.9 23.8-6.4-24.7-0.9-45.5 18.4-46.4 43.1-0.9 24.7 18.4 45.5 43.1 46.4h676.6c24.7 0.1 44.8-20 44.9-44.7 0.1-24.8-19.9-44.9-44.7-44.9zM513 959.8c62 0 112.2-50.2 112.2-111.9H400.7c0 61.7 50.2 111.9 112.3 111.9z" p-id="11059"></path></svg>
+                          
+                          <span style={{top:'28%',left:'70%'}} className="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
+                          </span>
+
                         </div>
 
                         <div className="p-1"></div>
 
-                        <div className="circular-link">
+                        <div className="circular-link position-relative">
                           <svg t="1716466844842" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="25" height="25"><path d="M640 682.666667a170.666667 170.666667 0 0 0 170.666667-170.666667V256a170.666667 170.666667 0 0 0-170.666667-170.666667H213.333333a170.666667 170.666667 0 0 0-170.666666 170.666667v533.333333a21.333333 21.333333 0 0 0 21.333333 21.333334 20.906667 20.906667 0 0 0 14.933333-6.4l85.333334-85.333334A128 128 0 0 1 256 682.666667z m256-426.666667v341.333333a170.666667 170.666667 0 0 1-170.666667 170.666667H213.333333a85.333333 85.333333 0 0 0 85.333334 85.333333h469.333333a128 128 0 0 1 90.88 37.546667l85.333333 85.333333a20.906667 20.906667 0 0 0 14.933334 6.4 21.333333 21.333333 0 0 0 21.333333-21.333333V341.333333A85.333333 85.333333 0 0 0 896 256z" p-id="4164"></path></svg>
+                          <span style={{top:'28%',left:'78%'}} className="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
+                          </span>
+                        
                         </div>
 
                         <div className="p-1"></div>
 
-                        <div className="circular-link2">
+                        <div className="circular-link2 position-relative">
                           <img className="circular-img" src={imageSrc} alt="" />
+                          <span style={{top:'80%',left:'85%'}} className="position-absolute translate-middle p-1 bg-success border border-light rounded-circle">
+                          </span>
                         </div>
 
                       </div>
