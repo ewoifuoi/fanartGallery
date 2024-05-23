@@ -1,4 +1,6 @@
-import createSlice from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const authStore = createSlice({
     name:"auth",
@@ -10,9 +12,9 @@ const authStore = createSlice({
     // 同步修改方法
     reducers:{
         login(state,action) {
-            state.isLoggedIn = true;
+            state.isLoggedIn = true; 
             state.token = action.payload;
-
+ 
             // 本地浏览器存一份
             localStorage.setItem('token',action.payload);
         },
@@ -25,6 +27,8 @@ const authStore = createSlice({
 
 
 })
+
+
 
 // 解构出 actionCreator
 const {login, logout} = authStore.actions;
