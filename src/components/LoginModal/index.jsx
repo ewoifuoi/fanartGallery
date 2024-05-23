@@ -289,7 +289,9 @@ const LoginModal = (props) => {
                                                     }
                                                 });
                                                 if(response.status == 200) {
-
+                                                    let token = response.data.token;
+                                                    localStorage.setItem('token',token);
+                                                    
                                                     // 登录成功
                                                     alertRef.current.showAlert({type:'success', msg:'登录成功'})
                                                     resetAllState();
