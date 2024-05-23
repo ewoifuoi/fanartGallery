@@ -14,7 +14,7 @@ const authStore = createSlice({
         login(state,action) {
             state.isLoggedIn = true; 
             state.token = action.payload;
- 
+            console.log("权限校验通过")
             // 本地浏览器存一份
             localStorage.setItem('token',action.payload);
         },

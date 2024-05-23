@@ -14,12 +14,14 @@ import Alerts from '../Alerts';
 import axios from 'axios';
 import sha from 'sha256';
 import EmailAnimation from '../../animations/Email/index.jsx';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/modules/auth.jsx';
 
  
 
 const LoginModal = (props) => {
 
- 
+    const dispatch = useDispatch()
 
     // 登录模态框状态 
     // 0 : 登录界面
@@ -290,7 +292,7 @@ const LoginModal = (props) => {
                                                 });
                                                 if(response.status == 200) {
                                                     let token = response.data.token;
-                                                    localStorage.setItem('token',token);
+                                                    dispatch(login(token))
                                                     
                                                     // 登录成功
                                                     alertRef.current.showAlert({type:'success', msg:'登录成功'})
