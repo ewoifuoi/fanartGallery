@@ -16,14 +16,14 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    top: 250px;
+    top: 240px;
     width: 100%;
     height: 800px;
     transition: .3s;
 }
 
 .card_box_inner {
-    width: 97%;
+    width: 96%;
     height: 800px;
     border-radius: 25px;
     border: 2px solid rgba(188, 188, 188, 0.959);
@@ -75,7 +75,7 @@
 /* App.css */
 .custom-button {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 12px 30px;
     color: white;
     background-color: #b595cc; /* 紫色背景 */
     text-align: center;
@@ -84,10 +84,11 @@
     border-radius: 4px; /* 使按钮稍微有点圆角，但仍然保持方形外观 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影 */
     transition: all 0.3s ease; /* 添加过渡效果 */
+    user-select: none;
   }
   
   .custom-button:hover {
-    background-color: #5e009e; /* 悬浮时的背景颜色 */
+    background-color: #7c35ab; /* 悬浮时的背景颜色 */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* 悬浮时加深阴影 */
   }
   
@@ -96,9 +97,18 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 按下时的阴影效果 */
     transform: translateY(2px); /* 按下时的轻微位移效果 */
   }
+
+  .nav_title {
+    user-select: none;
+    padding: 0px 22px;
+    font-size: 23px;
+    color: rgb(94, 94, 94);
+    font-weight: bold;
+    align-self:flex-end;
+  }
   
   #button_box {
     position: absolute;
-    top:120px;
-    left: 1100px;
+    top:150px;
+    left: 100px;
   }
