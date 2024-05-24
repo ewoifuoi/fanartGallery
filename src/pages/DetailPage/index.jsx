@@ -49,7 +49,7 @@ const DetailPage = () => {
 
                     <div className='d-flex justify-content-center'>
                         <div>
-                            <ImageDrawer imageUrl={imageSrc}/>
+                            <ImageDrawer width="700px" imageUrl={imageSrc}/>
                             <div className='p-2'></div>
                             <div className='p-3 border border-3 rounded' style={{width:'700px',height:'400px'}}></div>
                         </div>
