@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Form, Button, Modal } from 'react-bootstrap';
 import './LoginModal.css'
-import URL from '../../config.js'
+
 
 import SliderCaptcha, {
     Status
@@ -16,6 +16,7 @@ import sha from 'sha256';
 import EmailAnimation from '../../animations/Email/index.jsx';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/modules/auth.jsx';
+import { set_avatar } from '../../store/modules/auth.jsx';
 
  
 
@@ -110,6 +111,8 @@ const LoginModal = (props) => {
 
     }
 
+    
+
     // 关闭登录模态框 逻辑
     const handleModalBodyClick = (e) => {
         // 检查是否点击了模态框内容以外的区域，并且不是 login__registre 元素
@@ -200,7 +203,7 @@ const LoginModal = (props) => {
 
         setSigninLoading(true);
         try {
-            let response = await axios.post(URL.REGISTER_URL, {
+            let response = await axios.post("http://124.221.8.18:8080/user/register", {
                 email: signinEmail,
                 name: signinName,
                 pwd: pwd,
@@ -282,7 +285,7 @@ const LoginModal = (props) => {
                                             setErrorCode(0); // 重置异常代码
                                             let pwd = sha(loginPassword)
                                             try {
-                                                let response = await axios.post(URL.LOGIN_URL,{
+                                                let response = await axios.post("http://124.221.8.18:8080/user/login",{
                                                     email: loginEmail,
                                                     pwd: pwd,
                                                 },{
@@ -293,6 +296,8 @@ const LoginModal = (props) => {
                                                 if(response.status == 200) {
                                                     let {token,username,email} = response.data;
                                                     dispatch(login({token,username,email}))
+
+                                                    
                                                     
                                                     // 登录成功
                                                     alertRef.current.showAlert({type:'success', msg:'登录成功'})

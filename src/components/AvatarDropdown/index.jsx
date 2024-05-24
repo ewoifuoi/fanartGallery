@@ -99,6 +99,7 @@ const AvatarDropdown = (props,ref) => {
 
                     <div className="drop_item" onClick={()=>{
                         dispatch(logout());
+                        
                         props.logout()
                     }}>
                         <div className="p-2"></div>

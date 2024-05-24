@@ -25,7 +25,7 @@ const ProfilePage = () => {
                         <div className="card_box_inner">
                             <div className="user_info">
                                 <div className="profile_avatar">
-                                    <img draggable="false" src={imageSrc} alt="/images/default.png" />
+                                    <img style={{ width: '100%' }} draggable="false" src={imageSrc} alt="/images/default.png" />
                                 </div>
                                 <div className="p-3"></div>
                                 <div>

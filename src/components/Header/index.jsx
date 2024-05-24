@@ -51,18 +51,30 @@ function Header() {
           responseType:'blob',
           headers: {
             'Authorization':`${localStorage.getItem('token')}`,
+          },
+          params: {
+            timestamp: Date.now() // 添加随机参数
           }
         });
         
-        let imageUrl = URL.createObjectURL(response.data);
-        dispatch(set_avatar(imageUrl))
+        ;
+        if (imageSrc) {
+          URL.revokeObjectURL(imageSrc);
+        }
+        let link = URL.createObjectURL(response.data)
+        
+        dispatch(set_avatar(link))
+        
       } catch(error) {
         alertRef.current.showAlert({type:'danger',msg:`${error}`});
       }
     }
-    if(isLoggedIn) fetchAvatar();
+    if(isLoggedIn){
+      
+      fetchAvatar();
+    }
     
-  },[isLoggedIn])
+  },[isLoggedIn, dispatch])
 
 
   // 关闭头像下拉菜单

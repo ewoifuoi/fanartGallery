@@ -27,6 +27,7 @@ const authStore = createSlice({
         },
         logout(state) {
             state.isLoggedIn = false;
+            
             state.token = '';
             state.username='';state.email='';state.avatar_url='/images/default.png';
             localStorage.setItem('token','');
