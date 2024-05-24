@@ -60,6 +60,7 @@ const Image = (props) => {
     
     return (
         <div className=''style={img_style}
+        
         onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
         onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         onClick={()=>{
