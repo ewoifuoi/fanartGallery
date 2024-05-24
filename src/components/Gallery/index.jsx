@@ -79,7 +79,7 @@ const Gallery = ()=>{
                         {columnsRef.current.map((column, columnIndex) =>(
                             <div key={columnIndex} className="col-lg-3 col-md-6">
                                 {column.map((image, index) => (
-                                    <div key={index} className="mb-2">
+                                    <div key={index} className="mb-2" style={{userSelect:'none'}}>
                                         <Image className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
                                     </div>
                                 ))}

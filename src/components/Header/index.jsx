@@ -184,7 +184,7 @@ function Header() {
                           if (showDropdown == false){ setShowDropdown(true);}
                           else {setShowDropdown(false);}
                         }}>
-                          <img className="circular-img" src={imageSrc} alt="/images/default.png" />
+                          <img style={{userSelect:'none'}} draggable="false" className="circular-img" src={imageSrc} alt="/images/default.png" />
                           <span style={{top:'80%',left:'85%'}} className="position-absolute translate-middle p-1 bg-success border border-light rounded-circle">
                           </span>
                         </div>
