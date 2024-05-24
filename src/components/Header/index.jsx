@@ -189,7 +189,7 @@ function Header() {
                           </span>
                         </div>
 
-                        <AvatarDropdown show={showDropdown} ref={dropdownRef} className="dropdown" logout={()=>{
+                        <AvatarDropdown show={showDropdown} ref={dropdownRef} className="dropdown" close={()=>{setShowDropdown(false);}} logout={()=>{
 
                           setShowDropdown(false);
                           alertRef.current.showAlert({type:'success',msg:"退出登录成功"});
