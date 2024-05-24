@@ -18,10 +18,10 @@ const router = createBrowserRouter([
                 path:'/profile',
                 element:<ProfilePage/>
             },
-            {
+            { 
                 index:true,
                 element: <Home/>
-            }
+            },
         ]
     }
 ])
