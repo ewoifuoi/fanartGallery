@@ -189,7 +189,7 @@ function Header() {
                           </span>
                         </div>
 
-                        <AvatarDropdown show={showDropdown} ref={dropdownRef} className="dropdown"/>
+                        <AvatarDropdown show={showDropdown} ref={dropdownRef} className="dropdown" logout={()=>{setShowDropdown(false)}}/>
 
                       </div>
                     )}

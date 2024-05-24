@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import './AvatarDropdown.css'
 import { forwardRef } from 'react';
 import { useImperativeHandle } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/modules/auth';
 const AvatarDropdown = (props,ref) => {
+
+    const dispatch = useDispatch();
 
     const imageSrc = useSelector((state)=>state.auth.avatar_url);
     const username = useSelector((state)=>state.auth.username);
@@ -88,7 +91,10 @@ const AvatarDropdown = (props,ref) => {
 
                     <hr />
 
-                    <div className="drop_item">
+                    <div className="drop_item" onClick={()=>{
+                        dispatch(logout());
+                        props.logout()
+                    }}>
                         <div className="p-2"></div>
                         <svg t="1716530368687" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3762" width="23" height="23"><path d="M668 720c-19.1 0-34.7 15.5-34.7 34.7v86.7c0 9.6-7.8 17.3-17.3 17.3H182.7c-9.6 0-17.3-7.8-17.3-17.3V182.7c0-9.6 7.8-17.3 17.3-17.3H616c9.6 0 17.3 7.8 17.3 17.3v86.7c0 19.1 15.5 34.7 34.7 34.7 19.1 0 34.7-15.5 34.7-34.7v-86.7c0-47.8-38.9-86.7-86.7-86.7H182.7C134.9 96 96 134.9 96 182.7v658.7c0 47.8 38.9 86.7 86.7 86.7H616c47.8 0 86.7-38.9 86.7-86.7v-86.7c0-19.2-15.6-34.7-34.7-34.7z" p-id="3763" fill="#707070"></path><path d="M917.7 487.5L767.9 340.4c-13.8-13.5-36.1-13.5-49.9 0a34.173 34.173 0 0 0 0 49l89.5 87.9H460.6c-19.5 0-35.3 15.5-35.3 34.7 0 19.1 15.8 34.7 35.3 34.7h346.9L718 634.6a34.173 34.173 0 0 0 0 49c6.9 6.8 15.9 10.2 25 10.2 9 0 18.1-3.4 25-10.2l149.7-147.1c13.7-13.5 13.7-35.5 0-49z" p-id="3764" fill="#707070"></path></svg>
                         <div className="p-1"></div>
