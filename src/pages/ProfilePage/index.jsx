@@ -13,13 +13,21 @@ const ProfilePage = () =>{
             <div className="p-4"></div>
             <div className="p-2"></div>
             <div className="d-flex justify-content-center">
-                <div style={{width:'70%', height:'1000px'}} className="bg-success">
-                    <div style={{position:'relative',width:'100%', height:'220px'}} className="bg-warning ">
-                        <div className="profile_avatar">
-                            <img draggable="false" src={imageSrc} alt="/images/default.png" />
-                        </div>
-                        <div className="username">{username}</div>
+
+                <div className="container_box bg-success" style={{width:'95%', height:'1000px'}}>
+                    
+                    <div className="bg-warning background_img">
+                        <img style={{width:'100%'}} src="/images/default_background.jpg" alt="/images/default_background.jpg" />
                     </div>
+                    <div className=" card_box">
+                        <div className="card_box_inner">
+                            <div className="profile_avatar">
+                                <img draggable="false" src={imageSrc} alt="/images/default.png" />
+                            </div>
+                            <div className="username">{username}</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
