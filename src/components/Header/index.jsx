@@ -51,7 +51,7 @@ function Header() {
           responseType:'blob',
           headers: {
             'Authorization':`${localStorage.getItem('token')}`,
-          },
+          }, 
           params: {
             timestamp: Date.now() // 添加随机参数
           }
