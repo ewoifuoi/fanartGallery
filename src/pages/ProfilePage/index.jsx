@@ -1,18 +1,69 @@
 import { useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
-import store from '../../store'
 import './ProfilePage.css'
-import ImageDrawer from "../../components/ImageDrawer";
+import { useEffect, useState , useRef} from "react";
+import axios from "axios";
+import Alerts from "../../components/Alerts";
 
 const ProfilePage = () => {
 
     const dispatch = useDispatch()
     const imageSrc = useSelector((state) => state.auth.avatar_url);
-    const username = useSelector((state) => state.auth.username);
-    const email = useSelector((state) => state.auth.email)
+
+    const alertRef = useRef(null);
 
     const params = useParams()
     let uid = params.uid
+
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [workscount, setWorkscount] = useState('');
+    const [followingcount, setFollowingcount] = useState('');
+    const [followerscount, setFollowercount] = useState('')
+    const [likecount, setLikecount] = useState('');
+    const [avatarLink, setAvatarLink] = useState('/images/default.png')
+
+    const fetchData = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/profile/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json"
+                }
+            });
+            
+            if(response.status == 200) {
+                
+                let {username,email,workscount,followerscount,followingcount,likecount} = response.data;
+
+                setUsername(username);setEmail(email);setWorkscount(workscount);
+                setFollowingcount(followingcount);setFollowercount(followerscount);setLikecount(likecount);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+    }
+
+    const fetchAvatar = async () => {
+        try {
+          let response = await axios.get(`http://124.221.8.18:8080/user/avatar/${uid}`,{
+            responseType:'blob',
+            params: {
+              timestamp: Date.now() // 添加随机参数
+            }
+          });
+          setAvatarLink(URL.createObjectURL(response.data))
+          
+        } catch(error) {
+          alertRef.current.showAlert({type:'danger',msg:`${error}`});
+        }
+      }
+
+    useEffect(()=>{
+        fetchData();
+        fetchAvatar();
+    },[])
 
     return (
         
@@ -30,7 +81,7 @@ const ProfilePage = () => {
                         <div className="card_box_inner">
                             <div className="user_info">
                                 <div className="profile_avatar">
-                                    <img style={{ width: '100%' }} draggable="false" src={imageSrc} alt="/images/default.png" />
+                                    <img style={{ width: '100%' }} draggable="false" src={avatarLink} alt="/images/default.png" />
                                 </div>
                                 <div className="p-2"></div>
                                 <div>
@@ -42,28 +93,28 @@ const ProfilePage = () => {
                                 <div className="d-flex">
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
-                                        <div className="text3" style={{textAlign:'center'}}>0</div>
+                                        <div className="text3" style={{textAlign:'center'}}>{workscount}</div>
                                         <div className="text2">作品数</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
-                                        <div className="text3" style={{textAlign:'center'}}>0</div>
+                                        <div className="text3" style={{textAlign:'center'}}>{followingcount}</div>
                                         <div className="text2">关注</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
-                                        <div className="text3" style={{textAlign:'center'}}>0</div>
+                                        <div className="text3" style={{textAlign:'center'}}>{followerscount}</div>
                                         <div className="text2">粉丝</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
-                                        <div className="text3" style={{textAlign:'center'}}>0</div>
+                                        <div className="text3" style={{textAlign:'center'}}>{likecount}</div>
                                         <div className="text2">获赞</div>
                                     </div>
                                 </div>
@@ -106,6 +157,8 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
+            {/* 提示消息列表 */}
+            <Alerts ref={alertRef}/>
         </>
     )
 }
