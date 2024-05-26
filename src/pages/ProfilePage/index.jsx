@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { useParams } from "react-router-dom";
 import store from '../../store'
 import './ProfilePage.css'
 import ImageDrawer from "../../components/ImageDrawer";
@@ -10,7 +11,11 @@ const ProfilePage = () => {
     const username = useSelector((state) => state.auth.username);
     const email = useSelector((state) => state.auth.email)
 
+    const params = useParams()
+    let uid = params.uid
+
     return (
+        
         <>
             <div className="p-4"></div>
             <div className="p-2"></div>
@@ -29,9 +34,7 @@ const ProfilePage = () => {
                                 </div>
                                 <div className="p-2"></div>
                                 <div>
-                                    <div className="p-3"></div>
-                                    <div className="p-3"></div>
-                                    <div className="p-1"></div>
+                                    <div style={{height:'80px'}}></div>
                                     <div className="username">{username}</div>
                                     <div className="email">{email}</div>
                                 </div>

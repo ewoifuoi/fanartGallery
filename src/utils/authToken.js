@@ -13,8 +13,8 @@ const refreshToken = async (dispatch) => {
             }
         });
         if(response.status == 200) {
-            let {token,username,email} = response.data;
-            dispatch(login({token, username,email}))
+            let {token,username,email, uid} = response.data;
+            dispatch(login({token, username,email,uid}))
         }
     }
     catch (error) {
