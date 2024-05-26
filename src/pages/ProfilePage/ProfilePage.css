@@ -100,7 +100,7 @@
 
   .nav_title {
     user-select: none;
-    padding: 0px 22px;
+    padding: 0px 25px;
     font-size: 20px;
     color: rgb(94, 94, 94);
     font-weight: bold;
@@ -110,5 +110,5 @@
   #button_box {
     position: absolute;
     top:150px;
-    left: 100px;
+    left: 110px;
   }

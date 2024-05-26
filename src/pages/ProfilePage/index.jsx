@@ -80,7 +80,7 @@ const ProfilePage = () => {
                                     <div className="nav_title">粉丝列表</div>
                                 </div>
 
-                                <div style={{width:'550px'}}></div>
+                                <div style={{width:'500px'}}></div>
 
                                 <a className="custom-button">
                                     <div className="d-flex" style={{alignContent:'center', justifyContent:'center'}}>
