@@ -16,7 +16,7 @@ const ProfilePage = () => {
             <div className="p-2"></div>
             <div className="d-flex justify-content-center">
 
-                <div className="container_box" style={{ width: '98%', height: '1000px', minWidth:'1440px' }}>
+                <div className="container_box" style={{ width: '96%', height: '1000px', minWidth:'1440px' }}>
 
                     <div className="bg-warning background_img">
                         <img style={{ width: '100%' }} src="/images/default_background.jpg" alt="/images/default_background.jpg" />
@@ -27,7 +27,7 @@ const ProfilePage = () => {
                                 <div className="profile_avatar">
                                     <img style={{ width: '100%' }} draggable="false" src={imageSrc} alt="/images/default.png" />
                                 </div>
-                                <div className="p-3"></div>
+                                <div className="p-2"></div>
                                 <div>
                                     <div className="p-3"></div>
                                     <div className="p-3"></div>
@@ -38,25 +38,28 @@ const ProfilePage = () => {
                                 <div style={{width:'490px'}}></div>
                                 <div className="d-flex">
                                     <div>
-                                        <div style={{height:'90px',width:'10px'}}></div>
+                                        <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>0</div>
                                         <div className="text2">作品数</div>
                                     </div>
                                     <div className="p-3"></div>
+                                    <div className="p-1"></div>
                                     <div>
-                                        <div style={{height:'90px',width:'10px'}}></div>
+                                        <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>0</div>
                                         <div className="text2">关注</div>
                                     </div>
                                     <div className="p-3"></div>
+                                    <div className="p-1"></div>
                                     <div>
-                                        <div style={{height:'90px',width:'10px'}}></div>
+                                        <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>0</div>
                                         <div className="text2">粉丝</div>
                                     </div>
                                     <div className="p-3"></div>
+                                    <div className="p-1"></div>
                                     <div>
-                                        <div style={{height:'90px',width:'10px'}}></div>
+                                        <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>0</div>
                                         <div className="text2">获赞</div>
                                     </div>
@@ -97,11 +100,7 @@ const ProfilePage = () => {
                             <hr />
 
                         </div>
-
-                        
-
                     </div>
-
                 </div>
             </div>
         </>
