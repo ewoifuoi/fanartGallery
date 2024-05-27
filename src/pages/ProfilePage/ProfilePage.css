@@ -112,3 +112,14 @@
     top:150px;
     left: 110px;
   }
+
+  .nav-underline {
+    position: absolute;
+    bottom: -6px;
+    left: 8px;
+    width: 60px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #b595cc;
+    transition: transform 0.3s;
+  }

@@ -23,6 +23,14 @@ const ProfilePage = () => {
     const [likecount, setLikecount] = useState('');
     const [avatarLink, setAvatarLink] = useState('/images/default.png')
 
+    // 三级路由导航页标识
+    // 0 : 作品列表
+    // 1 : 收藏列表
+    // 2 : 关注列表
+    // 3 : 粉丝列表
+    const [currentPage, setCurrentPage] = useState(0)
+    const currentX = [12,163,345,560]
+
     const fetchData = async () => {
         try {
             let response = await axios.get(`http://124.221.8.18:8080/user/profile/${uid}`,{
@@ -115,7 +123,7 @@ const ProfilePage = () => {
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>{likecount}</div>
-                                        <div className="text2" style={{textAlign:'center'}}>获赞</div>
+                                        <div className="text2" style={{textAlign:'center'}}>总获赞</div>
                                     </div>
                                 </div>
 
@@ -125,10 +133,19 @@ const ProfilePage = () => {
                             <div className="d-flex" id="button_box">
 
                                 <div className="d-flex">
-                                    <div className="nav_title">作品</div>
-                                    <div className="nav_title">收藏</div>
-                                    <div className="nav_title">关注列表</div>
-                                    <div className="nav_title">粉丝列表</div>
+                                    <div className="nav_title" onClick={()=>{
+                                        setCurrentPage(0)
+                                    }}>作品</div>
+                                    <div className="nav_title" onClick={()=>{
+                                        setCurrentPage(1)
+                                    }}>收藏</div>
+                                    <div className="nav_title" onClick={()=>{
+                                        setCurrentPage(2)
+                                    }}>关注列表</div>
+                                    <div className="nav_title" onClick={()=>{
+                                        setCurrentPage(3)
+                                    }}>粉丝列表</div>
+                                    <div className="nav-underline" style={{ transform: `translateX(${currentX[currentPage]}%)` }}></div>
                                 </div>
 
                                 <div style={{width:'500px'}}></div>
