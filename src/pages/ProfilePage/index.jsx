@@ -84,8 +84,8 @@ const ProfilePage = () => {
 
                 <div className="container_box" style={{ width: '96%', height: '1000px', minWidth:'1440px' }}>
 
-                    <div className="bg-warning background_img">
-                        <img style={{ width: '100%' }} src="/images/default_background.jpg" alt="/images/default_background.jpg" />
+                    <div className="bg-warning background_img" draggable='false'>
+                        <img style={{ width: '100%' }} src="/images/default_background.jpg" alt="/images/default_background.jpg" draggable='false'/>
                     </div>
                     <div className=" card_box">
                         <div className="card_box_inner">

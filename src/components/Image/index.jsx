@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './ImageLoadingAnimation.css'
-import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const Image = (props) => {
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         const img = new window.Image();

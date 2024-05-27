@@ -60,8 +60,6 @@ const Gallery = ()=>{
         shortestColumn.push(image);
     });
     
-
-    
     return (
         <>
             {/* 提示消息列表 */}
