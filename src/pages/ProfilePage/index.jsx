@@ -1,14 +1,15 @@
 import { useDispatch, useSelector} from "react-redux";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import './ProfilePage.css'
 import { useEffect, useState , useRef} from "react";
 import axios from "axios";
 import Alerts from "../../components/Alerts";
 
-const ProfilePage = () => {
 
-    const dispatch = useDispatch()
-    const imageSrc = useSelector((state) => state.auth.avatar_url);
+const ProfilePage = () => {
+    
+    
+    const navigate = useNavigate();
 
     const alertRef = useRef(null);
 
@@ -32,6 +33,7 @@ const ProfilePage = () => {
     const currentX = [12,163,345,560]
 
     const fetchData = async () => {
+        
         try {
             let response = await axios.get(`http://124.221.8.18:8080/user/profile/${uid}`,{
                 headers:{
@@ -135,15 +137,19 @@ const ProfilePage = () => {
                                 <div className="d-flex">
                                     <div className="nav_title" onClick={()=>{
                                         setCurrentPage(0)
+                                        navigate(`/profile/${uid}`)
                                     }}>作品</div>
                                     <div className="nav_title" onClick={()=>{
                                         setCurrentPage(1)
+                                        navigate(`/profile/${uid}/favoriates`)
                                     }}>收藏</div>
                                     <div className="nav_title" onClick={()=>{
                                         setCurrentPage(2)
+                                        navigate(`/profile/${uid}/followings`)
                                     }}>关注列表</div>
                                     <div className="nav_title" onClick={()=>{
                                         setCurrentPage(3)
+                                        navigate(`/profile/${uid}/followers`)
                                     }}>粉丝列表</div>
                                     <div className="nav-underline" style={{ transform: `translateX(${currentX[currentPage]}%)` }}></div>
                                 </div>

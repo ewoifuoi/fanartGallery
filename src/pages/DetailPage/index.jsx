@@ -22,7 +22,6 @@ const DetailPage = () => {
     const [imageSrc, setImageSrc] = useState('');
 
     useEffect(()=>{
-
         const fetchImage = async () => {
             try {
               const response = await axios.get(url, { responseType: 'blob' });

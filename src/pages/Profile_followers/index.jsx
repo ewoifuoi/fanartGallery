@@ -3,6 +3,9 @@ const Profile_followers = () => {
 
     return (
         <>
+            <div className="bg-secondary" style={{height:'800px'}}>
+
+            </div>
         </>
     )
 }
