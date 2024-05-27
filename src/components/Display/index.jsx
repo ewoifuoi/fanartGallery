@@ -33,6 +33,7 @@ const Display = (props) => {
                             className="p-1"
                             style={{
                                 margin: '5px',
+                                borderRadius:'10px',
                                 height: `${height * k}px`,
                                 width: `${image.width * k}px`,
                                 backgroundImage: `url(${image.url})`,
@@ -58,6 +59,7 @@ const Display = (props) => {
                         className="p-1"
                         style={{
                             margin: '10px',
+                            borderRadius:'10px',
                             height: `${height * k}px`,
                             width: `${image.width * k}px`,
                             backgroundImage: `url(${image.url})`,
