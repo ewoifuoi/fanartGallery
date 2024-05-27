@@ -94,28 +94,28 @@ const ProfilePage = () => {
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>{workscount}</div>
-                                        <div className="text2">作品数</div>
+                                        <div className="text2" style={{textAlign:'center'}}>作品数</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>{followingcount}</div>
-                                        <div className="text2">关注</div>
+                                        <div className="text2" style={{textAlign:'center'}}>关注</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>{followerscount}</div>
-                                        <div className="text2">粉丝</div>
+                                        <div className="text2" style={{textAlign:'center'}}>粉丝</div>
                                     </div>
                                     <div className="p-3"></div>
                                     <div className="p-1"></div>
                                     <div>
                                         <div style={{height:'85px',width:'10px'}}></div>
                                         <div className="text3" style={{textAlign:'center'}}>{likecount}</div>
-                                        <div className="text2">获赞</div>
+                                        <div className="text2" style={{textAlign:'center'}}>获赞</div>
                                     </div>
                                 </div>
 
