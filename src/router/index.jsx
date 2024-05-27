@@ -3,6 +3,7 @@ import Layout from '../pages/Layout';
 import Home from '../pages/Home'
 import DetailPage from '../pages/DetailPage';
 import ProfilePage from '../pages/ProfilePage';
+import Profile_works from '../pages/Profile_works';
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,13 @@ const router = createBrowserRouter([
             },
             {
                 path:'/profile/:uid',
-                element:<ProfilePage/>
+                element:<ProfilePage/>,
+                children:[
+                    {
+                        path:'/profile/:uid/works',
+                        element:<Profile_works/>
+                    }
+                ]
             },
             { 
                 index:true,

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector} from "react-redux";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import './ProfilePage.css'
 import { useEffect, useState , useRef} from "react";
 import axios from "axios";
@@ -169,7 +169,7 @@ const ProfilePage = () => {
                             <div className="p-5"></div>
                             <div className="p-5"></div>
                             <hr />
-
+                            <Outlet/>
                         </div>
                     </div>
                 </div>
