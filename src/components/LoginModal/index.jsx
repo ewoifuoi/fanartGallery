@@ -434,7 +434,7 @@ const LoginModal = (props) => {
                                         <EmailAnimation/>
                                     
                                     <div className='p-3'></div>
-                                    <h3 className='fw-bolder p-0 m-0 text-start'>验证你的电子邮件</h3>
+                                    <h3 className='fw-bolder p-0 m-0 text-start'>验证你的电子邮箱</h3>
                                     <div className="p-2"></div>
                                     <p className='text-start text-secondary fw-bold fs-6'>
                                         我们已经发送验证邮件到您的邮箱
