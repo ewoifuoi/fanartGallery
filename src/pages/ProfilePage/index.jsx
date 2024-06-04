@@ -136,20 +136,24 @@ const ProfilePage = () => {
 
                                 <div className="d-flex">
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(0)
+                                        setCurrentPage(0);
                                         navigate(`/profile/${uid}`)
+                                        window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>作品</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(1)
-                                        navigate(`/profile/${uid}/favoriates`)
+                                        setCurrentPage(1);
+                                        navigate(`/profile/${uid}/favoriates`);
+                                        window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>收藏</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(2)
-                                        navigate(`/profile/${uid}/followings`)
+                                        setCurrentPage(2);
+                                        navigate(`/profile/${uid}/followings`);
+                                        window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>关注列表</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(3)
-                                        navigate(`/profile/${uid}/followers`)
+                                        setCurrentPage(3);
+                                        navigate(`/profile/${uid}/followers`);
+                                        window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>粉丝列表</div>
                                     <div className="nav-underline" style={{ transform: `translateX(${currentX[currentPage]}%)` }}></div>
                                 </div>

@@ -24,7 +24,10 @@ const Display = (props) => {
     }
 
     useEffect(()=>{
-        if (!props.data || props.data.length === 0) return;
+        if (!props.data || props.data.length === 0) {
+            setLoading(false);
+            return;
+        }
         
         setLoading(true);
         let temp = props.data.slice((currentPage-1) * 20, currentPage * 20)
@@ -112,7 +115,7 @@ const Display = (props) => {
                 </div>
             )}
 
-            {!loading && <div>
+            {!loading && !(!props.data || props.data.length === 0 ) && <div>
                 <div className="d-flex flex-wrap">
                     {list}
                 </div>
@@ -124,6 +127,19 @@ const Display = (props) => {
                 </div>
                 <div style={{height:'50px'}}></div>
             </div>}
+
+            {(!props.data || props.data.length === 0 ) && (
+                <div>
+                    <div className="d-flex justify-content-center" style={{width:'1200px', height:'300px'}}>
+                        <img src="/none.svg" alt="" />
+                    </div>
+                    <div className="d-flex justify-content-center" style={{width:'1200px', height:'10px'}}>
+                        <div style={{fontSize:'30px',fontWeight:'bold', color:'gray'}}>暂无作品</div>
+                    </div>
+                    <div style={{height:'300px'}}></div>
+                </div>
+            )}
+
         </div>
     )
 }
