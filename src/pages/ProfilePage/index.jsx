@@ -24,6 +24,8 @@ const ProfilePage = () => {
     const [likecount, setLikecount] = useState('');
     const [avatarLink, setAvatarLink] = useState('/images/default.png')
     const [owner, setOwner] = useState(true);
+    const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+    const [hasWatched, setHasWatched] = useState(false);
     
 
     // 三级路由导航页标识
@@ -35,14 +37,12 @@ const ProfilePage = () => {
     const currentX = [12,163,345,560]
 
     const fetchData = async () => {
-        
         try {
             let response = await axios.get(`http://124.221.8.18:8080/user/profile/${uid}`,{
                 headers:{
                     'Content-Type':"application/json"
                 }
             });
-            
             if(response.status == 200) {
                 
                 let {username,email,workscount,followerscount,followingcount,likecount} = response.data;
@@ -65,6 +65,24 @@ const ProfilePage = () => {
         }
     }
 
+    const checkWatcher = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/hasWatched/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                setHasWatched(response.data);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+    }
+
     const fetchAvatar = async () => {
         try {
           let response = await axios.get(`http://124.221.8.18:8080/user/avatar/${uid}`,{
@@ -81,9 +99,9 @@ const ProfilePage = () => {
       }
 
     useEffect(()=>{
-        if(!userid) return;
         fetchData();
         fetchAvatar();
+        if(isLoggedIn) checkWatcher();
     },[userid])
 
     return (
