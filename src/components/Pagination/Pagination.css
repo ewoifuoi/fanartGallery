@@ -26,21 +26,16 @@
 
 .page-link:hover {
     color: #0056b3;
-    background-color: #d5dde4;
-    border-color: #dee2e6;
+    background-color: #e2e7ec;
+    border: none;
 }
 
-.page-link:focus {
-    z-index: 3;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
 
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
     background-color: #0061bc62;
-    border-color: #007bff;
+    border: none;
 }
 
 .page-item.disabled .page-link {
