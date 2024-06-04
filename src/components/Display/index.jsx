@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Alerts from "../Alerts";
 import axios from "axios";
 import './Display.css'
+import Pagination from "../Pagination";
 
 
 
@@ -23,7 +24,7 @@ const Display = (props) => {
         let rowWidth = 0;
         temp.forEach((item,index)=>{
             let width = (height / item.height) * item.width;
-            console.log(width)
+            // console.log(width)
             if(rowWidth + width > maxWidth) {
                 const k = maxWidth / rowWidth;
                 row = row.map(image => {
@@ -70,9 +71,7 @@ const Display = (props) => {
             });
             newList = newList.concat(row);
         }
-
         setList(newList);
-
     },
     [props.data])
 
@@ -81,20 +80,14 @@ const Display = (props) => {
             <Alerts ref={alertRef}/>
             <div className="d-flex flex-wrap">
                 {list}
-                
             </div>
             <div style={{height:'20px'}}></div>
+
+            {/* 底部编页码 */}
             <div className="d-flex justify-content-center" style={{width:'100%'}}>
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" >Previous</a></li>
-                        <li className="page-item"><a className="page-link" >1</a></li>
-                        <li className="page-item"><a className="page-link" >2</a></li>
-                        <li className="page-item"><a className="page-link" >3</a></li>
-                        <li className="page-item"><a className="page-link" >Next</a></li>
-                    </ul>
-                </nav>
+                <Pagination totalPages={Math.ceil(props.data.length/20)}/>
             </div>
+
         </div>
     )
 }
