@@ -1,33 +1,32 @@
 .pagination {
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.1rem;
+    display: flex;    
 }
 
 .page-item {
-    margin: 0 0rem;
+    margin: 0 0.13rem;
 }
 
 .page-link {
     position: relative;
-    display: block;
-    padding: 0.7rem 0.95rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    font-size: 20px;
-    color: #007bff;
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px; /* 设置宽度 */
+    height: px; /* 设置高度，使其为正方形 */
+    border-radius: 50%; /* 使其为圆形 */
+    font-size: 22px;
+    color: #858585;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
     text-decoration: none;
-    border-radius: 0.25rem;
     cursor: pointer;
     user-select: none;
 }
 
 .page-link:hover {
     color: #0056b3;
-    background-color: #e9ecef;
+    background-color: #d5dde4;
     border-color: #dee2e6;
 }
 
@@ -40,7 +39,7 @@
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #007bff;
+    background-color: #0061bc62;
     border-color: #007bff;
 }
 
@@ -48,5 +47,4 @@
     color: #6c757d;
     pointer-events: none;
     background-color: #ffffff49;
-    border-color: #dee2e6b7;
 }

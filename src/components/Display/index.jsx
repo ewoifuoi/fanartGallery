@@ -81,11 +81,11 @@ const Display = (props) => {
             <div className="d-flex flex-wrap">
                 {list}
             </div>
-            <div style={{height:'20px'}}></div>
+            <div style={{height:'10px'}}></div>
 
             {/* 底部编页码 */}
             <div className="d-flex justify-content-center" style={{width:'100%'}}>
-                <Pagination totalPages={Math.ceil(props.data.length/20)}/>
+                <Pagination totalPages={Math.ceil(props.data.length/20)} currentPage={1}/>
             </div>
 
         </div>
