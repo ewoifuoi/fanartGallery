@@ -36,7 +36,7 @@ const Profile_works = () => {
     return (
         <>
             <Alerts ref={alertRef}/>
-            <div className="" style={{height:'1000px'}}>
+            <div className="" style={{height:'auto'}}>
                 <div className="d-flex">
                     <div style={{width:'100px'}}></div>
                     <Display data={data}/>

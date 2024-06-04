@@ -25,10 +25,11 @@
 .card_box_inner {
     width: 95%;
     height: auto;
+    margin-bottom: 100px;
     border-radius: 25px;
     border: 2px solid rgba(188, 188, 188, 0.959);
     background-color: rgba(243, 243, 243, 0.971);
-    box-shadow: -1px 15px 30px -10px rgba(0, 0, 0, 0.748);
+    box-shadow: -1px 10px 30px -10px rgba(0, 0, 0, 0.468);
     transition: .3s;
 }
 

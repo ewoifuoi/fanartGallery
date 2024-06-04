@@ -179,7 +179,9 @@ const ProfilePage = () => {
                                 <Outlet/>
                             </div>
                             
+                            
                         </div>
+                        
                     </div>
                 </div>
             </div>
