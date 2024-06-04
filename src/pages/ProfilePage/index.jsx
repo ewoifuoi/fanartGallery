@@ -81,9 +81,7 @@ const ProfilePage = () => {
             <div className="p-4"></div>
             <div className="p-2"></div>
             <div className="d-flex justify-content-center">
-
                 <div className="container_box" style={{ width: '96%', height: 'auto', minWidth:'1440px' }}>
-
                     <div className="bg-warning background_img" draggable='false'>
                         <img style={{ width: '100%' }} src="/images/default_background.jpg" alt="/images/default_background.jpg" draggable='false'/>
                     </div>
@@ -128,8 +126,6 @@ const ProfilePage = () => {
                                         <div className="text2" style={{textAlign:'center'}}>总获赞</div>
                                     </div>
                                 </div>
-
-                                
 
                             </div>
                             <div className="d-flex" id="button_box">
