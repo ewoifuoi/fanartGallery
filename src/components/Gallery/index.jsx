@@ -78,7 +78,7 @@ const Gallery = ()=>{
                             <div key={columnIndex} className="col-lg-3 col-md-6">
                                 {column.map((image, index) => (
                                     <div key={index} className="mb-2" style={{userSelect:'none'}}>
-                                        <Image className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
+                                        <Image realWidth='365px' defaultHeight='400px' showButton='true' width='400px' height='auto' className="w-100 shadow-2-strong rounded" src={image.src} tags={image.tags} />
                                     </div>
                                 ))}
                             </div>

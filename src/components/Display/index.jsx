@@ -4,6 +4,7 @@ import Alerts from "../Alerts";
 import axios from "axios";
 import './Display.css'
 import Pagination from "../Pagination";
+import Image from "../Image";
 
 
 
@@ -34,18 +35,25 @@ const Display = (props) => {
                 const k = maxWidth / rowWidth;
                 row = row.map(image => {
                     return (
+                        
                         <div
                             key={image.key}
-                            className="p-1"
+                            
                             style={{
-                                margin: '5px',
+                                margin: '3px',
                                 borderRadius:'10px',
                                 height: `${height * k}px`,
                                 width: `${image.width * k}px`,
-                                backgroundImage: `url(${image.url})`,
                                 backgroundSize: 'cover'
                             }}
-                        ></div>
+                        >
+                            <Image 
+                            height={`${height * k}px`} 
+                            width={`${image.width * k}px`} 
+                            src={`${image.url}`} 
+                            defaultHeight={`${height * k}px`} 
+                            realWidth={`${image.width * k}px`}/>
+                        </div>
                     );
                 });
                 newList = newList.concat(row);
@@ -61,18 +69,27 @@ const Display = (props) => {
             const k = maxWidth / rowWidth;
             row = row.map(image => {
                 return (
+                    
                     <div
                         key={image.key}
-                        className="p-1"
+                        
                         style={{
-                            margin: '10px',
+                            margin: '3px',
                             borderRadius:'10px',
                             height: `${height * k}px`,
                             width: `${image.width * k}px`,
-                            backgroundImage: `url(${image.url})`,
                             backgroundSize: 'cover'
                         }}
-                    ></div>
+                    >
+
+                        <Image 
+                            height={`${height * k}px`} 
+                            width={`${image.width * k}px`} 
+                            src={`${image.url}`} 
+                            defaultHeight={`${height * k}px`} 
+                            realWidth={`${image.width * k}px`}/>
+
+                    </div>
                 );
             });
             newList = newList.concat(row);
@@ -93,7 +110,7 @@ const Display = (props) => {
             <div className="d-flex justify-content-center" style={{width:'100%'}}>
                 <Pagination totalPages={Math.ceil(props.data.length/20)} currentPage={currentPage} onPageChange={changePage}/>
             </div>
-
+            <div style={{height:'200px'}}></div>
         </div>
     )
 }

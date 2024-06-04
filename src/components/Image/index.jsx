@@ -14,12 +14,12 @@ const Image = (props) => {
         };
         img.src = props.src;
     }, [props.src]);
-    
+
         
     const img_style = {
-        width: '365px',
+        width: `${props.realWidth}`,
         position: 'relative',
-        height: loaded? 'auto' : '400px',
+        height: loaded? 'auto' : `${props.defaultHeight}`,
         overflow: 'hidden',
         transform: hovered ? 'scale(1.005)' : 'scale(1)', // 鼠标悬停时放大图片
     };
@@ -54,6 +54,11 @@ const Image = (props) => {
         backdropFilter: 'blur(10px) opacity(0.7)'
     }
 
+    const loadingStyle = {
+        height : props.height,
+        width : '400px'
+    }
+
     
     return (
         <div className=''style={img_style}
@@ -75,7 +80,7 @@ const Image = (props) => {
                 {!loaded && (
                      <div style={{position: 'absolute',top:0,height:'100%',width:'100%'}}>
                         <p className="placeholder-glow rounded">
-                            <span style={{padding:0,margin:0,height:'400px',position:'absolute',left:0, top:0}} className="rounded placeholder col-12 bg-secondary z-3"></span>
+                            <span style={{height:'400px', padding:0,margin:0,position:'absolute',left:0, top:0 }} className={'rounded placeholder col-12 bg-secondary z-3'}></span>
                         </p>
                     </div>
                 )}
@@ -96,7 +101,7 @@ const Image = (props) => {
             style={overlayStyle}></div>  
 
             {/* 三个标签 */}
-            {hovered && props.tags && (
+            {hovered &&  props.tags && props.showButton && (
                 <div style={{...tagStyle}} className='d-flex'>
                     {props.tags.length>0 &&(<a className="p-1 fs-6 text-white text-decoration-none" >{props.tags[0]}</a>)}
                     {props.tags.length>1 &&(<a className="p-1 fs-6 text-white text-decoration-none" >{props.tags[1]}</a>)}
@@ -104,7 +109,7 @@ const Image = (props) => {
                 </div>
             )}
 
-            {hovered && loaded && ( // 根据鼠标悬停状态显示按钮
+            {hovered && loaded && props.showButton && ( // 根据鼠标悬停状态显示按钮
                 <React.Fragment>
                     <button
                         type="button"
