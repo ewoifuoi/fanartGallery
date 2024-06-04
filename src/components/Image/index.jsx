@@ -54,11 +54,6 @@ const Image = (props) => {
         backdropFilter: 'blur(10px) opacity(0.7)'
     }
 
-    const loadingStyle = {
-        height : props.height,
-        width : '400px'
-    }
-
     
     return (
         <div className=''style={img_style}

@@ -18,12 +18,14 @@ const Display = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const changePage = (page) => {
+        if(currentPage != page) setList([]);
         setCurrentPage(page);
+        
     }
 
     useEffect(()=>{
         if (!props.data || props.data.length === 0) return;
-        setList([]);
+        
         setLoading(true);
         let temp = props.data.slice((currentPage-1) * 20, currentPage * 20)
         const maxWidth = 1200; // 每行最大宽度
