@@ -9,6 +9,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     },[])
 
     useEffect(()=>{
+        onPageChange(page);
         renderPageNumbers();
     },[page])
     

@@ -12,11 +12,16 @@ const Display = (props) => {
     const alertRef = useRef(null);
     
     const [list,setList] = useState([])
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const changePage = (page) => {
+        setCurrentPage(page);
+    }
 
     useEffect(()=>{
         if (!props.data || props.data.length === 0) return;
 
-        let temp = props.data.slice(0, 20)
+        let temp = props.data.slice((currentPage-1) * 20, currentPage * 20)
         const maxWidth = 1200; // 每行最大宽度
         const height = 200; // 固定高度
         let newList = [];
@@ -24,7 +29,7 @@ const Display = (props) => {
         let rowWidth = 0;
         temp.forEach((item,index)=>{
             let width = (height / item.height) * item.width;
-            // console.log(width)
+
             if(rowWidth + width > maxWidth) {
                 const k = maxWidth / rowWidth;
                 row = row.map(image => {
@@ -50,6 +55,7 @@ const Display = (props) => {
             row.push({ key: index, width, url: item.url });
             rowWidth += width;
         })
+
          //处理最后一行
         if (row.length > 0) {
             const k = maxWidth / rowWidth;
@@ -73,7 +79,7 @@ const Display = (props) => {
         }
         setList(newList);
     },
-    [props.data])
+    [props.data,currentPage])
 
     return (
         <div>
@@ -85,7 +91,7 @@ const Display = (props) => {
 
             {/* 底部编页码 */}
             <div className="d-flex justify-content-center" style={{width:'100%'}}>
-                <Pagination totalPages={Math.ceil(props.data.length/20)} currentPage={1}/>
+                <Pagination totalPages={Math.ceil(props.data.length/20)} currentPage={currentPage} onPageChange={changePage}/>
             </div>
 
         </div>
