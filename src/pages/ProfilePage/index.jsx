@@ -82,7 +82,7 @@ const ProfilePage = () => {
             <div className="p-2"></div>
             <div className="d-flex justify-content-center">
 
-                <div className="container_box" style={{ width: '96%', height: '1000px', minWidth:'1440px' }}>
+                <div className="container_box" style={{ width: '96%', height: 'auto', minWidth:'1440px' }}>
 
                     <div className="bg-warning background_img" draggable='false'>
                         <img style={{ width: '100%' }} src="/images/default_background.jpg" alt="/images/default_background.jpg" draggable='false'/>
@@ -175,7 +175,10 @@ const ProfilePage = () => {
                             <div className="p-5"></div>
                             <div className="p-5"></div>
                             <hr />
-                            <Outlet/>
+                            <div>
+                                <Outlet/>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -77,12 +77,16 @@ const Display = (props) => {
     [props.data])
 
     return (
-        <>
+        <div>
             <Alerts ref={alertRef}/>
             <div className="d-flex flex-wrap">
                 {list}
+                
             </div>
-        </>
+            <div className="d-flex justify-content-center" style={{width:'100%'}}>
+                <div style={{width:'600px',height:'80px', backgroundColor:'black'}}></div>
+            </div>
+        </div>
     )
 }
 export default Display;
