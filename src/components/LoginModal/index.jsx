@@ -220,7 +220,7 @@ const LoginModal = (props) => {
                 alertRef.current.showAlert({ type: 'danger', msg: `注册失败: ${response}` });
             }
         } catch (error) {
-            alertRef.current.showAlert({ type: 'danger', msg: `${error.response.data}` });
+            alertRef.current.showAlert({ type: 'danger', msg: `${error.response.data.detail}` });
         }
         finally {
             // 注册按钮结束加载中状态
@@ -304,10 +304,10 @@ const LoginModal = (props) => {
                                                         props.onHide();
                                                     }, 1200);
                                                     
-                                                    
                                                 }
+                                                
                                             } catch (error) {
-                                                alertRef.current.showAlert({type:'danger', msg:`登录失败:${error.response}`})
+                                                alertRef.current.showAlert({type:'danger', msg:`登录失败: ${error.response.data.detail}`})
                                             }
                                             finally {
 

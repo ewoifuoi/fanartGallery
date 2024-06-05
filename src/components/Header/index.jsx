@@ -32,7 +32,7 @@ function Header() {
   // 0 : 不显示
   // 1 : 显示登录界面
   // 2 : 显示注册界面
-  const [modalState, setModalState] = useState(0);
+
 
   const buttonStyle = {
     opacity: '1',
@@ -146,7 +146,6 @@ function Header() {
                         else {
 
                           // 如果用户没有登录, 则载入用户登录界面
-                          setModalState(1)
                           dispatch(showLoginModal());
 
                         }
@@ -159,7 +158,7 @@ function Header() {
                     {!isLoggedIn && (<div className="d-flex">
                         {/*用户登录按钮*/}
                       <button type="button"  
-                      onClick={() => {setModalState(1); dispatch(showLoginModal());}}                     
+                      onClick={() => {dispatch(showLoginModal());}}                     
                       className="btn">登录</button>
                       <div className="p-1"></div>
                       <button type="button" className="
@@ -168,7 +167,7 @@ function Header() {
                       border
                       rounded-4
                       " style={{...buttonStyle}}
-                      onClick={()=>{setModalState(2); dispatch(showSigninModal());}}>注册</button>
+                      onClick={()=>{dispatch(showSigninModal());}}>注册</button>
                     </div>)}
 
                     
@@ -227,7 +226,7 @@ function Header() {
 
           {/* 用户登录模态框 */}
           
-          <LoginModal show={modal!=0?true:false} onHide={()=>{setModalState(0); dispatch(closeModal());}} modalstate={modal}/>
+          <LoginModal show={modal!=0?true:false} onHide={()=>{dispatch(closeModal());}} modalstate={modal}/>
           
           <Alerts ref={alertRef}/>
 
