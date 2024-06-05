@@ -9,6 +9,7 @@ import Alerts from "../Alerts";
 import axios from "axios";
 import AvatarDropdown from "../AvatarDropdown";
 import { set_avatar } from "../../store/modules/auth";
+import {showLoginModal, showSigninModal, closeModal} from "../../store/modules/modal";
 
 function Header() {
 
@@ -17,12 +18,15 @@ function Header() {
 
   const alertRef = useRef(null);
   const dropdownRef = useRef(null);
+  
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const imageSrc = useSelector((state) => state.auth.avatar_url);
 
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const modal = useSelector((state)=> state.modal.modalState);
 
   // 登录模态框状态
   // 0 : 不显示
@@ -43,6 +47,7 @@ function Header() {
     });
   };
 
+
   // 请求头像图片
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -56,8 +61,7 @@ function Header() {
             timestamp: Date.now() // 添加随机参数
           }
         });
-        
-        ;
+
         if (imageSrc) {
           URL.revokeObjectURL(imageSrc);
         }
@@ -143,6 +147,7 @@ function Header() {
 
                           // 如果用户没有登录, 则载入用户登录界面
                           setModalState(1)
+                          dispatch(showLoginModal());
 
                         }
                       }}>上传图片</div>
@@ -154,7 +159,7 @@ function Header() {
                     {!isLoggedIn && (<div className="d-flex">
                         {/*用户登录按钮*/}
                       <button type="button"  
-                      onClick={() => setModalState(1)}                     
+                      onClick={() => {setModalState(1); dispatch(showLoginModal());}}                     
                       className="btn">登录</button>
                       <div className="p-1"></div>
                       <button type="button" className="
@@ -163,7 +168,7 @@ function Header() {
                       border
                       rounded-4
                       " style={{...buttonStyle}}
-                      onClick={()=>{setModalState(2)}}>注册</button>
+                      onClick={()=>{setModalState(2); dispatch(showSigninModal());}}>注册</button>
                     </div>)}
 
                     
@@ -222,7 +227,7 @@ function Header() {
 
           {/* 用户登录模态框 */}
           
-          <LoginModal show={modalState!=0?true:false} onHide={()=>setModalState(0)} modalstate={modalState}/>
+          <LoginModal show={modal!=0?true:false} onHide={()=>{setModalState(0); dispatch(closeModal());}} modalstate={modal}/>
           
           <Alerts ref={alertRef}/>
 

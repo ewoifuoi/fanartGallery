@@ -16,8 +16,6 @@ import sha from 'sha256';
 import EmailAnimation from '../../animations/Email/index.jsx';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/modules/auth.jsx';
-import { set_avatar } from '../../store/modules/auth.jsx';
-
  
 
 const LoginModal = (props) => {
