@@ -46,3 +46,16 @@
 .icon_button_selected {
     fill: #1772F6;
 }
+
+.content {
+    font-size: 16px;
+    user-select: none;
+    font-weight: bold;
+}
+
+.time {
+    font-size: 13px;
+    font-weight:800;
+    user-select: none;
+    color: #5454548a;
+}
