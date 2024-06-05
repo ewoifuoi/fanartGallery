@@ -8,7 +8,6 @@ const modalStore = createSlice({
     reducers:{
         showLoginModal(state) {
             state.modalState = 1;
-            console.log("!")
         },
         showSigninModal(state) {
             state.modalState = 2;
