@@ -1,11 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './ImageLoadingAnimation.css'
+import axios from 'axios'
 
 
 const Image = (props) => {
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
+
+    const url = props.src;
+    const parts = url.split("/");
+    const lastPart = parts[parts.length - 1];
+
+    // 再根据点号 . 分割最后一个部分，并选择第一个部分，即文件名部分
+    const id = lastPart;
+    const [isFavoriated, setIsFavorited] = useState(false);
 
     useEffect(() => {
         const img = new window.Image();
@@ -24,7 +33,18 @@ const Image = (props) => {
         transform: hovered ? 'scale(1.005)' : 'scale(1)', // 鼠标悬停时放大图片
     };
 
-    const buttonStyle = {
+    const buttonStyle1 = {
+        position: 'absolute',
+        top: '10px',
+        left: '10px',
+        backgroundColor: isFavoriated? '#BE851C98':'',
+        opacity: '0.8',
+        transition: 'opacity 0.3s ease', // 添加过渡效果
+        backdropFilter: 'blur(10px) opacity(0.7)'
+        
+    };
+
+    const buttonStyle2 = {
         position: 'absolute',
         top: '10px',
         left: '10px',
@@ -54,21 +74,72 @@ const Image = (props) => {
         backdropFilter: 'blur(10px) opacity(0.7)'
     }
 
+    useEffect(()=>{
+        checkFavorite();
+    },
+    [hovered])
+
+    const checkFavorite = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/check_favorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("success");
+                setIsFavorited(response.data);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+      }
+
+    const favoriate = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/favorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("收藏成功");
+                setIsFavorited(true);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
+    const unfavoriate = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/unfavorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("取消收藏");
+                setIsFavorited(false);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
     
     return (
         <div className=''style={img_style}
-        
-        onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
-        onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
-        onClick={()=>{
-            let idRegex = /image\/([^\/]+)$/;
-            let match = props.src.match(idRegex);
-            let id = match[1];
-            // 点击插画作品跳转作品详情页
-            
-            window.open(`http://localhost:5173/illustration/${id}`, '_blank');
-
-        }}
+            onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
+            onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         >
 
                 {/* 图片加载动画 */}
@@ -93,7 +164,16 @@ const Image = (props) => {
             className='
             rounded
             '
-            style={overlayStyle}></div>  
+            style={overlayStyle}
+            onClick={()=>{
+                let idRegex = /image\/([^\/]+)$/;
+                let match = props.src.match(idRegex);
+                let id = match[1];
+                // 点击插画作品跳转作品详情页
+                
+                window.open(`http://localhost:5173/illustration/${id}`, '_blank');
+    
+            }}></div>  
 
             {/* 三个标签 */}
             {hovered &&  props.tags && props.showButton && (
@@ -109,7 +189,16 @@ const Image = (props) => {
                     <button
                         type="button"
                         className="btn btn-md m-2 border btn-outline-light"
-                        style={buttonStyle}
+                        style={buttonStyle1}
+                        onClick={()=>{
+                            if(isFavoriated == false) {
+                                favoriate();
+                            }
+                            else {
+                                unfavoriate();
+                            }
+                            
+                        }}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +215,7 @@ const Image = (props) => {
                     <button
                         type="button"
                         className="btn btn-md border m-2 btn-outline-light"
-                        style={{ ...buttonStyle, left: '57px' }}
+                        style={{ ...buttonStyle2, left: '57px' }}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
