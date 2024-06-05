@@ -95,7 +95,7 @@ const Image = (props) => {
                 }
             });
             if(response.status == 200) {
-                console.log("success");
+                // console.log("success");
                 setIsFavorited(response.data);
             }
         }

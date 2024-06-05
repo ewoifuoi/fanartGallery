@@ -5,6 +5,7 @@ import { useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/modules/auth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const AvatarDropdown = (props,ref) => {
 
     const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const AvatarDropdown = (props,ref) => {
     const username = useSelector((state)=>state.auth.username);
     const email = useSelector((state)=>state.auth.email);
     const uid = useSelector((state)=>state.auth.uid);
+    const [followingcount, setFollowingcount] = useState(0);
+    const [followercount, setFollowercount] = useState(0);
     // 使用 useImperativeHandle 暴露 closeDropdown 方法给父组件
     useImperativeHandle(ref, () => ({
         checkClick : (event)=>{
@@ -22,6 +25,29 @@ const AvatarDropdown = (props,ref) => {
             else return true;
         }
     }));
+
+    const fetchData = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/profile/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json"
+                }
+            });
+            if(response.status == 200) {
+                let {username,email,workscount,followerscount,followingcount,likecount} = response.data;
+                setFollowingcount(followingcount);setFollowercount(followerscount);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+
+            // alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+    }
+
+    useEffect(()=>{
+        fetchData();
+    },[])
 
     return (
         <div>
@@ -47,12 +73,12 @@ const AvatarDropdown = (props,ref) => {
                         <div className="ps-4"></div>
                         <div className='ps-4'></div>
                         <div>
-                            <div style={{textAlign:'center',fontFamily:'Arial',fontWeight:'bold',userSelect:'none'}}>0</div>
+                            <div style={{textAlign:'center',fontFamily:'Arial',fontWeight:'bold',userSelect:'none'}}>{followingcount}</div>
                             <div style={{fontSize:'14px',color:'#707070',userSelect:'none'}}>已关注</div>
                         </div>
                         <div className="ps-5"></div>
                         <div>
-                            <div style={{textAlign:'center',fontFamily:'Arial',fontWeight:'bold',userSelect:'none'}}>0</div>
+                            <div style={{textAlign:'center',fontFamily:'Arial',fontWeight:'bold',userSelect:'none'}}>{followercount}</div>
                             <div style={{fontSize:'14px',color:'#707070',userSelect:'none'}}>粉丝</div>
                         </div>
                     </div>

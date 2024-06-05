@@ -41,9 +41,7 @@ const ProfilePage = () => {
                 }
             });
             if(response.status == 200) {
-                
                 let {username,email,workscount,followerscount,followingcount,likecount} = response.data;
-
                 setUsername(username);setEmail(email);setWorkscount(workscount);
                 setFollowingcount(followingcount);setFollowercount(followerscount);setLikecount(likecount);
             }
