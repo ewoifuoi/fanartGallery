@@ -21,13 +21,58 @@
     padding: 0; /* 可选，如果希望内容与模态框之间没有间距 */
 }
 
-.upload-container{
-    display: grid;
+.upload-container1{
+    justify-content: center;
+    align-items: center;
     grid-template-columns: 100%;
     height: 100vh;
     opacity: 95%;
-    margin-left: 24%;
+    margin-left: 32%;
     margin-right: 1.5rem;
     border-radius: 2rem;
     box-shadow: 0 8px 20px rgba(35,0,77,.2);
+  }
+
+  .upload-container2{
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 100%;
+    height: 100vh;
+    opacity: 95%;
+    margin-left: 21%;
+    margin-right: 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 8px 20px rgba(35,0,77,.2);
+  }
+
+  .custom-button {
+    display: inline-block;
+    padding: 12px 30px;
+    color: white;
+    background-color: #b595cc; /* 紫色背景 */
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px; /* 使按钮稍微有点圆角，但仍然保持方形外观 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    user-select: none;
+  }
+  
+  .custom-button:hover {
+    background-color: #7c35ab; /* 悬浮时的背景颜色 */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* 悬浮时加深阴影 */
+  }
+  
+  .custom-button:active {
+    background-color: #52008a; /* 按下时的背景颜色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 按下时的阴影效果 */
+    transform: translateY(2px); /* 按下时的轻微位移效果 */
+  }
+
+  .info-text {
+    padding: 2px 0px;
+    font-size: 15px;
+    font-weight: bold;
+    color:#5e3c75d1;
   }
