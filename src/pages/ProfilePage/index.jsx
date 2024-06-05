@@ -4,7 +4,7 @@ import './ProfilePage.css'
 import { useEffect, useState , useRef} from "react";
 import axios from "axios";
 import Alerts from "../../components/Alerts";
-import showLoginState, { showLoginModal } from "../../store/modules/modal"
+import showLoginState, { changeCurrentList, showLoginModal } from "../../store/modules/modal"
 
 
 const ProfilePage = () => {
@@ -29,14 +29,8 @@ const ProfilePage = () => {
     const [owner, setOwner] = useState(true);
     const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
     const [hasWatched, setHasWatched] = useState(false);
+    const currentList = useSelector((state)=>state.modal.currentList);
     
-
-    // 三级路由导航页标识
-    // 0 : 作品列表
-    // 1 : 收藏列表
-    // 2 : 关注列表
-    // 3 : 粉丝列表
-    const [currentPage, setCurrentPage] = useState(0)
     const currentX = [12,163,345,560]
 
     const fetchData = async () => {
@@ -205,26 +199,26 @@ const ProfilePage = () => {
 
                                 <div className="d-flex">
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(0);
+                                        dispatch(changeCurrentList(0));
                                         navigate(`/profile/${uid}`)
                                         window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>作品</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(1);
+                                        dispatch(changeCurrentList(1));
                                         navigate(`/profile/${uid}/favoriates`);
                                         window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>收藏</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(2);
+                                        dispatch(changeCurrentList(2));
                                         navigate(`/profile/${uid}/followings`);
                                         window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>关注列表</div>
                                     <div className="nav_title" onClick={()=>{
-                                        setCurrentPage(3);
+                                        dispatch(changeCurrentList(3));
                                         navigate(`/profile/${uid}/followers`);
                                         window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>粉丝列表</div>
-                                    <div className="nav-underline" style={{ transform: `translateX(${currentX[currentPage]}%)` }}></div>
+                                    <div className="nav-underline" style={{ transform: `translateX(${currentX[currentList]}%)` }}></div>
                                 </div>
 
                                 <div style={{width:'500px'}}></div>

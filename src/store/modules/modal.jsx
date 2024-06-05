@@ -4,7 +4,8 @@ const modalStore = createSlice({
     name:"modalState",
     initialState:{
         modalState:0,
-        refresh:false
+        refresh:false,
+        currentList:0
     },
     reducers:{
         showLoginModal(state) {
@@ -23,12 +24,15 @@ const modalStore = createSlice({
             else {
                 state.refresh = true;
             }
+        },
+        changeCurrentList(state, action) {
+            state.currentList = action.payload;
         }
     }
 })
 
-const {showLoginModal, showSigninModal, closeModal, refresh} = modalStore.actions;
+const {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList} = modalStore.actions;
 const modalReducer = modalStore.reducer;
 
-export {showLoginModal, showSigninModal, closeModal, refresh};
+export {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList};
 export default modalReducer;

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import '../ProfilePage/ProfilePage.css'
 import Loading from '../../components/Loading'
 import { useDispatch, useSelector } from "react-redux";
-import { refresh } from "../../store/modules/modal";
+import { changeCurrentList, refresh } from "../../store/modules/modal";
 import './ProfileFollowings.css'
 
 const Profile_followings = () => {
@@ -137,6 +137,7 @@ const Profile_followings = () => {
 
     useEffect(()=>{
         fetch_following_list();
+        dispatch(changeCurrentList(2));
     }, [])
 
     useEffect(() => {
