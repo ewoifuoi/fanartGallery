@@ -32,43 +32,17 @@
     padding: 10px;
     margin: 5px 0;
     background-color: rgb(244, 244, 244);
-    transition: .3s;
+    transition: .1s;
 }
 
-.drop_title2 {
-    display: flex;
-    align-content: center;
-    justify-self: start;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: rgb(244, 244, 244);
-    transition: .3s;
+.icon_button {
+    fill: #8491A5;
 }
 
-.drop_sub_title2 {
-    display: flex;
-    align-content: center;
-    justify-self: start;
-    padding: 0px 0px 5px 0px;
-    margin: 5px 0;
-    background-color: rgb(244, 244, 244);
-    transition: .3s;
+.icon_button:hover {
+    fill: #6b7584;
 }
 
-.drop_item2:hover{
-    background-color: rgba(225, 231, 245, 0.586);
+.icon_button_selected {
+    fill: #1772F6;
 }
-
-.drop_item2:active{
-    background-color: rgba(201, 210, 230, 0.79);
-}
-
-.drop_item_img2 {
-    display: inline-block; /* 让链接显示为块级元素，这样就可以设置宽度和高度 */
-    width: 46px; /* 设置链接的宽度 */
-    height: 46px; /* 设置链接的高度 */
-    border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
-    transition: .3s;
-}
-
-
