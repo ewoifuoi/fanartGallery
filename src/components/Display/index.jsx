@@ -131,10 +131,10 @@ const Display = (props) => {
             {(!props.data || props.data.length === 0 ) && (
                 <div>
                     <div className="d-flex justify-content-center" style={{width:'1200px', height:'300px'}}>
-                        <img src="/none.svg" alt="" />
+                        <img draggable="false" src="/none.svg" alt="" />
                     </div>
                     <div className="d-flex justify-content-center" style={{width:'1200px', height:'10px'}}>
-                        <div style={{fontSize:'30px',fontWeight:'bold', color:'gray'}}>暂无作品</div>
+                        <div style={{fontSize:'30px',fontWeight:'bold', color:'#9FABBB', userSelect:'none'}}>暂无作品</div>
                     </div>
                     <div style={{height:'300px'}}></div>
                 </div>

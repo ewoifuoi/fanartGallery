@@ -4,7 +4,7 @@ import './ProfilePage.css'
 import { useEffect, useState , useRef} from "react";
 import axios from "axios";
 import Alerts from "../../components/Alerts";
-import showLoginState, { changeCurrentList, showLoginModal } from "../../store/modules/modal"
+import showLoginState, { changeCurrentList, refresh, showLoginModal } from "../../store/modules/modal"
 
 
 const ProfilePage = () => {
@@ -105,6 +105,7 @@ const ProfilePage = () => {
             });
             if(response.status == 200) {
                 alertRef.current.showAlert({ type: 'success', msg: "关注成功" });
+                dispatch(refresh())
             }
         }
         catch(error) {
@@ -123,6 +124,7 @@ const ProfilePage = () => {
             });
             if(response.status == 200) {
                 alertRef.current.showAlert({ type: 'success', msg: "取消关注成功" });
+                dispatch(refresh())
             }
         }
         catch(error) {
@@ -139,7 +141,6 @@ const ProfilePage = () => {
 
     useEffect(()=>{
         fetchData();
-        if(isLoggedIn) checkWatcher();
     }, [r]);
 
 
@@ -209,14 +210,16 @@ const ProfilePage = () => {
                                         window.scrollTo({ top:300, behavior: 'smooth' });
                                     }}>收藏</div>
                                     <div className="nav_title" onClick={()=>{
+                                       
                                         dispatch(changeCurrentList(2));
                                         navigate(`/profile/${uid}/followings`);
-                                        window.scrollTo({ top:300, behavior: 'smooth' });
+                                        
                                     }}>关注列表</div>
                                     <div className="nav_title" onClick={()=>{
+                                        
                                         dispatch(changeCurrentList(3));
                                         navigate(`/profile/${uid}/followers`);
-                                        window.scrollTo({ top:300, behavior: 'smooth' });
+                                        
                                     }}>粉丝列表</div>
                                     <div className="nav-underline" style={{ transform: `translateX(${currentX[currentList]}%)` }}></div>
                                 </div>
