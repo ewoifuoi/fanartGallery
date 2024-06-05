@@ -9,8 +9,9 @@ import Alerts from "../Alerts";
 import axios from "axios";
 import AvatarDropdown from "../AvatarDropdown";
 import { set_avatar } from "../../store/modules/auth";
-import {showLoginModal, showSigninModal, closeModal} from "../../store/modules/modal";
+import {showLoginModal, showSigninModal, closeModal, showUploadModal} from "../../store/modules/modal";
 import Notice from "../Notice";
+import UploadModal from "../UploadModal";
 
 function Header() {
 
@@ -161,6 +162,7 @@ function Header() {
                         if(isLoggedIn) {
 
                           // 载入上传页面
+                          dispatch(showUploadModal());
 
                         }
                         else {
@@ -249,7 +251,9 @@ function Header() {
 
           {/* 用户登录模态框 */}
           
-          <LoginModal show={modal!=0?true:false} onHide={()=>{dispatch(closeModal());}} modalstate={modal}/>
+          <LoginModal show={modal!=0 && modal != 3?true:false} onHide={()=>{dispatch(closeModal());}} modalstate={modal}/>
+
+          <UploadModal show={modal==3?true:false} onHide={()=>{dispatch(closeModal());}} />
           
           <Alerts ref={alertRef}/>
 
