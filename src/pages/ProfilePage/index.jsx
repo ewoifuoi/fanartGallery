@@ -109,7 +109,6 @@ const ProfilePage = () => {
                 }
             });
             if(response.status == 200) {
-                setHasWatched(true);
                 alertRef.current.showAlert({ type: 'success', msg: "关注成功" });
             }
         }
@@ -128,7 +127,6 @@ const ProfilePage = () => {
                 }
             });
             if(response.status == 200) {
-                setHasWatched(false);
                 alertRef.current.showAlert({ type: 'success', msg: "取消关注成功" });
             }
         }
@@ -233,31 +231,29 @@ const ProfilePage = () => {
                                                 <div>私信</div>
                                             </div>
                                         </a>
-                                    <div style={{width:'30px'}}></div>
-                                        <a className="custom-button">
+                                        <div style={{width:'30px'}}></div>
+                                        <a className="custom-button" onClick={()=>{
+                                            if(!isLoggedIn) {
+                                                dispatch(showLoginModal())
+                                            }
+                                            else if(hasWatched) {
+                                                setHasWatched(false);
+                                                unfollow();
+                                            }
+                                            else {
+                                                setHasWatched(true);
+                                                follow();
+                                            }
+                                        }}>
                                             {!hasWatched && <div className="d-flex" style={{alignContent:'center', justifyContent:'center'}}>
                                                 <svg t="1716552985086" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2592" width="26" height="23"><path d="M469.333333 469.333333V170.666667h85.333334v298.666666h298.666666v85.333334h-298.666666v298.666666h-85.333334v-298.666666H170.666667v-85.333334h298.666666z" fill="#fff" p-id="2593"></path></svg>
                                                 <div style={{width:'4px'}}></div>
-                                                <div onClick={()=>{
-                                                    if(!isLoggedIn) {
-                                                        dispatch(showLoginModal())
-                                                    }
-                                                    else {
-                                                        follow();
-                                                    }
-                                                }}>关注</div>
+                                                <div>关注</div>
                                             </div>}
                                             {hasWatched && <div className="d-flex" style={{alignContent:'center', justifyContent:'center'}}>
-                                            <svg t="1717557575903" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4254" width="26" height="23"><path d="M933.568 211.008c-27.072-28.096-71.232-28.096-98.304 0.128l-474.816 492.096L213.12 550.656c-27.2-28.16-71.232-28.16-98.432-0.064-27.008 28.096-27.008 73.664 0 101.952l196.864 203.904c27.008 28.096 71.104 28.096 98.304 0.128 0.512-0.576 0.704-1.344 1.216-1.92l522.56-541.632C960.64 284.8 960.64 239.232 933.568 211.008z" fill="#ffffff" p-id="4255"></path></svg>
+                                            <svg t="1717557575903" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4254" width="26" height="23"><path d="M933.568 211.008c-27.072-28.096-71.232-28.096-98.304 0.128l-474.816 492.096L213.12 550.656c-27.2-28.16-71.232-28.16-98.432-0.064-27.008 28.096-27.008 73.664 0 101.952l196.864 203.904c27.008 28.096 71.104 28.096 98.304 0.128 0.512-0.576 0.704-1.344 1.216-1.92l522.56-541.632C960.64 284.8 960.64 239.232 933.568 211.008z" fill="#ffffff" p-id="4255"></path></svg>
                                                 <div style={{width:'4px'}}></div>
-                                                <div onClick={()=>{
-                                                    if(!isLoggedIn) {
-                                                        dispatch(showLoginModal())
-                                                    }
-                                                    else {
-                                                        unfollow();
-                                                    }
-                                                }}>已关注</div>
+                                                <div>已关注</div>
                                             </div>}
                                         </a>
                                     </div>
