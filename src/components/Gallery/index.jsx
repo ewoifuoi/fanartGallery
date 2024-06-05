@@ -49,14 +49,10 @@ const Gallery = ()=>{
         }
     };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [loading]);
+    window.addEventListener('scroll', handleScroll);
 
     images.forEach((image, index) => {
         const shortestColumn = columnsRef.current.reduce((acc, curr) => (curr.length < acc.length ? curr : acc), columnsRef.current[0]);
-        
         shortestColumn.push(image);
     });
     
