@@ -6,6 +6,7 @@ import '../ProfilePage/ProfilePage.css'
 import Loading from '../../components/Loading'
 import { useDispatch, useSelector } from "react-redux";
 import { refresh } from "../../store/modules/modal";
+import './ProfileFollowings.css'
 
 const Profile_followings = () => {
 
@@ -104,7 +105,7 @@ const Profile_followings = () => {
             if(isLoggedIn) hasWatched = await checkWatcher(user.uid);
             
             elements.push(
-                <div key={i} style={{backgroundColor:'#fff', margin:'5px 60px'}}>
+                <div className="following_card" key={i} style={{backgroundColor:'#fff', margin:'5px 60px'}}>
                     <div  style={styles.userCard}>
                         <img draggable="false" src={user.avatar} alt="/images/default.png" style={styles.avatar} />
                         <div style={{width:'20px'}}></div>
@@ -130,7 +131,6 @@ const Profile_followings = () => {
                     </div>
                 </div>
             );
-            console.log(hasWatched);
         }
         setUserElements(elements);
     }
