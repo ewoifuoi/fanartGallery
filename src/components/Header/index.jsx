@@ -10,6 +10,7 @@ import axios from "axios";
 import AvatarDropdown from "../AvatarDropdown";
 import { set_avatar } from "../../store/modules/auth";
 import {showLoginModal, showSigninModal, closeModal} from "../../store/modules/modal";
+import Notice from "../Notice";
 
 function Header() {
 
@@ -17,6 +18,8 @@ function Header() {
   const dispatch = useDispatch();
 
   const alertRef = useRef(null);
+
+  const noticeRef = useRef(null);
   const dropdownRef = useRef(null);
   
 
@@ -24,6 +27,7 @@ function Header() {
 
   const imageSrc = useSelector((state) => state.auth.avatar_url);
 
+  const [showNotice, setShowNotice] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const modal = useSelector((state)=> state.modal.modalState);
@@ -74,7 +78,6 @@ function Header() {
       }
     }
     if(isLoggedIn){
-      
       fetchAvatar();
     }
     
@@ -96,6 +99,23 @@ function Header() {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [showDropdown])
+
+
+  // 关闭通知下拉菜单
+  useEffect(()=>{
+    const handleOutsideClick = (event) => {
+      // 如果点击的元素不在弹出框内部，则调用 onClose 函数
+      if (noticeRef.current && noticeRef.current.checkClick(event) && !event.target.closest('.notice')) {
+        setShowNotice(false);
+      }
+    };
+    // 添加事件监听器
+    document.addEventListener('mousedown', handleOutsideClick);
+    // 在组件卸载时移除事件监听器
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [showNotice])
     
     return (
         <div className="header">
@@ -174,11 +194,14 @@ function Header() {
                     {isLoggedIn && (
                       <div className="d-flex">
                         
-                        <div className="circular-link position-relative">
+                        <div className="circular-link position-relative notice" onClick={()=>{
+                          if (showNotice == false){ setShowNotice(true);setShowDropdown(false);}
+                          else {setShowNotice(false);}
+                        }}>
                           <svg t="1716469676499" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11058" width="25" height="25"><path d="M849.6 713.4c8.4-0.4 16.7 1.8 23.8 6.4-28.9-18.5-46.4-50.4-46.3-84.8V436c0-145.9-105.7-267.6-246.9-297.5v-7.2c0-37.1-30.1-67.1-67.2-67.1h-0.1c-37.1 0-67.3 30.1-67.3 67.2v7C304.3 168.4 198.7 290 198.7 436v199.1c0 35.7-18.6 66.9-46.4 84.8 7-4.6 15.4-6.9 23.8-6.4-24.7-0.9-45.5 18.4-46.4 43.1-0.9 24.7 18.4 45.5 43.1 46.4h676.6c24.7 0.1 44.8-20 44.9-44.7 0.1-24.8-19.9-44.9-44.7-44.9zM513 959.8c62 0 112.2-50.2 112.2-111.9H400.7c0 61.7 50.2 111.9 112.3 111.9z" p-id="11059"></path></svg>
                           
-                          <span style={{top:'28%',left:'70%'}} className="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
-                          </span>
+                          {false && <span style={{top:'28%',left:'70%'}} className="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
+                          </span>}
 
                         </div>
 
@@ -194,7 +217,7 @@ function Header() {
                         <div className="p-2"></div>
 
                         <div className="circular-link position-relative avatar" onClick={()=>{
-                          if (showDropdown == false){ setShowDropdown(true);}
+                          if (showDropdown == false){ setShowDropdown(true);setShowNotice(false);}
                           else {setShowDropdown(false);}
                         }}>
                           <img style={{userSelect:'none'}} draggable="false" className="circular-img" src={imageSrc} alt="/images/default.png" />
@@ -206,6 +229,9 @@ function Header() {
 
                           setShowDropdown(false);
                           alertRef.current.showAlert({type:'success',msg:"退出登录成功"});
+                        }}/>
+
+                        <Notice show={showNotice} ref={noticeRef} className="dropdown" close={()=>{setShowNotice(false);
                         }}/>
 
                       </div>

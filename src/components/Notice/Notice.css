@@ -1,0 +1,74 @@
+
+.text2 {
+    user-select: none;
+    color:#707070;
+}
+
+.drop_box2{
+    height: 0;
+    opacity: 0;
+    width: 300px;
+    background-color: rgb(244, 244, 244);
+    position:absolute;
+    top: 70px;
+    right:100px;
+    border: 3px solid rgba(197, 197, 197, 0.352);
+    
+    border-radius: 15px;
+    box-shadow: -1px 15px 30px -10px rgba(0, 0, 0, 0.362);
+    overflow: hidden; 
+    transition: .3s;
+}
+
+.drop_box2.show2 {
+    opacity: 100%;
+    height: 390px; /* 显示时的高度 */
+}
+
+.drop_item2 {
+    display: flex;
+    align-content: center;
+    justify-self: start;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: rgb(244, 244, 244);
+    transition: .3s;
+}
+
+.drop_title2 {
+    display: flex;
+    align-content: center;
+    justify-self: start;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: rgb(244, 244, 244);
+    transition: .3s;
+}
+
+.drop_sub_title2 {
+    display: flex;
+    align-content: center;
+    justify-self: start;
+    padding: 0px 0px 5px 0px;
+    margin: 5px 0;
+    background-color: rgb(244, 244, 244);
+    transition: .3s;
+}
+
+.drop_item2:hover{
+    background-color: rgba(225, 231, 245, 0.586);
+}
+
+.drop_item2:active{
+    background-color: rgba(201, 210, 230, 0.79);
+}
+
+.drop_item_img2 {
+    display: inline-block; /* 让链接显示为块级元素，这样就可以设置宽度和高度 */
+    width: 46px; /* 设置链接的宽度 */
+    height: 46px; /* 设置链接的高度 */
+    border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
+    transition: .3s;
+}
+
+
