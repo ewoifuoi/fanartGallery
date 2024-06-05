@@ -19,6 +19,7 @@ const ProfilePage = () => {
 
     const [username, setUsername] = useState('');
     const userid = useSelector((state)=>state.auth.uid);
+    const r = useSelector((state)=>state.modal.refresh);
     const [email, setEmail] = useState('');
     const [workscount, setWorkscount] = useState('');
     const [followingcount, setFollowingcount] = useState('');
@@ -141,6 +142,12 @@ const ProfilePage = () => {
         fetchAvatar();
         if(isLoggedIn) checkWatcher();
     },[userid])
+
+    useEffect(()=>{
+        fetchData();
+        if(isLoggedIn) checkWatcher();
+    }, [r]);
+
 
     return (
         <>

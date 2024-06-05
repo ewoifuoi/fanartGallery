@@ -170,9 +170,6 @@ function Header() {
                       onClick={()=>{dispatch(showSigninModal());}}>注册</button>
                     </div>)}
 
-                    
-                    
-
                     {/* 用户登陆后的用户信息板块 */}
                     {isLoggedIn && (
                       <div className="d-flex">

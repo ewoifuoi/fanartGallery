@@ -3,7 +3,8 @@ import {createSlice} from '@reduxjs/toolkit'
 const modalStore = createSlice({
     name:"modalState",
     initialState:{
-        modalState:0
+        modalState:0,
+        refresh:false
     },
     reducers:{
         showLoginModal(state) {
@@ -14,12 +15,20 @@ const modalStore = createSlice({
         },
         closeModal(state) {
             state.modalState = 0;
+        },
+        refresh(state){
+            if(state.refresh == true) {
+                state.refresh = false;
+            }
+            else {
+                state.refresh = true;
+            }
         }
     }
 })
 
-const {showLoginModal, showSigninModal, closeModal} = modalStore.actions;
+const {showLoginModal, showSigninModal, closeModal, refresh} = modalStore.actions;
 const modalReducer = modalStore.reducer;
 
-export {showLoginModal, showSigninModal, closeModal};
+export {showLoginModal, showSigninModal, closeModal, refresh};
 export default modalReducer;
