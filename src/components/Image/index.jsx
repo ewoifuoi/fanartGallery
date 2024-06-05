@@ -19,6 +19,7 @@ const Image = (props) => {
     // 再根据点号 . 分割最后一个部分，并选择第一个部分，即文件名部分
     const id = lastPart;
     const [isFavoriated, setIsFavorited] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
     const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
 
     useEffect(() => {
@@ -53,6 +54,7 @@ const Image = (props) => {
         position: 'absolute',
         top: '10px',
         left: '10px',
+        backgroundColor: isLiked? '#FF554298':'',
         opacity: '0.8',
         transition: 'opacity 0.3s ease', // 添加过渡效果
         backdropFilter: 'blur(10px) opacity(0.7)'
@@ -140,13 +142,69 @@ const Image = (props) => {
             console.log(error.response.data.detail);
         }
     }
+
+    const checkLike = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/check_like/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("success");
+                setIsLiked(response.data);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+      }
+
+    const like = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/like/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("点赞成功");
+                setIsLiked(true);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
+    const unlike = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/unlike/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("取消点赞");
+                setIsLiked(false);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
     
     return (
         <div className=''style={img_style}
             onMouseEnter={() => setHovered(true)} // 鼠标进入时显示按钮
             onMouseLeave={() => setHovered(false)} // 鼠标离开时隐藏按钮
         >
-
                 {/* 图片加载动画 */}
                 {!loaded && (
                      <div style={{position: 'absolute',top:0,height:'100%',width:'100%'}}>
@@ -205,7 +263,6 @@ const Image = (props) => {
                             else {
                                 unfavoriate();
                             }
-                            
                         }}
                     >
                         <svg
@@ -224,6 +281,17 @@ const Image = (props) => {
                         type="button"
                         className="btn btn-md border m-2 btn-outline-light"
                         style={{ ...buttonStyle2, left: '57px' }}
+                        onClick={()=>{
+                            if(isLoggedIn == false) {
+                                dispatch(showLoginModal())
+                            }
+                            else if(isLiked == false) {
+                                like();
+                            }
+                            else {
+                                unlike();
+                            }
+                        }}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
