@@ -2,11 +2,15 @@ import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './ImageLoadingAnimation.css'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { showLoginModal } from '../../store/modules/modal'
 
 
 const Image = (props) => {
     const [loaded, setLoaded] = useState(false);
     const [hovered, setHovered] = useState(false);
+
+    const dispatch = useDispatch()
 
     const url = props.src;
     const parts = url.split("/");
@@ -15,6 +19,7 @@ const Image = (props) => {
     // 再根据点号 . 分割最后一个部分，并选择第一个部分，即文件名部分
     const id = lastPart;
     const [isFavoriated, setIsFavorited] = useState(false);
+    const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
 
     useEffect(() => {
         const img = new window.Image();
@@ -191,7 +196,10 @@ const Image = (props) => {
                         className="btn btn-md m-2 border btn-outline-light"
                         style={buttonStyle1}
                         onClick={()=>{
-                            if(isFavoriated == false) {
+                            if(isLoggedIn == false) {
+                                dispatch(showLoginModal())
+                            }
+                            else if(isFavoriated == false) {
                                 favoriate();
                             }
                             else {
