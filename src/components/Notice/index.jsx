@@ -45,7 +45,7 @@ const Notice = (props, ref) => {
 
     const getIllustrationNotice = async () => {
         try {
-            let response = await axios.get(`http://124.221.8.18:8080/notice/user`,{
+            let response = await axios.get(`http://124.221.8.18:8080/notice/illustration`,{
                 headers:{
                     'Content-Type':"application/json",
                     'Authorization':`${localStorage.getItem('token')}`,
@@ -64,6 +64,7 @@ const Notice = (props, ref) => {
 
     useEffect(()=>{
         getUserNotice();
+        getIllustrationNotice();
     },[])
 
     return (
