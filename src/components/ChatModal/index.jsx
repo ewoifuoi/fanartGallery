@@ -44,7 +44,6 @@ const ChatModal = (props) => {
                         <div className='d-flex justify-content-center  ms-5' style={{width:'90%', height:'80%'}}>
                             <div className='d-flex justify-content-center align-items-center' style={{width:'380px', height:'420px'}}>
                                 
-                               
                             </div>
                             <div style={{width:'30px'}}></div>
                             

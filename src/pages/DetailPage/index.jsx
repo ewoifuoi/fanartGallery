@@ -159,7 +159,7 @@ const DetailPage = () => {
 
     const follow = async () => {
         try {
-            let response = await axios.get(`http://124.221.8.18:8080/user/follow/${uid}`,{
+            let response = await axios.get(`http://124.221.8.18:8080/user/follow/${authorUid}`,{
                 headers:{
                     'Content-Type':"application/json",
                     'Authorization':`${localStorage.getItem('token')}`,
@@ -178,7 +178,7 @@ const DetailPage = () => {
 
       const unfollow = async () => {
         try {
-            let response = await axios.get(`http://124.221.8.18:8080/user/unfollow/${uid}`,{
+            let response = await axios.get(`http://124.221.8.18:8080/user/unfollow/${authorUid}`,{
                 headers:{
                     'Content-Type':"application/json",
                     'Authorization':`${localStorage.getItem('token')}`,
