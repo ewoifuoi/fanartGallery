@@ -52,7 +52,7 @@ const ImageDrawer = ({ imageUrl,width }) => {
   }, []);
 
   return (
-    <div className='p-2 border border-3 d-flex justify-content-center rounded' style={{width:'700px',height:'auto'}}>
+    <div className='p-2 d-flex justify-content-center rounded' style={{width:'700px',height:'auto'}}>
       <div>
         <img style={{width:`${width}`}} ref={imageRef} src="" />
         <div ref={imgBackgroundRef} className="imgBackground"></div>
