@@ -105,13 +105,14 @@ const DetailPage = () => {
                     {!loading&& <div className='d-flex justify-content-center'>
                         <div>
                             <div className='card-detail'>
-                                <ImageDrawer width="700px" imageUrl={imageSrc}/>
+                                <ImageDrawer width="750px" imageUrl={imageSrc}/>
                             </div>
                             <div className='p-2'></div>
                             <div className='p-3 border border-3 rounded' style={{width:'700px',height:'400px'}}></div>
                         </div>
                         
-                        <div className='p-3'></div>
+                        <div style={{width:'10px'}}></div>
+
                         <div>
                             <div className='p-3 rounded' style={{width:'400px',height:'400px'}}>
                                 <div style={{width:'100%', height:'200px'}} className='card-detail'>
