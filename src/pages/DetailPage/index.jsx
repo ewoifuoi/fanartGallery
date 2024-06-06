@@ -186,10 +186,10 @@ const DetailPage = () => {
                             <div className='p-3 border border-3 rounded' style={{width:'700px',height:'400px'}}></div>
                         </div>
                         
-                        <div style={{width:'10px'}}></div>
+                        <div style={{width:'5px'}}></div>
 
                         <div>
-                            <div className='p-3 rounded' style={{width:'400px',height:'200px'}}>
+                            <div className='ps-3 rounded' style={{width:'400px',height:'200px'}}>
                                 <div style={{width:'100%', height:'200px'}} className='card-detail'>
                                     <div className='d-flex align-items-center p-3'>
                                         <div className='d-flex'>
@@ -249,52 +249,52 @@ const DetailPage = () => {
                             </div>
                             <div className='p-2'></div>
 
-                            <div className='p-3 rounded' style={{width:'400px',height:'250px'}}>
+                            <div className='ps-3 rounded' style={{width:'400px',height:'250px'}}>
                                 <div style={{width:'100%', height:'250px'}} className='card-detail'>
                                     <div style={{fontSize:'18px', fontWeight:'bold', color:'#555555', userSelect:'none'}} className='p-3'>作品详情</div>
                                     <div className='d-flex justify-content-center align-items-center'>
-                                        <div style={{width:'300px', height:'155px', border:'1px solid #9E9E9E99'}}>
+                                        <div style={{width:'320px', height:'155px', border:'1px solid #9E9E9E99'}}>
 
                                             <div className='d-flex' style={{width:'100%', height:'38px'}}>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-2'>上传时间</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-2'>上传时间</div>
                                                 </div>
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{datetime}</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{datetime}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
 
                                             <div className='d-flex' style={{width:'100%', height:'38px'}}>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>尺寸</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>尺寸</div>
                                                 </div>
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{`${width} x ${height}`}</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{`${width} x ${height}`}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
 
                                             <div className='d-flex' style={{width:'100%', height:'38px'}}>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>大小</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>大小</div>
                                                 </div>
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{filesize}</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{filesize}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
 
                                             <div className='d-flex' style={{width:'100%', height:'38px'}}>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>格式</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>格式</div>
                                                 </div>
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
-                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{filetype}</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{filetype}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
@@ -303,6 +303,8 @@ const DetailPage = () => {
                                 </div>
                             </div>
                             </div>
+
+                            
                         </div>
                     </div>}
                     
