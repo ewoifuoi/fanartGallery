@@ -45,3 +45,7 @@
   border-radius: 1rem;
   box-shadow: 0 4px 20px rgba(1, 1, 1, 0.086);
 }
+
+.button-detail {
+  box-shadow: 0 8px 20px rgba(1, 1, 1, 0.103);
+}

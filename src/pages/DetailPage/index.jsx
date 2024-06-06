@@ -40,6 +40,123 @@ const DetailPage = () => {
     const [viewcount, setViewCount] = useState(0);
     const [datetime, setDateTime] = useState('');
 
+    const [isFavoriated, setIsFavorited] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
+
+    const checkFavorite = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/check_favorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                // console.log("success");
+                setIsFavorited(response.data);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+      }
+
+    const favoriate = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/favorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("收藏成功");
+                setIsFavorited(true);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
+    const unfavoriate = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/unfavorite/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("取消收藏");
+                setIsFavorited(false);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
+    const checkLike = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/check_like/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("success");
+                setIsLiked(response.data);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+      }
+
+    const like = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/like/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("点赞成功");
+                setIsLiked(true);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
+    const unlike = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/unlike/${id}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                console.log("取消点赞");
+                setIsLiked(false);
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            console.log(error.response.data.detail);
+        }
+    }
+
     const follow = async () => {
         try {
             let response = await axios.get(`http://124.221.8.18:8080/user/follow/${uid}`,{
@@ -157,6 +274,8 @@ const DetailPage = () => {
         fetch_author_info();
         fetchImage();
         fetch_info();
+        checkFavorite();
+        checkLike();
     },[]);
 
     useEffect(()=>{
@@ -178,19 +297,108 @@ const DetailPage = () => {
                 {loading && <Loading/>}
 
                     {!loading&& <div className='d-flex justify-content-center'>
+
+                        
                         <div>
+
+                            {/* 插画展板 */}
                             <div className='card-detail'>
                                 <ImageDrawer width="750px" imageUrl={imageSrc}/>
                             </div>
-                            <div className='p-2'></div>
-                            <div className='p-3 border border-3 rounded' style={{width:'700px',height:'400px'}}></div>
+
+                            {/* 获赞与浏览量 */}
+                            <div className='d-flex p-2'>
+                                <div style={{width:'20px'}}></div>
+                                <div style={{fontWeight:'bold', color:'#777'}}>{`获赞数: ${likecount}`}</div>
+                                <div style={{width:'20px'}}></div>
+                                <div style={{fontWeight:'bold', color:'#777'}}>{`浏览量: ${viewcount}`}</div>
+                            </div>
+
+                            <div className='p-3 rounded' style={{width:'700px',height:'400px'}}>
+                                <div></div>
+                            </div>
                         </div>
                         
                         <div style={{width:'5px'}}></div>
 
                         <div>
-                            <div className='ps-3 rounded' style={{width:'400px',height:'200px'}}>
-                                <div style={{width:'100%', height:'200px'}} className='card-detail'>
+
+                            {/* 点赞与收藏 */}
+                            <div className='ps-3 rounded' style={{width:'400px',height:'90px'}}>
+                                <div className='d-flex align-items-center' style={{width:'100%', height:'100px'}}>
+                                    <div style={{width:'80px'}}></div>
+                                    
+                                    <div onClick={()=>{
+                                        if(isLoggedIn == false) {
+                                            dispatch(showLoginModal())
+                                        }
+                                        else if(isLiked == false) {
+                                            like();
+                                        }
+                                        else {
+                                            unlike();
+                                        }
+                                    }}>
+                                        {!isLiked && <div>
+                                            <div className='d-flex justify-content-center align-items-center button-detail' style={{height:'60px', width:'60px', border:'1.8px solid #B5B5B5', borderRadius:'40px'}}>
+                                                <svg t="1717673908321" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5950" width="30" height="30"><path d="M736.064853 106.27072c-110.639787 0-189.91104 99.710293-224.078506 152.446293-34.194773-52.736-113.41824-152.446293-224.07168-152.446293C129.140053 106.27072 0 249.357653 0 425.22624c0 82.213547 55.773867 200.116907 123.487573 261.802667C217.14944 807.376213 480.453973 1024 512.969387 1024c33.082027 0 290.73408-212.411733 386.095786-335.517013C967.959893 625.691307 1024 507.644587 1024 425.22624c0-175.868587-129.14688-318.95552-287.935147-318.95552z" fill="#8f8f8f" p-id="5951"></path></svg>
+                                            </div>
+                                            <div className='d-flex justify-content-center align-items-center'>
+                                            <div style={{fontSize:'18px', fontWeight:'bold', color:'#8f8f8f'}}>赞</div>
+                                            </div>
+                                        </div>}
+
+                                        {isLiked && <div>
+                                            <div className='d-flex justify-content-center align-items-center button-detail' style={{height:'60px', width:'60px', border:'2px solid #B5B5B5', borderRadius:'40px'}}>
+                                                <svg t="1717673908321" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5950" width="30" height="30"><path d="M736.064853 106.27072c-110.639787 0-189.91104 99.710293-224.078506 152.446293-34.194773-52.736-113.41824-152.446293-224.07168-152.446293C129.140053 106.27072 0 249.357653 0 425.22624c0 82.213547 55.773867 200.116907 123.487573 261.802667C217.14944 807.376213 480.453973 1024 512.969387 1024c33.082027 0 290.73408-212.411733 386.095786-335.517013C967.959893 625.691307 1024 507.644587 1024 425.22624c0-175.868587-129.14688-318.95552-287.935147-318.95552z" fill="#E97B85" p-id="5951"></path></svg>
+                                            </div>
+                                            <div className='d-flex justify-content-center align-items-center'>
+                                                <div style={{fontSize:'18px', fontWeight:'bold', color:'#8f8f8f'}}>赞</div>
+                                            </div>
+                                        </div>}
+                                    </div>
+
+                                    <div style={{width:'75px'}}></div>
+
+                                    <div onClick={()=> {
+                                        if(isLoggedIn == false) {
+                                            dispatch(showLoginModal())
+                                        }
+                                        else if(isFavoriated == false) {
+                                            favoriate();
+                                        }
+                                        else {
+                                            unfavoriate();
+                                        }
+                                    }}>
+                                        {!isFavoriated && <div>
+                                            <div className='d-flex justify-content-center align-items-center button-detail' style={{height:'60px', width:'60px', border:'1.8px solid #B5B5B5', borderRadius:'40px'}}>
+                                                <svg t="1717674366601" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8830" width="50" height="50"><path d="M529.5104 162.6112l101.5808 205.824c2.8672 5.7344 8.3968 9.8304 14.7456 10.752l227.2256 32.9728c16.0768 2.3552 22.4256 22.1184 10.8544 33.3824L719.5648 605.7984c-4.608 4.5056-6.7584 10.9568-5.632 17.3056l38.8096 226.304c2.7648 15.9744-14.0288 28.16-28.3648 20.6848L521.1136 763.1872c-5.7344-2.9696-12.4928-2.9696-18.2272 0L299.7248 870.0928c-14.336 7.5776-31.1296-4.608-28.3648-20.6848l38.8096-226.304c1.1264-6.3488-1.024-12.8-5.632-17.3056L140.0832 445.5424c-11.5712-11.3664-5.2224-31.0272 10.8544-33.3824l227.2256-32.9728c6.3488-0.9216 11.8784-4.9152 14.7456-10.752l101.5808-205.824c7.168-14.6432 27.8528-14.6432 35.0208 0z" p-id="8831" fill="#8f8f8f"></path></svg>
+                                            </div>
+                                            <div className='d-flex justify-content-center align-items-center'>
+                                                <div style={{fontSize:'18px', fontWeight:'bold', color:'#8f8f8f'}}>收藏</div>
+                                            </div>
+                                        </div>}
+
+                                        {isFavoriated && <div>
+                                            <div className='d-flex justify-content-center align-items-center button-detail' style={{height:'60px', width:'60px', border:'2px solid #B5B5B5', borderRadius:'40px'}}>
+                                                <svg t="1717674366601" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8830" width="50" height="50"><path d="M529.5104 162.6112l101.5808 205.824c2.8672 5.7344 8.3968 9.8304 14.7456 10.752l227.2256 32.9728c16.0768 2.3552 22.4256 22.1184 10.8544 33.3824L719.5648 605.7984c-4.608 4.5056-6.7584 10.9568-5.632 17.3056l38.8096 226.304c2.7648 15.9744-14.0288 28.16-28.3648 20.6848L521.1136 763.1872c-5.7344-2.9696-12.4928-2.9696-18.2272 0L299.7248 870.0928c-14.336 7.5776-31.1296-4.608-28.3648-20.6848l38.8096-226.304c1.1264-6.3488-1.024-12.8-5.632-17.3056L140.0832 445.5424c-11.5712-11.3664-5.2224-31.0272 10.8544-33.3824l227.2256-32.9728c6.3488-0.9216 11.8784-4.9152 14.7456-10.752l101.5808-205.824c7.168-14.6432 27.8528-14.6432 35.0208 0z" p-id="8831" fill="#E2C678"></path></svg>
+                                            </div>
+                                            <div className='d-flex justify-content-center align-items-center'>
+                                                <div style={{fontSize:'18px', fontWeight:'bold', color:'#8f8f8f'}}>收藏</div>
+                                            </div>
+                                        </div>}
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className='p-2'></div>
+
+                            {/* 作者信息 */}
+                            <div className='ps-3 rounded' style={{width:'400px',height:'190px'}}>
+                                <div style={{width:'100%', height:'190px'}} className='card-detail'>
                                     <div className='d-flex align-items-center p-3'>
                                         <div className='d-flex'>
                                             <div style={{width:'10px'}}></div>
@@ -247,21 +455,23 @@ const DetailPage = () => {
 
                                 </div>
                             </div>
+
                             <div className='p-2'></div>
 
-                            <div className='ps-3 rounded' style={{width:'400px',height:'250px'}}>
-                                <div style={{width:'100%', height:'250px'}} className='card-detail'>
+                            {/* 作品详情信息 */}
+                            <div className='ps-3 rounded' style={{width:'400px',height:'280px'}}>
+                                <div style={{width:'100%', height:'280px'}} className='card-detail'>
                                     <div style={{fontSize:'18px', fontWeight:'bold', color:'#555555', userSelect:'none'}} className='p-3'>作品详情</div>
                                     <div className='d-flex justify-content-center align-items-center'>
-                                        <div style={{width:'320px', height:'155px', border:'1px solid #9E9E9E99'}}>
+                                        <div style={{width:'320px', height:'195px', border:'1px solid #9E9E9E99'}}>
 
                                             <div className='d-flex' style={{width:'100%', height:'38px'}}>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
-                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-2'>上传时间</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>标题</div>
                                                 </div>
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
-                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{datetime}</div>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{title}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
@@ -295,6 +505,17 @@ const DetailPage = () => {
                                                 <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
                                                 <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
                                                     <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{filetype}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
+
+                                            <div className='d-flex' style={{width:'100%', height:'38px'}}>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-2'>上传时间</div>
+                                                </div>
+                                                <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
+                                                    <div style={{fontSize:'14px', color:'#555', userSelect:'none'}} className='p-3'>{datetime}</div>
                                                 </div>
                                             </div>
                                             <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>

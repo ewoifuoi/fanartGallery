@@ -83,6 +83,7 @@ const Image = (props) => {
 
     useEffect(()=>{
         checkFavorite();
+        checkLike();
     },
     [hovered])
 
