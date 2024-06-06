@@ -298,7 +298,7 @@ const DetailPage = () => {
 
                     {!loading&& <div className='d-flex justify-content-center'>
 
-                        
+                        {/* 左侧部分 */}
                         <div>
 
                             {/* 插画展板 */}
@@ -314,13 +314,18 @@ const DetailPage = () => {
                                 <div style={{fontWeight:'bold', color:'#777'}}>{`浏览量: ${viewcount}`}</div>
                             </div>
 
-                            <div className='p-3 rounded' style={{width:'700px',height:'400px'}}>
-                                <div></div>
-                            </div>
+                            <div style={{height:'20px'}}></div>
+
+                           
+
+                            <div style={{height:'50px'}}></div>
+
                         </div>
                         
                         <div style={{width:'5px'}}></div>
 
+
+                        {/* 右侧部分 */}
                         <div>
 
                             {/* 点赞与收藏 */}
@@ -525,7 +530,6 @@ const DetailPage = () => {
                             </div>
                             </div>
 
-                            
                         </div>
                     </div>}
                     
