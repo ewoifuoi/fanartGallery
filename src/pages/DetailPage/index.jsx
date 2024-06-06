@@ -10,6 +10,8 @@ import Alerts from '../../components/Alerts'
 import Loading from '../../components/Loading'
 import ImageDrawer from '../../components/ImageDrawer'
 import { useSelector } from 'react-redux'
+import { refresh } from '../../store/modules/modal'
+import { format } from 'date-fns';
 
 const DetailPage = () => {
     const params = useParams()
@@ -19,6 +21,7 @@ const DetailPage = () => {
     // 提示消息列表的引用 <Alerts/> 组件
     const alertRef = useRef(null);
     const uid = useSelector((state)=>state.auth.uid)
+    const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn)
 
     const [loading, setLoading] = useState(true);
     const [imageSrc, setImageSrc] = useState('');
@@ -28,6 +31,52 @@ const DetailPage = () => {
     const [authorAvatarUrl, setAuthorAvatarUrl] = useState('');
     const [hasWatched, setHasWatched] = useState(false);
     const [isOwner, setIsOwner] = useState(false);
+    const [title, setTitle] = useState('');
+    const [height, setHeight] = useState('');
+    const [width, setWidth] = useState('');
+    const [filesize, setFileSize] = useState('');
+    const [filetype, setFileType] = useState('');
+    const [likecount, setLikeCount] = useState(0);
+    const [viewcount, setViewCount] = useState(0);
+    const [datetime, setDateTime] = useState('');
+
+    const follow = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/follow/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                alertRef.current.showAlert({ type: 'success', msg: "关注成功" });
+                dispatch(refresh())
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            // alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+      }
+
+      const unfollow = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/user/unfollow/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+                alertRef.current.showAlert({ type: 'success', msg: "取消关注成功" });
+                dispatch(refresh())
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            // alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+      }
 
     const checkWatcher = async () => {
         try {
@@ -66,6 +115,32 @@ const DetailPage = () => {
             alertRef.current.showAlert({type:'danger', msg:`获取用户作品失败:${error}`})
         }
     }
+
+    const fetch_info = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/illust/info/${id}`,{
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            });
+            if(response.status == 200) {
+                let res = response.data;
+                setTitle(res.Title);
+                setHeight(res.Height);
+                setWidth(res.Width);
+                setFileSize(res.Filesize);
+                setFileType(res.FileType);
+                setDateTime(format(res.Datetime, 'yyyy 年 MM 月 dd 日'));
+                setLikeCount(res.LikeCount);
+                setViewCount(res.ViewCount);
+                
+            }
+        }
+        catch(error) {
+            alertRef.current.showAlert({type:'danger', msg:`获取用户作品失败:${error}`})
+        }
+    }
+
     const fetchImage = async () => {
         try {
           const response = await axios.get(url, { responseType: 'blob' });
@@ -81,7 +156,7 @@ const DetailPage = () => {
     useEffect(()=>{
         fetch_author_info();
         fetchImage();
-
+        fetch_info();
     },[]);
 
     useEffect(()=>{
@@ -114,7 +189,7 @@ const DetailPage = () => {
                         <div style={{width:'10px'}}></div>
 
                         <div>
-                            <div className='p-3 rounded' style={{width:'400px',height:'400px'}}>
+                            <div className='p-3 rounded' style={{width:'400px',height:'200px'}}>
                                 <div style={{width:'100%', height:'200px'}} className='card-detail'>
                                     <div className='d-flex align-items-center p-3'>
                                         <div className='d-flex'>
@@ -141,7 +216,19 @@ const DetailPage = () => {
 
                                     <div className='d-flex justify-content-center align-items-center'>
                                         {!isOwner && <a className="custom-button-detail" onClick={()=>{
-                                            // 点击关注
+                                            
+                                            if(!isLoggedIn) {
+                                                dispatch(showLoginModal())
+                                            }
+                                            else if(hasWatched) {
+                                                setHasWatched(false);
+                                                unfollow();
+                                            }
+                                            else {
+                                                setHasWatched(true);
+                                                follow();
+                                            }
+
                                         }}>
                                             {!hasWatched && <div className="d-flex" style={{alignContent:'center', justifyContent:'center'}}>
                                                 <svg t="1716552985086" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2592" width="26" height="23"><path d="M469.333333 469.333333V170.666667h85.333334v298.666666h298.666666v85.333334h-298.666666v298.666666h-85.333334v-298.666666H170.666667v-85.333334h298.666666z" fill="#fff" p-id="2593"></path></svg>
@@ -161,7 +248,61 @@ const DetailPage = () => {
                                 </div>
                             </div>
                             <div className='p-2'></div>
-                            <div className='p-3 border border-3 rounded' style={{width:'400px',height:'400px'}}></div>
+
+                            <div className='p-3 rounded' style={{width:'400px',height:'250px'}}>
+                                <div style={{width:'100%', height:'250px'}} className='card-detail'>
+                                    <div style={{fontSize:'18px', fontWeight:'bold', color:'#555555', userSelect:'none'}} className='p-3'>作品详情</div>
+                                    <div className='d-flex justify-content-center align-items-center'>
+                                        <div style={{width:'300px', height:'155px', border:'1px solid #9E9E9E99'}}>
+
+                                            <div className='d-flex' style={{width:'100%', height:'38px'}}>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-2'>上传时间</div>
+                                                </div>
+                                                <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{datetime}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
+
+                                            <div className='d-flex' style={{width:'100%', height:'38px'}}>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>尺寸</div>
+                                                </div>
+                                                <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{`${width} x ${height}`}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
+
+                                            <div className='d-flex' style={{width:'100%', height:'38px'}}>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>大小</div>
+                                                </div>
+                                                <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{filesize}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
+
+                                            <div className='d-flex' style={{width:'100%', height:'38px'}}>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'30%', backgroundColor:'#F5F5F5'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>格式</div>
+                                                </div>
+                                                <div style={{height:'100%', width:'1px',backgroundColor:'#9E9E9E99'}}></div>
+                                                <div className='d-flex align-items-center' style={{height:'100%', width:'70%', backgroundColor:'white'}}>
+                                                    <div style={{fontSize:'14px', color:'#555'}} className='p-3'>{filetype}</div>
+                                                </div>
+                                            </div>
+                                            <div style={{width:'100%', height:'1px', backgroundColor:'#9E9E9E99'}}></div>
+
+                                        </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>}
                     
