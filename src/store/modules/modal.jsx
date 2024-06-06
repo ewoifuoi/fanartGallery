@@ -20,6 +20,9 @@ const modalStore = createSlice({
         showUploadModal(state) {
             state.modalState = 3;
         },
+        showChatModal(state) {
+            state.modalState = 4;
+        },
         refresh(state){
             if(state.refresh == true) {
                 state.refresh = false;
@@ -34,8 +37,8 @@ const modalStore = createSlice({
     }
 })
 
-const {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList, showUploadModal} = modalStore.actions;
+const {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList, showUploadModal, showChatModal} = modalStore.actions;
 const modalReducer = modalStore.reducer;
 
-export {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList, showUploadModal};
+export {showLoginModal, showSigninModal, closeModal, refresh, changeCurrentList, showUploadModal, showChatModal};
 export default modalReducer;

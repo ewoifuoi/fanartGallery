@@ -3,12 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Form, Button, Modal } from 'react-bootstrap';
 import './UploadModal.css'
 
-
-import SliderCaptcha, {
-    Status
-  } from 'rc-slider-captcha';
-
-
 import Alerts from '../Alerts';
 import axios from 'axios';
 import sha from 'sha256';
