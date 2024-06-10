@@ -4,7 +4,7 @@ import './ProfilePage.css'
 import { useEffect, useState , useRef} from "react";
 import axios from "axios";
 import Alerts from "../../components/Alerts";
-import showLoginState, { changeCurrentList, refresh, showLoginModal } from "../../store/modules/modal"
+import showLoginState, { changeCurrentList, refresh, showLoginModal,showChatModal } from "../../store/modules/modal"
 
 
 const ProfilePage = () => {
@@ -32,6 +32,24 @@ const ProfilePage = () => {
     const currentList = useSelector((state)=>state.modal.currentList);
     
     const currentX = [12,163,345,560]
+
+    const addToMessageList = async () => {
+        try {
+            let response = await axios.get(`http://124.221.8.18:8080/chat/add/${uid}`,{
+                headers:{
+                    'Content-Type':"application/json",
+                    'Authorization':`${localStorage.getItem('token')}`,
+                }
+            });
+            if(response.status == 200) {
+
+            }
+        }
+        catch(error) {
+            const errorMessage = error.response ? error.response.data : '用户数据请求失败';
+            // alertRef.current.showAlert({ type: 'danger', msg: errorMessage });
+        }
+    }
 
     const fetchData = async () => {
         try {
@@ -144,6 +162,8 @@ const ProfilePage = () => {
 
     return (
         <>
+            {/* 提示消息列表 */}
+            <Alerts ref={alertRef}/>
             <div className="p-4"></div>
             <div className="p-2"></div>
             <div className="d-flex justify-content-center">
@@ -226,7 +246,14 @@ const ProfilePage = () => {
 
                                 {!owner && (
                                     <div className="d-flex">
-                                        <a className="custom-button">
+                                        <a className="custom-button" onClick={()=>{
+
+                                            // 点击私信按钮, 展示私信模态框, 将用户添加到私信列表中
+                                            addToMessageList();
+                                            dispatch(showChatModal());
+                                            
+
+                                        }}>
                                             <div className="d-flex" style={{alignContent:'center', justifyContent:'center'}}>
                                                 <svg t="1716553162486" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6543" width="23" height="23"><path d="M914.285714 73.142857h-804.571428C51.2 73.142857 0 124.342857 0 182.857143v585.142857c0 58.514286 51.2 109.714286 109.714286 109.714286h804.571428c58.514286 0 109.714286-51.2 109.714286-109.714286v-585.142857c0-58.514286-51.2-109.714286-109.714286-109.714286z m-804.571428 73.142857h804.571428L563.2 497.371429c-14.628571 14.628571-29.257143 21.942857-51.2 21.942857s-36.571429-7.314286-51.2-21.942857L109.714286 146.285714zM73.142857 782.628571V212.114286l285.257143 285.257143L73.142857 782.628571z m80.457143 21.942858l256-256c29.257143 29.257143 65.828571 43.885714 102.4 43.885714s73.142857-14.628571 102.4-43.885714l43.885714-43.885715-43.885714 43.885715 256 256H153.6z m797.257143-36.571429v14.628571L665.6 497.371429 950.857143 212.114286v555.885714z" p-id="6544" fill="#fff"></path></svg>
                                                 <div style={{width:'9px'}}></div>
@@ -274,8 +301,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
-            {/* 提示消息列表 */}
-            <Alerts ref={alertRef}/>
+           
         </>
     )
 }

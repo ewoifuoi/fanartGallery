@@ -10,3 +10,32 @@
     border-radius: 2rem;
     box-shadow: 0 8px 20px rgba(35,0,77,.2);
 }
+
+
+.chat-input-box {
+    margin: 8px;
+    width: 77%;
+    height: 73%;
+    background-color: #E5EBEE;
+    border-radius: 22px;
+}
+
+.chat-input {
+    margin: 8px;
+    width: 85%;
+    outline: none;
+    height: 58%;
+    background-color: #E5EBEE;
+    border: none;
+}
+
+.chat-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 将链接的边框半径设置为宽度或高度的一半，使其呈圆形 */
+    transition: .3s;
+}
+
+.chat-button:hover{
+    background-color: #d8d8d8c9;
+}
