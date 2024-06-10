@@ -17,7 +17,7 @@ function Board() {
                                 <Card.Text style={{userSelect:'none'}}  className=" text-center z-3">-- 图库，高质量插画壁纸的聚集地 --</Card.Text>
                                 
                                 <div className="d-flex p-5 align-items-center justify-content-center z-3">
-                                    <SearchBox/>
+                                    {/* <SearchBox/> */}
                                 </div>
                             </Card.Body>
                         </Card>

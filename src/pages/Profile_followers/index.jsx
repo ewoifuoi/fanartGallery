@@ -106,10 +106,16 @@ const Profile_followers = () => {
             
             elements.push(
                 <div className="following_card" key={i} style={{backgroundColor:'#fff', margin:'5px 60px'}}>
-                    <div  style={styles.userCard}>
-                        <img draggable="false" src={user.avatar} alt="/images/default.png" style={styles.avatar} />
-                        <div style={{width:'20px'}}></div>
-                        <div style={styles.userInfo}>
+                    <div  style={styles.userCard} >
+                        <img draggable="false" src={user.avatar} alt="/images/default.png" style={styles.avatar} onClick={()=>{
+                            window.open(`http://localhost:5173/profile/${user.uid}`, '_blank');
+                        }}/>
+                        <div style={{width:'20px'}} onClick={()=>{
+                            window.open(`http://localhost:5173/profile/${user.uid}`, '_blank');
+                        }}></div>
+                        <div style={styles.userInfo} onClick={()=>{
+                            window.open(`http://localhost:5173/profile/${user.uid}`, '_blank');
+                        }}>
                             <h3 style={styles.username}>{user.name}</h3>
                             <div style={{height:'5px'}}></div>
                             <p style={styles.email}>{user.email}</p>

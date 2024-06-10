@@ -28,7 +28,7 @@ const ChatModal = (props) => {
 
     useEffect(() => {
         if(show) {
-            socket.current = new WebSocket('ws://124.221.8.18:8080/ws');
+            socket.current = new WebSocket('ws://124.221.8.18:8080/chat/ws');
     
             socket.current.onopen = () => {
             console.log("连接建立成功")
