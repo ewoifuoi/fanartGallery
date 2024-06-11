@@ -100,6 +100,9 @@ const ChatModal = (props) => {
     const render = async () => {
         
         let elements = [];
+        setCurrentUserName(data[0].name);
+        setCurrentUserId(data[0].uid);
+        setCurrentAvatar(data[0].avatar);
         for (let i = 0; i < data.length; i++) {
             const user = data[i];
             
@@ -236,7 +239,7 @@ const ChatModal = (props) => {
                                         {message.user=='from'?(
                                             <div className='d-flex align-items-center'>
                                                 <div style={{width:'20px'}}></div>
-                                                <img className='chat-user-avatar' src={currentAvatar} alt="" />
+                                                <img className='chat-user-avatar' src={currentAvatar} alt=""  draggable='false'/>
                                                 <div className='chat-message-bubble'>
                                                     {message.content}
                                                 </div>
@@ -247,7 +250,7 @@ const ChatModal = (props) => {
                                                 <div className='chat-message-send-bubble'>
                                                     {message.content}
                                                 </div>
-                                                <img className='chat-user-avatar' src={userAvatar} alt="" />
+                                                <img className='chat-user-avatar' src={userAvatar} alt="" draggable='false'/>
                                                 <div style={{width:'20px'}}></div>
                                             </div>
                                         )}
@@ -281,7 +284,7 @@ const ChatModal = (props) => {
                                     <div style={{width:'10px'}}></div>
                                     <input onChange={(e)=>{
                                         setInput(e.target.value);
-                                    }} style={{color:'#333',textJustify:'top'}} className='chat-input' type="text" placeholder='Message'/>
+                                    }} style={{color:'#333',textJustify:'top'}} className='chat-input' type="text" placeholder='Message' value={input}/>
                                     <div style={{width:'20px'}}></div>
                                     
                                     <div className='chat-button d-flex justify-content-center align-items-center'>
