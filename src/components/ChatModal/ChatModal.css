@@ -14,7 +14,7 @@
 
 .chat-input-box {
     margin: 8px;
-    width: 77%;
+    width: 78%;
     height: 73%;
     background-color: #E5EBEE;
     border-radius: 22px;
@@ -38,4 +38,68 @@
 
 .chat-button:hover{
     background-color: #d8d8d8c9;
+}
+
+.chat-user-card {
+    transition: .3s;
+    padding: 10px;
+    display: flex;
+    height: 62px;
+}
+
+.chat-user-card:hover {
+    background-color: antiquewhite;
+}
+
+.chat-user-card-avatar {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.chat-user-card-name {
+    user-select: none;
+    font-size: 18px;
+}
+
+.chat-top-name {
+    margin-left:20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+}
+
+.chat-content-box {
+    width: 90%;
+    height: 99%;
+}
+
+.chat-scrollspy {
+    width: 100%;
+}
+
+.chat-message-bubble {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    height: 45px;
+    border-radius: 15px;
+    background-color: #cbd4da3d;
+}
+
+.chat-message-send-bubble {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    height: 45px;
+    border-radius: 15px;
+    background-color: #86b7d83d;
+}
+
+.chat-user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    user-select: none;
 }
