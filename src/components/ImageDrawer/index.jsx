@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './ImageDrawer.css';
+import './imageDrawer.css';
 
 const ImageDrawer = ({ imageUrl,width }) => {
   const imageRef = useRef(null);
